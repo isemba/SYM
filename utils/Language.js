@@ -7,7 +7,12 @@ const Languages = {
     PROFILE:{ en: "Profile", tr: "Profil"},
     SETTINGS:{ en: "Settings", tr: "Ayarlar"},
     HOW_ARE_YOU_FEELING:{ en: "How are you feeling?", tr: "Nasıl Hissediyorsun?"},
-    POPULAR:{ en: "Popular", tr: "Popüler"}
+    POPULAR:{ en: "Popular", tr: "Popüler"},
+};
+
+export const MoodLanguages = {
+    STRESSED: { en: "Stressed", tr: "Stresli" },
+    HAPPY: { en: "Happy", tr: "Mutlu" },
 };
 
 

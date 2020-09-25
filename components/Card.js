@@ -1,21 +1,24 @@
-import {Text, View, StyleSheet, ImageBackground} from "react-native";
+import {Text, View, StyleSheet, ImageBackground, Dimensions} from "react-native";
 import React from "react";
 import {Color} from "../utils/Colors";
-import PropTypes from 'prop-types';
 import {Ionicons} from "@expo/vector-icons";
 
-export default function Card (props){
-    const {lock, color, title, desc} = props;
-    const size = props.size ? props.size : 1;
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+const radios = 15;
 
-    return(
-        <View sytle ={{flex: size}}>
-            <ImageBackground source={require('../assets/images/SampleImage.jpg')} />
-            <View sytle={styles.lock}>
-                {lock ? <Lock /> :null}
-            </View>
+export default function Card(props) {
 
-            <View style={[styles.bottom, {backgroundColor: color}]}>
+    const {lock, title, desc, source} = props;
+    return (
+        <ImageBackground
+            style={styles.container}
+            source={source}
+            imageStyle={{ borderRadius: radios }}
+        >
+            {lock ? <Lock /> :null}
+
+            <View style={styles.bottom}>
                 <Text style={styles.titleStyle}>
                     {title}
                 </Text>
@@ -24,43 +27,52 @@ export default function Card (props){
                 </Text>
             </View>
 
-
-
-        </View>
+        </ImageBackground>
     )
-}
+};
+
 function Lock(){
     return(
-        <View style={{flex:1}}>
+        <View style={styles.lock}>
             <Ionicons
                 name={'ios-lock'}
                 size={12}
-                color={'#000'}
+                color={Color.LIGHT_TEXT_COLOR}
                 style={{ padding: 10, fontSize:20 }}
             />
         </View>
     )
 }
-Card.propTypes={
-    lock: PropTypes.bool,
-    color: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    desc: PropTypes.string,
-    size: PropTypes.number
 
-}
 const styles = StyleSheet.create({
-    bottom: {
-
-    },
-    descStyle:{
-
-    },
-    titleStyle:{
-
+    container:{
+        backgroundColor: Color.MENU,
+        borderRadius: radios,
+        width: windowWidth * 2 / 5,
+        height: 200,
+        justifyContent: "flex-end",
+        marginRight: 10
     },
     lock:{
-
+        position: "absolute",
+        top: 0,
+        left: 0
+    },
+    bottom: {
+        borderBottomRightRadius: radios,
+        borderBottomLeftRadius: radios,
+        padding: 10,
+        backgroundColor: "rgba(0, 0, 0, 0.3)"
+    },
+    titleStyle: {
+        color: Color.LIGHT_TEXT_COLOR,
+        fontSize: 14,
+        fontWeight: "bold",
+        marginBottom: 2
+    },
+    descStyle: {
+        color: Color.LIGHT_TEXT_COLOR,
+        fontSize: 11
     }
 
-})
+});

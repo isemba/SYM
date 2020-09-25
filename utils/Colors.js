@@ -3,6 +3,7 @@ export const Color = {
     MAIN: "#0d19a3",
     LIGHT: "#15db95",
     MENU: "#90ccf4",
+    TITLE: "rgba(48,16,62, 0.4)",
     DARK_TEXT_COLOR: "#000",
     LIGHT_TEXT_COLOR: "#fff"
 };

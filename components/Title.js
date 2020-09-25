@@ -14,18 +14,16 @@ export default function Title(props) {
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: Color.MENU,
-        opacity: 0.8,
         borderRadius: 15,
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        width: windowWidth / 2,
-        marginHorizontal: 10,
-        marginVertical: 5
-
+        marginVertical: 5,
+        flexDirection: 'row'
     },
     text:{
         color: Color.LIGHT_TEXT_COLOR,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        backgroundColor: Color.TITLE,
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        borderRadius: 15
     }
 });
