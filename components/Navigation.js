@@ -4,7 +4,6 @@ import {createStackNavigator} from "@react-navigation/stack";
 import {navigationRef, navigate} from "./RootNavigation";
 import TabStack from "./screen/TabStack";
 import CustomizeScreen from "./screen/CustomizeScreen";
-import {Ionicons} from "@expo/vector-icons";
 
 
 const MainStack = createStackNavigator();

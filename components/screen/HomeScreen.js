@@ -1,8 +1,10 @@
-import {Text, View, StyleSheet} from "react-native";
+import {View, StyleSheet } from "react-native";
 import React from "react";
 import {Ionicons} from "@expo/vector-icons";
 import {navigate} from "../RootNavigation";
-import Video from "react-native-video";
+import Logo from "../Logo";
+import MainContent from "../MainContent";
+
 
 export default function HomeScreen() {
     const videoError = (err) => {
@@ -14,16 +16,7 @@ export default function HomeScreen() {
     };
 
     return (
-        <View>
-            {/*<Video source={{uri: "../../assets/video/Alis.mp4"}}   // Can be a URL or a local file.*/}
-            {/*       ref={(ref) => {*/}
-            {/*           this.player = ref*/}
-            {/*       }}                                      // Store reference*/}
-            {/*       onBuffer={onBuffer}                // Callback when remote video is buffering*/}
-            {/*       onError={videoError}               // Callback when video cannot be loaded*/}
-            {/*       style={styles.backgroundVideo}*/}
-            {/*/>*/}
-
+        <View style={{flex : 1}}>
             <Ionicons
                 name={'ios-aperture'}
                 size={12}
@@ -33,6 +26,13 @@ export default function HomeScreen() {
                     navigate('Customize');
                 }}
             />
+
+            <View style={styles.logoContainer}>
+                <Logo />
+            </View>
+
+            <MainContent/>
+
 
         </View>
     );
@@ -45,5 +45,8 @@ const styles = StyleSheet.create({
         left: 0,
         bottom: 0,
         right: 0,
+    },
+    logoContainer: {
+        alignItems : "center",
     }
 });

@@ -6,6 +6,7 @@ import SettingsScreen from "./SettingScreen";
 import {Ionicons} from "@expo/vector-icons";
 import {navigate } from "../RootNavigation";
 import {Color} from "../../utils/Colors";
+import Languages, {getLanguageText} from "../../utils/Language";
 
 
 const ProfileStack = createStackNavigator();
@@ -17,12 +18,12 @@ export default function ProfileStackScreen() {
             <ProfileStack.Screen
                 name="Profile"
                 component={ProfileScreen}
-                options={{ title: 'Profil', headerRight: SettingsButton, headerTransparent: true, headerTitle:false }}
+                options={{ title: getLanguageText(Languages.PROFILE), headerRight: SettingsButton, headerTransparent: true, headerTitle:false }}
             />
             <ProfileStack.Screen
                 name="Settings"
                 component={SettingsScreen}
-                options={{ title: 'Ayarlar' }}
+                options={{ title: getLanguageText(Languages.SETTINGS) }}
             />
         </ProfileStack.Navigator>
     );

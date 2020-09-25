@@ -7,6 +7,7 @@ import BlogScreen from "./BlogScreen";
 import ProfileStackScreen from "./ProfileStackScreen";
 import React from "react";
 import {Color} from "../../utils/Colors";
+import Languages, {getLanguageText} from "../../utils/Language";
 const Tab = createBottomTabNavigator();
 
 export default function TabStack(){
@@ -49,11 +50,11 @@ export default function TabStack(){
             }}
 
         >
-            <Tab.Screen name="Today" component={HomeScreen} options={{ title: "Bugün" }} />
-            <Tab.Screen name="Meditation" component={MeditationScreen} options={{ title: "Meditasyon" }} />
-            <Tab.Screen name="Music" component={MusicScreen} options={{ title: "Müzik" }} />
-            <Tab.Screen name="Blog" component={BlogScreen} options={{ title: "Blog" }} />
-            <Tab.Screen name="Profile" component={ProfileStackScreen} options={{ title: "Profil" }} />
+            <Tab.Screen name="Today" component={HomeScreen} options={{ title: getLanguageText(Languages.TODAY) }} />
+            <Tab.Screen name="Meditation" component={MeditationScreen} options={{ title: getLanguageText(Languages.MEDITATION) }} />
+            <Tab.Screen name="Music" component={MusicScreen} options={{ title: getLanguageText(Languages.MUSIC) }} />
+            <Tab.Screen name="Blog" component={BlogScreen} options={{ title: getLanguageText(Languages.BLOG) }} />
+            <Tab.Screen name="Profile" component={ProfileStackScreen} options={{ title: getLanguageText(Languages.PROFILE) }} />
         </Tab.Navigator>
     )
 }
