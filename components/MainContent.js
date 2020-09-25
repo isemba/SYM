@@ -3,6 +3,8 @@ import {Dimensions, ScrollView, StyleSheet, Text, View, TouchableOpacity} from '
 import Title from "./Title";
 import Languages, {getLanguageText} from "../utils/Language";
 import {navigate} from "./RootNavigation";
+import Card from "./Card"
+import {Color} from "../utils/Colors";
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -12,9 +14,11 @@ export default class MainContent extends Component {
 
         return (
             <ScrollView style={styles.container}>
-                <TouchableOpacity style={{ height: windowHeight * 6 / 10, paddingTop: windowHeight * 1 / 10 }} onPress={()=>{navigate("Customize")}} />
+                <TouchableOpacity style={{ height: windowHeight *  13/ 20, paddingTop: windowHeight * 1 / 10 }} onPress={()=>{navigate("Customize")}} />
 
                 <Title title={getLanguageText(Languages.HOW_ARE_YOU_FEELING)} />
+
+                <Card lock={true} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.MEDITATION)} size={1} />
 
 
             </ScrollView>

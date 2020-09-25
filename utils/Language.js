@@ -1,4 +1,4 @@
-const lang = "en";
+const lang = "tr";
 const Languages = {
     TODAY:{ en: "Today", tr: "Bugün"},
     MEDITATION:{ en: "Meditation", tr: "Meditasyon"},
