@@ -4,17 +4,12 @@ import {Ionicons} from "@expo/vector-icons";
 import {navigate} from "../RootNavigation";
 import Logo from "../Logo";
 import MainContent from "../MainContent";
+import MainBG from "./MainBG";
 
 
 
 export default function HomeScreen() {
-    const videoError = (err) => {
-        console.log("Video Error", err);
-    };
 
-    const onBuffer = (buff) => {
-        console.log("Buffer", buff);
-    };
 
     return (
         <View style={{flex : 1}}>
@@ -31,6 +26,8 @@ export default function HomeScreen() {
             <View style={styles.logoContainer}>
                 <Logo />
             </View>
+
+            <MainBG />
 
             <MainContent/>
 

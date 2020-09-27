@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
         backgroundColor: Color.TITLE,
         paddingHorizontal: 10,
         paddingVertical: 6,
-        borderRadius: 15
+        borderRadius: 15,
+        overflow: "hidden"
     }
 });

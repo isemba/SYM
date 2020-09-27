@@ -4,7 +4,6 @@ import {Color} from "../utils/Colors";
 import {Ionicons} from "@expo/vector-icons";
 
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 const radios = 15;
 
 export default function Card(props) {

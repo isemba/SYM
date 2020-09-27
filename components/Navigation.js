@@ -4,6 +4,7 @@ import {createStackNavigator} from "@react-navigation/stack";
 import {navigationRef, navigate} from "./RootNavigation";
 import TabStack from "./screen/TabStack";
 import CustomizeScreen from "./screen/CustomizeScreen";
+import VideoScreen from "./screen/VideoScreen";
 
 
 const MainStack = createStackNavigator();
@@ -18,7 +19,14 @@ export default function Navigation() {
                         title : "",
                         headerShown: false
                     }} />
-                <MainStack.Screen name="Customize" component={CustomizeScreen} />
+                <MainStack.Screen name="Customize" component={CustomizeScreen} options={{
+                    headerBackTitleVisible: false
+                }} />
+                <MainStack.Screen name="Video" component={VideoScreen} options={{
+                    title : "",
+                    headerTransparent: true,
+                    headerBackTitleVisible: false
+                }} />
             </MainStack.Navigator>
         </NavigationContainer>
     )
