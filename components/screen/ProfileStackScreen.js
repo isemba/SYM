@@ -23,7 +23,7 @@ export default function ProfileStackScreen() {
             <ProfileStack.Screen
                 name="Settings"
                 component={SettingsScreen}
-                options={{ title: getLanguageText(Languages.SETTINGS) }}
+                options={{ title: getLanguageText(Languages.SETTINGS), headerBackTitleVisible: false }}
             />
         </ProfileStack.Navigator>
     );

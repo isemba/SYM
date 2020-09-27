@@ -1,7 +1,7 @@
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {Ionicons} from "@expo/vector-icons";
 import HomeScreen from "./HomeScreen";
-import MeditationScreen from "./MeditationScreen";
+import DiscoverScreen from "./DiscoverScreen";
 import MusicScreen from "./MusicScreen";
 import BlogScreen from "./BlogScreen";
 import ProfileStackScreen from "./ProfileStackScreen";
@@ -51,7 +51,7 @@ export default function TabStack(){
 
         >
             <Tab.Screen name="Today" component={HomeScreen} options={{ title: getLanguageText(Languages.TODAY) }} />
-            <Tab.Screen name="Meditation" component={MeditationScreen} options={{ title: getLanguageText(Languages.MEDITATION) }} />
+            <Tab.Screen name="Discover" component={DiscoverScreen} options={{ title: getLanguageText(Languages.DISCOVER) }} />
             <Tab.Screen name="Music" component={MusicScreen} options={{ title: getLanguageText(Languages.MUSIC) }} />
             <Tab.Screen name="Blog" component={BlogScreen} options={{ title: getLanguageText(Languages.BLOG) }} />
             <Tab.Screen name="Profile" component={ProfileStackScreen} options={{ title: getLanguageText(Languages.PROFILE) }} />

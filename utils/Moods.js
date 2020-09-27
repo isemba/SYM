@@ -4,20 +4,20 @@ import {Color} from "./Colors";
 export const Moods = [
     MoodLanguages.STRESSED,
     MoodLanguages.HAPPY,
-    MoodLanguages.STRESSED,
-    MoodLanguages.STRESSED,
-    MoodLanguages.STRESSED,
-    MoodLanguages.STRESSED,
-    MoodLanguages.STRESSED,
-    MoodLanguages.STRESSED,
-    MoodLanguages.STRESSED,
-    MoodLanguages.STRESSED,
-    MoodLanguages.STRESSED,
-    MoodLanguages.STRESSED,
-    MoodLanguages.STRESSED,
-    MoodLanguages.STRESSED,
-    MoodLanguages.STRESSED,
-    MoodLanguages.STRESSED
+    MoodLanguages.ANXIOUS,
+    MoodLanguages.COMPASSIONED,
+    MoodLanguages.DEMOTIVATED,
+    MoodLanguages.DEPRESSED,
+    MoodLanguages.DISTRACTED,
+    MoodLanguages.GRATEFUL,
+    MoodLanguages.IN_PAIN,
+    MoodLanguages.INCAPABLE,
+    MoodLanguages.NEED_SPACE,
+    MoodLanguages.LONELY,
+    MoodLanguages.SAD,
+    MoodLanguages.SLEEPLESS,
+    MoodLanguages.TIRED,
+    MoodLanguages.UNEASY
 ];
 
 // const PopularColorList = [

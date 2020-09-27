@@ -1,7 +1,7 @@
 const lang = "tr";
 const Languages = {
     TODAY:{ en: "Today", tr: "Bugün"},
-    MEDITATION:{ en: "Meditation", tr: "Meditasyon"},
+    DISCOVER:{ en: "Discover", tr: "Keşfet"},
     MUSIC:{ en: "Music", tr: "Müzik"},
     BLOG:{ en: "Blog", tr: "Blog"},
     PROFILE:{ en: "Profile", tr: "Profil"},
@@ -13,6 +13,20 @@ const Languages = {
 export const MoodLanguages = {
     STRESSED: { en: "Stressed", tr: "Stresli" },
     HAPPY: { en: "Happy", tr: "Mutlu" },
+    TIRED: { en: "Tired", tr: "Yorgun" },
+    DEMOTIVATED: { en: "Demotive", tr: "Demotive" },
+    INCAPABLE: { en: "Incapable", tr: "Yetersiz" },
+    LONELY: { en: "LONELY", tr: "Yalnız" },
+    IN_PAIN: { en: "In Pain", tr: "Ağrılı" },
+    SAD: { en: "Sad", tr: "Üzgün" },
+    GRATEFUL: { en: "Grateful", tr: "Minettar" },
+    UNEASY: { en: "Uneasy", tr: "Rahatsız" },
+    DEPRESSED: { en: "Depressed", tr: "Depresif" },
+    DISTRACTED: { en: "Distracted", tr: "Dikkati Dağılmış" },
+    NEED_SPACE: { en: "Need Space", tr: "Alana İhtiyacım Var" },
+    COMPASSIONED: { en: "Compassioned", tr: "Şefkatli" },
+    SLEEPLESS: { en: "Sleepless", tr: "Uykusuz" },
+    ANXIOUS: { en: "Anxious", tr: "Endişeli" }
 };
 
 

@@ -1,12 +1,12 @@
 import {Text, View} from "react-native";
 import React from "react";
 
-function MeditationScreen() {
+function DiscoverScreen() {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Meditation!</Text>
+            <Text>Discover!</Text>
         </View>
     );
 }
 
-export default MeditationScreen;
+export default DiscoverScreen;

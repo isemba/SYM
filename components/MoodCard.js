@@ -28,10 +28,13 @@ const styles = StyleSheet.create({
         width: windowWidth * 9 / 40,
         height: windowWidth * 9 / 40,
         marginBottom: 10,
+        paddingHorizontal: 5
     },
     text: {
         color: Color.LIGHT_TEXT_COLOR,
         fontWeight: 'bold',
-        fontSize: 12
+        fontSize: 12,
+        textAlign: 'center'
+
     }
 });
