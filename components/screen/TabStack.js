@@ -21,7 +21,7 @@ export default function TabStack(){
                         case "Today":
                             iconName = "ios-home";
                             break;
-                        case "Meditation":
+                        case "Discover":
                             iconName = "ios-leaf";
                             break;
                         case "Music":
