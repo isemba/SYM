@@ -47,10 +47,9 @@ const styles = StyleSheet.create({
     container:{
         backgroundColor: Color.MENU,
         borderRadius: radios,
-        width: windowWidth * 2 / 5,
+        width: windowWidth * 44 / 100,
         height: 200,
         justifyContent: "flex-end",
-        marginRight: 10
     },
     lock:{
         position: "absolute",

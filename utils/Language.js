@@ -8,6 +8,11 @@ const Languages = {
     SETTINGS:{ en: "Settings", tr: "Ayarlar"},
     HOW_ARE_YOU_FEELING:{ en: "How are you feeling?", tr: "Nasıl Hissediyorsun?"},
     POPULAR:{ en: "Popular", tr: "Popüler"},
+    SELF_REALISATON:{ en: "Self Realisation", tr: "Aydınlanma Meditasyonu"},
+    QUICK_START:{en: "Quick Start", tr: "Hızlı Başla"},
+    ELEMENTS:{en: "Elements", tr: "Elementler"},
+    SEVEN_STEPS:{en: "Seven Steps", tr: "Yedi Adım"},
+    MEDITATION_WITH_MANTRA:{en: "Meditation with Mantra", tr: "Mantralı Meditasyon"}
 };
 
 export const MoodLanguages = {

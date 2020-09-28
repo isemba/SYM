@@ -6,7 +6,7 @@ import {navigate} from "./RootNavigation";
 import {Color} from "../utils/Colors";
 import Card from "./Card";
 import MoodCard from "./MoodCard";
-import Moods from "../utils/Moods";
+import {Moods} from "../utils/Data";
 import EventEmitter from "react-native-eventemitter";
 import CustomEvents from "../models/CustomEvents";
 
@@ -24,7 +24,7 @@ export default class MainContent extends Component {
 
         Moods.forEach((item, index) => {
             this.MoodViews.push(
-                <MoodCard mood={getLanguageText(item)} key={"mood" + index} uri="http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4" />
+                <MoodCard mood={getLanguageText(item.title)} key={"mood" + index} uri={item.uri} />
             )
         })
     }
@@ -59,15 +59,22 @@ export default class MainContent extends Component {
                 <Title title={getLanguageText(Languages.POPULAR)} />
 
                 <ScrollView horizontal={true}>
-                    <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')} />
-                    <Card lock={true} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')}/>
-                    <Card lock={true} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')}/>
-                    <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')}/>
-                    <Card lock={true} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')}/>
-                    <Card lock={true} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')}/>
-                    <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')}/>
-                    <Card lock={true} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')}/>
-                    <Card lock={true} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')}/>
+                    <View style={styles.cardContainer}>
+                        <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')} />
+                    </View>
+                    <View style={styles.cardContainer}>
+                        <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')} />
+                    </View>
+                    <View style={styles.cardContainer}>
+                        <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')} />
+                    </View>
+                    <View style={styles.cardContainer}>
+                        <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')} />
+                    </View>
+                    <View style={styles.cardContainer}>
+                        <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')} />
+                    </View>
+                    
                 </ScrollView>
 
             </ScrollView>
@@ -88,5 +95,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "space-between"
+    },
+    cardContainer:{
+        marginRight: 10
     }
 });
