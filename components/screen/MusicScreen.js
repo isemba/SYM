@@ -1,6 +1,7 @@
-import React from "react";
+import React, {Component} from "react";
 import { Dimensions, ScrollView, StyleSheet, View } from 'react-native';
 import { Color } from "../../utils/Colors";
+import { MusicList } from "../../utils/Data";
 import Languages, { getLanguageText } from '../../utils/Language';
 import Card from '../Card';
 import Title from "../Title";
@@ -8,45 +9,61 @@ import Title from "../Title";
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function MusicScreen() {
-    return (
-        <View>
-            <ScrollView
-                style={styles.container}
-                horizontal={true}
-            >
 
-                <Title style={styles.titleContainer} title={getLanguageText(Languages.SELF_REALISATON)} />
-                <Title style={styles.titleContainer} title={getLanguageText(Languages.SELF_REALISATON)} />
-                <Title style={styles.titleContainer} title={getLanguageText(Languages.SELF_REALISATON)} />
-                <Title style={styles.titleContainer} title={getLanguageText(Languages.SELF_REALISATON)} />
-                <Title style={styles.titleContainer} title={getLanguageText(Languages.SELF_REALISATON)} />
-                <Title style={styles.titleContainer} title={getLanguageText(Languages.SELF_REALISATON)} />
+class MusicScreen extends Component {
+    state = {
+        musicList: [],
+        activemusics: []
+    }
 
-            </ScrollView>
 
-            <View style={styles.discoverContainer}>
-                <View style={styles.cardContainer}>
-                     <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../../assets/images/SampleImage.jpg')} />  
+    constructor(props) {
+        super(props);
+        MusicList[0].active = true;
+    }
+
+    componentDidMount() {
+        this.setState({
+            musicList: MusicList
+        })
+
+    }
+
+    changeActiveList = index => {
+        MusicList.forEach((item, ind) => {
+            item.active = index === ind;
+        });
+
+        this.setState({
+            musicList: MusicList
+        });
+    };
+
+
+    render() {
+        return (
+            <View>
+                <ScrollView
+                    style={styles.container}
+                    horizontal={true}
+                >
+
+                    {this.state.musicList.map((item, index) => {
+                        return (<Title style={styles.titleContainer} title={getLanguageText(item.title)} onPress={() => {
+                            this.changeActiveList(index);
+                        }} active={item.active} key={"musicTitle_" + index} />)
+                    })}
+
+                </ScrollView>
+
+                <View style={styles.musicContainer}>
+                    <View style={styles.cardContainer}>
+                         <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../../assets/images/SampleImage.jpg')} />  
+                    </View>                
                 </View>
-                <View style={styles.cardContainer}>
-                     <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../../assets/images/SampleImage.jpg')} />  
-                </View>
-                <View style={styles.cardContainer}>
-                     <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../../assets/images/SampleImage.jpg')} />  
-                </View>
-                <View style={styles.cardContainer}>
-                     <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../../assets/images/SampleImage.jpg')} />  
-                </View>
-                <View style={styles.cardContainer  }>
-                     <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../../assets/images/SampleImage.jpg')} />  
-                </View>
-                
-                
-                
             </View>
-        </View>
-    );
+        );
+    }
 }
 
 
@@ -58,7 +75,7 @@ const styles = StyleSheet.create({
     titleContainer: {
         flexDirection: "row",
     },
-    discoverContainer: {
+    musicContainer: {
         flexDirection: "row",
         flexWrap: "wrap",
         width: windowWidth

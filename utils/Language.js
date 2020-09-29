@@ -7,12 +7,28 @@ const Languages = {
     PROFILE:{ en: "Profile", tr: "Profil"},
     SETTINGS:{ en: "Settings", tr: "Ayarlar"},
     HOW_ARE_YOU_FEELING:{ en: "How are you feeling?", tr: "Nasıl Hissediyorsun?"},
+    WORD_OF_THE_DAY:{ en: "Word of the day", tr: "Günün Sözü"},
     POPULAR:{ en: "Popular", tr: "Popüler"},
     SELF_REALISATON:{ en: "Self Realisation", tr: "Aydınlanma Meditasyonu"},
     QUICK_START:{en: "Quick Start", tr: "Hızlı Başla"},
     ELEMENTS:{en: "Elements", tr: "Elementler"},
     SEVEN_STEPS:{en: "Seven Steps", tr: "Yedi Adım"},
-    MEDITATION_WITH_MANTRA:{en: "Meditation with Mantra", tr: "Mantralı Meditasyon"}
+    MEDITATION_WITH_MANTRA:{ en: "Meditation with Mantra", tr: "Mantralı Meditasyon" },
+    THREE_CHANNEL_BALANCING:{ en: "Three Channel Balancing", tr: "Üç Kanal Dengeleme" },
+    MEDITATION_WITH_AFFIRMATIONS:{ en: "Meditation With Affirmations", tr: "Olumlamalı Meditasyon" },
+    BREATH_EXERCISES:{ en: "Breath Exercises", tr: "Nefes Egzersizleri" },
+    STRESS_MANAGAMENT:{ en: "Stress Management", tr: "Stres Yönetimi" },
+    ATTENTION_MEDITATION:{ en: "Attention Meditation", tr:  "Dikkat Meditasyonu" },
+    MEDITATION_WITH_MUSIC:{ en: "Meditation With Music", tr:  "Müzikli Meditasyon" },
+    OMKAR_TECHNIQUE:{ en: "Omkar Technique", tr:  "Omkar Tekniği" },
+    GRADITUDE_AND_THANK:{ en: "Graditude and Thank", tr:  "Şükran ve Teşekkür" },
+    MEDITATION_MUSICS:{ en: "Meditation Musics", tr:  "Meditasyon Müzikleri" },
+    FREQUENCY_MUSICS:{ en: "Frequency Musics", tr:  "Frekans Müzikleri" },
+    NATURE_SOUNDS:{ en: "Nature Sounds", tr:  "Doğa Sesleri" },
+    SLEEP_MUSICS:{ en: "Sleep Sounds", tr:  "Uyku Sesleri" },
+    CHILL_AMBIENT_MUSICS:{ en: "Chill & Ambient Musics", tr:  "Chill & Ambiyans Müzikleri" },
+    CLASSIC_MUSICS:{ en: "Classic Musics", tr:  "Klasik Müzikler" }
+
 };
 
 export const MoodLanguages = {
@@ -36,7 +52,13 @@ export const MoodLanguages = {
 
 
 export function getLanguageText(obj) {
-    return obj[lang];
+    try {
+        return obj[lang];
+    } catch (error) {
+        console.error(error);
+       return ''; 
+    }
+    
 }
 
 export default Languages;

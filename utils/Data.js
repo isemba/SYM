@@ -48,6 +48,14 @@ export const DiscoverList = [
         ] 
     },
     { 
+        title: Languages.THREE_CHANNEL_BALANCING, 
+        meditations: [
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
+        ] 
+    },
+    { 
         title: Languages.SEVEN_STEPS, 
         meditations: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
@@ -63,6 +71,216 @@ export const DiscoverList = [
     { 
         title: Languages.MEDITATION_WITH_MANTRA, 
         meditations: [
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
+        ] 
+    },
+    { 
+        title: Languages.MEDITATION_WITH_AFFIRMATIONS, 
+        meditations: [
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
+        ] 
+    },
+    { 
+        title: Languages.BREATH_EXERCISES, 
+        meditations: [
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
+        ] 
+    },
+    { 
+        title: Languages.STRESS_MANAGAMENT, 
+        meditations: [
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
+        ] 
+    },
+    { 
+        title: Languages.ATTENTION_MEDITATION, 
+        meditations: [
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
+        ] 
+    },
+    { 
+        title: Languages.MEDITATION_WITH_MUSIC, 
+        meditations: [
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
+        ] 
+    },
+    { 
+        title: Languages.OMKAR_TECHNIQUE, 
+        meditations: [
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
+        ] 
+    },
+    { 
+        title: Languages.GRADITUDE_AND_THANK, 
+        meditations: [
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
+        ] 
+    }
+];
+export const MusicList = [
+    { 
+        title: Languages.MEDITATION_MUSICS, 
+        musics: [
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
+        ] 
+    },
+    { 
+        title: Languages.FREQUENCY_MUSICS, 
+        musics: [
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
+        ] 
+    },
+    { 
+        title: Languages.NATURE_SOUNDS, 
+        musics: [
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
+        ] 
+    },
+    { 
+        title: Languages.CHILL_AMBIENT_MUSICS, 
+        musics: [
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
+        ] 
+    },
+    { 
+        title: Languages.SLEEP_MUSICS, 
+        musics: [
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
+        ] 
+    },
+    { 
+        title: Languages.CLASSIC_MUSICS, 
+        musics: [
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
+            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },

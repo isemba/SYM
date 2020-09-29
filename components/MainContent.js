@@ -9,6 +9,7 @@ import MoodCard from "./MoodCard";
 import {Moods} from "../utils/Data";
 import EventEmitter from "react-native-eventemitter";
 import CustomEvents from "../models/CustomEvents";
+import { TabBarHeight } from '../utils/DeviceInfo';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -49,7 +50,7 @@ export default class MainContent extends Component {
 
                 <TouchableOpacity style={{ height: emptyArea, paddingTop: windowHeight / 10 }} onPress={()=>{navigate("Customize")}} />
 
-                <Title title={getLanguageText(Languages.HOW_ARE_YOU_FEELING)} />
+                <Title  title={getLanguageText(Languages.HOW_ARE_YOU_FEELING)} />
 
                 <View style={styles.moodContainer}>
                     { this.MoodViews }
@@ -77,6 +78,12 @@ export default class MainContent extends Component {
                     
                 </ScrollView>
 
+                    <Title  title={getLanguageText(Languages.WORD_OF_THE_DAY)} />
+
+                    <View style={styles.cardContainer}>
+                        <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')} />
+                    </View>
+
             </ScrollView>
         );
     }
@@ -88,7 +95,7 @@ const styles = StyleSheet.create({
     container : {
         position: "absolute",
         width: windowWidth,
-        height: windowHeight - 52,
+        height: windowHeight - TabBarHeight,
         paddingHorizontal: windowWidth / 50
     },
     moodContainer: {

@@ -15,7 +15,7 @@ export default function Title(props) {
 const styles = StyleSheet.create({
     container:{
         borderRadius: 15,
-        marginVertical: 5,
+        marginVertical: 10,
         flexDirection: 'row',
         height: 30
     },
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 6,
         borderRadius: 15,
-        overflow: "hidden"
+        overflow: "hidden",
+        marginVertical: 10
     }
 });
