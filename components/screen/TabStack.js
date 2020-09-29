@@ -1,51 +1,52 @@
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {View, Text, StyleSheet, TouchableWithoutFeedback} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 import HomeScreen from "./HomeScreen";
 import DiscoverScreen from "./DiscoverScreen";
 import MusicScreen from "./MusicScreen";
 import BlogScreen from "./BlogScreen";
 import ProfileStackScreen from "./ProfileStackScreen";
-import React from "react";
+import React, {Component} from "react";
 import {Color} from "../../utils/Colors";
 import Languages, {getLanguageText} from "../../utils/Language";
 const Tab = createBottomTabNavigator();
 
 export default function TabStack(){
+
     return (
         <Tab.Navigator
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color, size }) => {
-                    let iconName;
-
-                    switch (route.name) {
-                        case "Today":
-                            iconName = "ios-home";
-                            break;
-                        case "Discover":
-                            iconName = "ios-leaf";
-                            break;
-                        case "Music":
-                            iconName = "md-musical-note";
-                            break;
-                        case "Blog":
-                            iconName = "ios-book";
-                            break;
-                        case "Profile":
-                            iconName = "ios-man";
-                            break;
-                    }
-
-                    return <Ionicons name={iconName} size={size} color={color} />;
-                },
-                style: {
-                    backgroundColor: Color.MENU
+            // tabBar={(props) => (<TabBar />)}
+            screenOptions={({route}) => {
+                let iconName;
+                switch (route.name) {
+                    case "Today":
+                        iconName = "ios-home";
+                        break;
+                    case "Discover":
+                        iconName = "ios-leaf";
+                        break;
+                    case "Music":
+                        iconName = "md-musical-note";
+                        break;
+                    case "Blog":
+                        iconName = "ios-book";
+                        break;
+                    case "Profile":
+                        iconName = "ios-man";
+                        break;
                 }
-            })}
+
+                return ({
+                    tabBarIcon: ({ focused, color, size }) => {
+                        return <Ionicons name={iconName} size={size} color={color} />;
+                    }
+                })
+            }}
             tabBarOptions={{
                 activeTintColor: 'tomato',
                 inactiveTintColor: 'white',
                 tabStyle: {
-                    backgroundColor: Color.MENU
+                    backgroundColor: Color.MAIN
                 }
             }}
 
@@ -58,3 +59,46 @@ export default function TabStack(){
         </Tab.Navigator>
     )
 }
+
+class TabBar extends Component{
+    state={
+        tabs: [
+            { iconName: "ios-home", title: Languages.TODAY, active: true, address: ""  },
+            { iconName: "ios-leaf", title: Languages.DISCOVER },
+            { iconName: "md-musical-note", title: Languages.MUSIC },
+            { iconName: "ios-book", title: Languages.BLOG },
+            { iconName: "ios-man", title: Languages.PROFILE },
+        ]
+    }
+
+    render() {
+        return (
+            <View style={styles.tabContainer}>
+                { this.state.tabs.map((item, index) => (
+                    <View style={styles.tabItem} key={"tab_" + index}>
+                        <Ionicons name={item.iconName} size={20} color={item.active ? 'tomato' : 'white'} />
+                        <Text style={[styles.tabItemText, { color: item.active ? 'tomato' : 'white' }]}>{getLanguageText(item.title)}</Text>
+                    </View>
+                )) }
+            </View>
+        )
+    }
+}
+
+const styles = StyleSheet.create({
+    tabContainer: {
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        flexDirection: "row"
+    },
+    tabItem: {
+        backgroundColor: Color.MAIN,
+        padding: 5,
+        overflow: "hidden",
+        textAlign: "center",
+        alignItems: "center",
+        flex: 1
+    },
+    tabItemText: {
+    }
+});

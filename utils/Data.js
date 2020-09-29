@@ -22,22 +22,22 @@ export const Moods = [
 ];
 
 export const DiscoverList = [
-    { 
-        title: Languages.SELF_REALISATON, 
+    {
+        title: Languages.SELF_REALISATON,
         meditations: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     },
-    { 
-        title: Languages.QUICK_START, 
+    {
+        title: Languages.QUICK_START,
         meditations: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     },
-    { 
-        title: Languages.ELEMENTS, 
+    {
+        title: Languages.ELEMENTS,
         meditations: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
@@ -45,18 +45,18 @@ export const DiscoverList = [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     },
-    { 
-        title: Languages.THREE_CHANNEL_BALANCING, 
+    {
+        title: Languages.THREE_CHANNEL_BALANCING,
         meditations: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     },
-    { 
-        title: Languages.SEVEN_STEPS, 
+    {
+        title: Languages.SEVEN_STEPS,
         meditations: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
@@ -66,10 +66,10 @@ export const DiscoverList = [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     },
-    { 
-        title: Languages.MEDITATION_WITH_MANTRA, 
+    {
+        title: Languages.MEDITATION_WITH_MANTRA,
         meditations: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
@@ -79,12 +79,11 @@ export const DiscoverList = [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
-            { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     },
-    { 
-        title: Languages.MEDITATION_WITH_AFFIRMATIONS, 
+    {
+        title: Languages.MEDITATION_WITH_AFFIRMATIONS,
         meditations: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
@@ -96,48 +95,48 @@ export const DiscoverList = [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     },
-    { 
-        title: Languages.BREATH_EXERCISES, 
+    {
+        title: Languages.BREATH_EXERCISES,
         meditations: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     },
-    { 
-        title: Languages.STRESS_MANAGAMENT, 
+    {
+        title: Languages.STRESS_MANAGAMENT,
         meditations: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     },
-    { 
-        title: Languages.ATTENTION_MEDITATION, 
+    {
+        title: Languages.ATTENTION_MEDITATION,
         meditations: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     },
-    { 
-        title: Languages.MEDITATION_WITH_MUSIC, 
+    {
+        title: Languages.MEDITATION_WITH_MUSIC,
         meditations: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     },
-    { 
-        title: Languages.OMKAR_TECHNIQUE, 
+    {
+        title: Languages.OMKAR_TECHNIQUE,
         meditations: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     },
-    { 
-        title: Languages.GRADITUDE_AND_THANK, 
+    {
+        title: Languages.GRADITUDE_AND_THANK,
         meditations: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     }
 ];
 export const MusicList = [
-    { 
-        title: Languages.MEDITATION_MUSICS, 
+    {
+        title: Languages.MEDITATION_MUSICS,
         musics: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
@@ -160,10 +159,10 @@ export const MusicList = [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     },
-    { 
-        title: Languages.FREQUENCY_MUSICS, 
+    {
+        title: Languages.FREQUENCY_MUSICS,
         musics: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
@@ -186,10 +185,10 @@ export const MusicList = [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     },
-    { 
-        title: Languages.NATURE_SOUNDS, 
+    {
+        title: Languages.NATURE_SOUNDS,
         musics: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
@@ -212,10 +211,10 @@ export const MusicList = [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     },
-    { 
-        title: Languages.CHILL_AMBIENT_MUSICS, 
+    {
+        title: Languages.CHILL_AMBIENT_MUSICS,
         musics: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
@@ -238,10 +237,10 @@ export const MusicList = [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     },
-    { 
-        title: Languages.SLEEP_MUSICS, 
+    {
+        title: Languages.SLEEP_MUSICS,
         musics: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
@@ -264,10 +263,10 @@ export const MusicList = [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     },
-    { 
-        title: Languages.CLASSIC_MUSICS, 
+    {
+        title: Languages.CLASSIC_MUSICS,
         musics: [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
@@ -290,7 +289,7 @@ export const MusicList = [
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER },
             { lock: true, color: Color.MENU, title: Languages.POPULAR, desc: Languages.DISCOVER }
-        ] 
+        ]
     }
 ]
 

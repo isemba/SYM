@@ -1,31 +1,42 @@
-import {Text, View, StyleSheet, Dimensions, TouchableWithoutFeedback} from "react-native";
+import {Text, View, StyleSheet, Dimensions, TouchableOpacity} from "react-native";
 import React from "react";
 import {Color} from "../utils/Colors";
 
 const windowWidth = Dimensions.get('window').width;
 export default function Title(props) {
     const { title, active, onPress } = props;
-    return (
-        <TouchableWithoutFeedback style={styles.container} onPress={onPress} >
-            <Text style={[ styles.text, { backgroundColor : active ? Color.ACTIVE_TITLE : Color.TITLE } ]}>{ title }</Text>
-        </TouchableWithoutFeedback>
-    )
+
+
+    if( onPress == null ){
+        return (
+            <View style={styles.container}>
+                <Text style={[ styles.text, { backgroundColor : active ? Color.ACTIVE_TITLE : Color.TITLE } ]}>{ title }</Text>
+            </View>
+        )
+    }else{
+        return (
+            <TouchableOpacity style={styles.container} onPress={onPress} >
+                <Text style={[ styles.text, { backgroundColor : active ? Color.ACTIVE_TITLE : Color.TITLE } ]}>{ title }</Text>
+            </TouchableOpacity>
+        )
+    }
+
 }
 
 const styles = StyleSheet.create({
     container:{
-        borderRadius: 15,
-        marginVertical: 10,
+        borderRadius: 20,
         flexDirection: 'row',
-        height: 30
+        marginVertical: 10,
+        marginRight: 5,
+        height: 35
     },
     text:{
         color: Color.LIGHT_TEXT_COLOR,
         fontWeight: "bold",
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        borderRadius: 15,
-        overflow: "hidden",
-        marginVertical: 10
+        borderRadius: 20,
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        overflow: "hidden"
     }
 });

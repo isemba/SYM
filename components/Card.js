@@ -11,13 +11,14 @@ export default function Card(props) {
 
     const { lock, title, desc, source } = props;
     const media = props.media ? props.media : MediaType.VIDEO;
+    const size = props.size ? props.size : 47;
 
     console.log("CARD TITLE: ", title);
 
     return (
         <TouchableOpacity
             onPress={() => {
-                
+
                 switch (media) {
                     case MediaType.BLOG:
 
@@ -37,7 +38,7 @@ export default function Card(props) {
             }}
         >
             <ImageBackground
-                style={styles.container}
+                style={[styles.container, {width: windowWidth * size / 100}]}
                 source={source}
                 imageStyle={{ borderRadius: radios }}
             >
@@ -76,9 +77,9 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: Color.MENU,
         borderRadius: radios,
-        width: windowWidth * 44 / 100,
         height: 200,
         justifyContent: "flex-end",
+        marginBottom: 10
     },
     lock: {
         position: "absolute",
