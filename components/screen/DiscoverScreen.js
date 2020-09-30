@@ -72,7 +72,7 @@ class DiscoverScreen extends Component {
 
            setTimeout(()=>{
                this.headerLocked = false;
-           }, 200);
+           }, 250);
 
        }catch (e){
 
