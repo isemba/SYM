@@ -13,7 +13,7 @@ const windowHeight = Dimensions.get('window').height;
 class MusicScreen extends Component {
     state = {
         musicList: [],
-        activemusics: []
+        activeMusicGroups: []
     }
 
 
@@ -22,68 +22,137 @@ class MusicScreen extends Component {
         MusicList[0].active = true;
     }
 
-    componentDidMount() {
-        this.setState({
-            musicList: MusicList
-        })
+    componentDidMount(){
+        const musics = MusicList[0].musics;
+        const activeMusicGroups = this.getMusicGroups(musics);
 
+        this.setState({
+            musicList : MusicList,
+            activeMusicGroups
+        })
+    }
+
+    getMusicGroups(musics) {
+        const activeMusicGroups = [];
+        let groupIndex = -1;
+        for(let i = 0; i < musics.length; i++){
+            const med = musics[i];
+
+            if(i % 2 === 0){
+                groupIndex++;
+                activeMusicGroups[groupIndex] = [];
+            }
+
+            activeMusicGroups[groupIndex].push(med);
+        }
+
+        return activeMusicGroups;
     }
 
     changeActiveList = index => {
-        MusicList.forEach((item, ind) => {
-            item.active = index === ind;
+        let musics;
+        MusicList.forEach((item, ind) =>{
+            if(index === ind){
+                item.active = true;
+                musics = item.musics;
+            }else{
+                item.active = false;
+            }
         });
 
+        const activeMusicGroups = this.getMusicGroups(musics);
+
         this.setState({
-            musicList: MusicList
+            musicList : MusicList,
+            activeMusicGroups
         });
     };
 
-
     render() {
+        const { musicList, activeMusicGroups } = this.state;
+
         return (
             <View>
                 <ScrollView
                     style={styles.container}
                     horizontal={true}
                 >
-
-                    {this.state.musicList.map((item, index) => {
-                        return (<Title style={styles.titleContainer} title={getLanguageText(item.title)} onPress={() => {
-                            this.changeActiveList(index);
-                        }} active={item.active} key={"musicTitle_" + index} />)
-                    })}
+                    { musicList.map( (item, index) =>{
+                        return (
+                            <Title
+                                title={getLanguageText(item.title)}
+                                active={item.active}
+                                key={"discoverTitle_" + index}
+                                onPress={() => {
+                                    this.changeActiveList(index);
+                                }}
+                            />)
+                    }) }
 
                 </ScrollView>
 
-                <View style={styles.musicContainer}>
-                    <View style={styles.cardContainer}>
-                         <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../../assets/images/SampleImage.jpg')} />  
-                    </View>                
-                </View>
+                <ScrollView style={styles.musicContainer}>
+                    {
+                        activeMusicGroups.map((group, index) => ( addMusicCards(group, index) ))
+                    }
+
+                    <View style={{ height: windowHeight / 10 }} />
+                </ScrollView>
             </View>
-        );
+        )
     }
+
+}
+
+function addMusicCards(group, groupIndex){
+    const groupSize = group.length;
+
+    if(groupSize === 1 && groupIndex === 0){
+        const card = group[0];
+        return (
+            getCard(card, 0, 96)
+        )
+    }
+
+    return (
+        <View style={styles.cardContainer} key={"music_card_container_" + groupIndex}>
+            {
+                group.map((card, index)=>( getCard(card, index, 47) ))
+            }
+        </View>
+    )
+}
+
+function getCard(card, index, size){
+    const { lock, color, title, desc } = card;
+    return (
+        <Card
+            key={"discover_card_" + index}
+            lock={lock}
+            color={color}
+            size={size}
+            title={getLanguageText(title)}
+            desc={getLanguageText(desc)}
+            source={require('../../assets/images/SampleImage.jpg')}
+        />
+    )
 }
 
 
 
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: windowWidth / 50
-    },
-    titleContainer: {
-        flexDirection: "row",
+        paddingHorizontal: windowWidth / 50,
     },
     musicContainer: {
-        flexDirection: "row",
-        flexWrap: "wrap",
-        width: windowWidth
+        padding: windowWidth / 50
     },
     cardContainer: {
-        margin: windowWidth * 3 / 100
+        flexDirection: "row",
+        justifyContent: "space-between"
     }
 });
+
 
 
 export default MusicScreen;
