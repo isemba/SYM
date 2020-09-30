@@ -1,5 +1,5 @@
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import {View, Text, StyleSheet, TouchableWithoutFeedback} from "react-native";
+import {View, Text, StyleSheet} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 import HomeScreen from "./HomeScreen";
 import DiscoverScreen from "./DiscoverScreen";

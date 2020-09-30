@@ -13,8 +13,6 @@ export default function Card(props) {
     const media = props.media ? props.media : MediaType.VIDEO;
     const size = props.size ? props.size : 47;
 
-    console.log("CARD TITLE: ", title);
-
     return (
         <TouchableOpacity
             onPress={() => {

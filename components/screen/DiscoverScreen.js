@@ -1,34 +1,40 @@
 import React, { Component } from "react";
-import { Dimensions, ScrollView, StyleSheet, View } from 'react-native';
-import { Color } from "../../utils/Colors";
+import { Dimensions, ScrollView, StyleSheet, View, FlatList } from 'react-native';
 import { DiscoverList } from "../../utils/Data";
 import Languages, { getLanguageText } from '../../utils/Language';
 import Card from '../Card';
 import Title from "../Title";
-import {TabBarHeight} from "../../utils/DeviceInfo";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 class DiscoverScreen extends Component {
+
+    flatListRef;
+    headerListRef;
     state = {
+        titles: [],
         discoverList : [],
         activeMeditationGroups: []
     }
 
-
     constructor(props){
         super(props);
         DiscoverList[0].active = true;
+
+        DiscoverList.forEach(item => {
+            item.groups = this.getMeditationGroups(item.meditations)
+        })
+
+        this.flatListRef = React.createRef();
+        this.headerListRef = React.createRef();
     }
 
     componentDidMount(){
-        const meditations = DiscoverList[0].meditations;
-        const activeMeditationGroups = this.getMeditationGroups(meditations);
+
 
         this.setState({
-            discoverList : DiscoverList,
-            activeMeditationGroups
+            discoverList : DiscoverList
         })
     }
 
@@ -50,54 +56,97 @@ class DiscoverScreen extends Component {
     }
 
     changeActiveList = index => {
-        let meditations;
         DiscoverList.forEach((item, ind) =>{
-            if(index === ind){
-                item.active = true;
-                meditations = item.meditations;
-            }else{
-                item.active = false;
-            }
+            item.active = index === ind;
         });
-
-        const activeMeditationGroups = this.getMeditationGroups(meditations);
 
         this.setState({
-            discoverList : DiscoverList,
-            activeMeditationGroups
+            discoverList : DiscoverList
         });
+
+       try {
+           if(this.flatListRef != null){
+               this.flatListRef.current.scrollToIndex({index});
+           }
+
+       }catch (e){
+
+       }
     };
 
+    renderHeaderItem = ({item, index}) => (
+        <Title
+            title={getLanguageText(item.title)}
+            active={item.active}
+            key={"discoverTitle_" + index}
+            onPress={() => {
+                this.changeActiveList(index);
+            }}
+        />
+    )
+
+    renderScreen = ({item: { groups }, index}) => (
+        <ScrollView
+            style={styles.discoverContainer}
+            showsVerticalScrollIndicator={false}
+            key={"discover_screen_"+index}
+        >
+            {
+                groups.map((group, index) => (addMeditationCards(group, index)))
+            }
+
+            <View style={{height: windowHeight / 10}}/>
+        </ScrollView>
+    )
+
+    onViewableItemsChanged = ({ viewableItems, changed }) => {
+       // console.log("Visible items are", viewableItems);
+       // console.log("Changed in this iteration", changed);
+
+        const index = viewableItems[0].index;
+
+        if(this.headerListRef != null){
+
+
+            DiscoverList.forEach((item, ind) =>{
+                item.active = index === ind;
+            });
+
+            this.setState({
+                discoverList : DiscoverList
+            });
+
+            this.headerListRef.current.scrollToIndex({index});
+
+        }
+
+
+    }
+
     render() {
-        const { discoverList, activeMeditationGroups } = this.state;
+        const { discoverList } = this.state;
 
         return (
             <View>
-                <ScrollView
+                <FlatList
                     style={styles.container}
                     horizontal={true}
-                >
-                    { discoverList.map( (item, index) =>{
-                        return (
-                            <Title
-                                title={getLanguageText(item.title)}
-                                active={item.active}
-                                key={"discoverTitle_" + index}
-                                onPress={() => {
-                                    this.changeActiveList(index);
-                                }}
-                            />)
-                    }) }
+                    showsHorizontalScrollIndicator={false}
+                    ref={this.headerListRef}
+                    data={discoverList}
+                    keyExtractor={item => "header_"+ item.title.en}
+                    renderItem={this.renderHeaderItem}
+                />
 
-                </ScrollView>
-
-                <ScrollView style={styles.discoverContainer}>
-                    {
-                        activeMeditationGroups.map((group, index) => ( addMeditationCards(group, index) ))
-                    }
-
-                    <View style={{ height: windowHeight / 10 }} />
-                </ScrollView>
+                <FlatList
+                    data={discoverList}
+                    renderItem={this.renderScreen}
+                    keyExtractor={item => item.title.en}
+                    horizontal={true}
+                    pagingEnabled={true}
+                    ref={this.flatListRef}
+                    onViewableItemsChanged={this.onViewableItemsChanged }
+                />
             </View>
         )
     }
@@ -145,7 +194,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: windowWidth / 50,
     },
     discoverContainer: {
-        padding: windowWidth / 50
+        padding: windowWidth / 50,
+        width: windowWidth,
+        flex : 1
     },
     cardContainer: {
         flexDirection: "row",
