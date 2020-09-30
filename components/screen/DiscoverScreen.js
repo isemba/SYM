@@ -12,6 +12,7 @@ class DiscoverScreen extends Component {
 
     flatListRef;
     headerListRef;
+    headerLocked;
     state = {
         titles: [],
         discoverList : [],
@@ -31,7 +32,6 @@ class DiscoverScreen extends Component {
     }
 
     componentDidMount(){
-
 
         this.setState({
             discoverList : DiscoverList
@@ -65,9 +65,14 @@ class DiscoverScreen extends Component {
         });
 
        try {
-           if(this.flatListRef != null){
-               this.flatListRef.current.scrollToIndex({index});
-           }
+           this.flatListRef.current.scrollToIndex({index});
+
+           this.headerListRef.current.scrollToIndex({index});
+           this.headerLocked = true;
+
+           setTimeout(()=>{
+               this.headerLocked = false;
+           }, 200);
 
        }catch (e){
 
@@ -116,7 +121,9 @@ class DiscoverScreen extends Component {
                 discoverList : DiscoverList
             });
 
-            this.headerListRef.current.scrollToIndex({index});
+            if(!this.headerLocked){
+                this.headerListRef.current.scrollToIndex({index});
+            }
 
         }
 
