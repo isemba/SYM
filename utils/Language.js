@@ -27,7 +27,8 @@ const Languages = {
     NATURE_SOUNDS:{ en: "Nature Sounds", tr:  "Doğa Sesleri" },
     SLEEP_MUSICS:{ en: "Sleep Sounds", tr:  "Uyku Sesleri" },
     CHILL_AMBIENT_MUSICS:{ en: "Chill & Ambient Musics", tr:  "Chill & Ambiyans Müzikleri" },
-    CLASSIC_MUSICS:{ en: "Classic Musics", tr:  "Klasik Müzikler" }
+    CLASSIC_MUSICS:{ en: "Classic Musics", tr:  "Klasik Müzikler" },
+
 
 };
 

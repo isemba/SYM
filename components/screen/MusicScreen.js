@@ -1,110 +1,167 @@
-import React, {Component} from "react";
-import { Dimensions, ScrollView, StyleSheet, View } from 'react-native';
-import { Color } from "../../utils/Colors";
+import React, { Component } from "react";
+import { Dimensions, ScrollView, StyleSheet, View, FlatList } from 'react-native';
 import { MusicList } from "../../utils/Data";
 import Languages, { getLanguageText } from '../../utils/Language';
 import Card from '../Card';
 import Title from "../Title";
-
+import HeaderBar from "../HeaderBar";
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-
-
+const windowHeight = Dimensions.get('window').height; 
 class MusicScreen extends Component {
+
+    flatListRef;
+    headerListRef;
+    headerLocked;
     state = {
-        musicList: [],
-        activeMusicGroups: []
+        titles: [],
+        musicList : [],
+        activeMeditationGroups: []
     }
 
-
-    constructor(props) {
+    constructor(props){
         super(props);
         MusicList[0].active = true;
+
+        MusicList.forEach(item => {
+            item.groups = this.getMeditationGroups(item.musics )
+        })
+
+        this.flatListRef = React.createRef();
+        this.headerListRef = React.createRef();
     }
 
     componentDidMount(){
-        const musics = MusicList[0].musics;
-        const activeMusicGroups = this.getMusicGroups(musics);
 
         this.setState({
-            musicList : MusicList,
-            activeMusicGroups
+            musicList : MusicList
         })
     }
 
-    getMusicGroups(musics) {
-        const activeMusicGroups = [];
+    getMeditationGroups(musics ) {
+        const activeMeditationGroups = [];
         let groupIndex = -1;
-        for(let i = 0; i < musics.length; i++){
-            const med = musics[i];
+        for(let i = 0; i < musics .length; i++){
+            const med = musics [i];
 
             if(i % 2 === 0){
                 groupIndex++;
-                activeMusicGroups[groupIndex] = [];
+                activeMeditationGroups[groupIndex] = [];
             }
 
-            activeMusicGroups[groupIndex].push(med);
+            activeMeditationGroups[groupIndex].push(med);
         }
 
-        return activeMusicGroups;
+        return activeMeditationGroups;
     }
 
     changeActiveList = index => {
-        let musics;
         MusicList.forEach((item, ind) =>{
-            if(index === ind){
-                item.active = true;
-                musics = item.musics;
-            }else{
-                item.active = false;
-            }
+            item.active = index === ind;
         });
-
-        const activeMusicGroups = this.getMusicGroups(musics);
 
         this.setState({
-            musicList : MusicList,
-            activeMusicGroups
+            musicList : MusicList
         });
+
+       try {
+           this.flatListRef.current.scrollToIndex({index});
+
+           this.headerListRef.current.scrollToIndex({index});
+           this.headerLocked = true;
+
+           setTimeout(()=>{
+               this.headerLocked = false;
+           }, 250);
+
+       }catch (e){
+
+       }
     };
 
+    renderHeaderItem = ({item, index}) => (
+        <Title
+            title={getLanguageText(item.title)}
+            active={item.active}
+            key={"musicTitle_" + index}
+            onPress={() => {
+                this.changeActiveList(index);
+            }}
+        />
+    )
+
+    renderScreen = ({item: { groups }, index}) => (
+        <ScrollView
+            style={styles.musicContainer}
+            showsVerticalScrollIndicator={false}
+            key={"music_screen_"+index}
+        >
+            {
+                groups.map((group, index) => (addMeditationCards(group, index)))
+            }
+
+            <View style={{height: windowHeight / 10}}/>
+        </ScrollView>
+    )
+
+    onViewableItemsChanged = ({ viewableItems, changed }) => {
+       // console.log("Visible items are", viewableItems);
+       // console.log("Changed in this iteration", changed);
+
+        const index = viewableItems[0].index;
+
+        if(this.headerListRef != null){
+
+
+            MusicList.forEach((item, ind) =>{
+                item.active = index === ind;
+            });
+
+            this.setState({
+                musicList : MusicList
+            });
+
+            if(!this.headerLocked){
+                this.headerListRef.current.scrollToIndex({index});
+            }
+
+        }
+
+
+    }
+
     render() {
-        const { musicList, activeMusicGroups } = this.state;
+        const { musicList } = this.state;
 
         return (
+            
             <View>
-                <ScrollView
+                <HeaderBar title={getLanguageText(Languages.MUSIC)} />
+                <FlatList
                     style={styles.container}
                     horizontal={true}
-                >
-                    { musicList.map( (item, index) =>{
-                        return (
-                            <Title
-                                title={getLanguageText(item.title)}
-                                active={item.active}
-                                key={"discoverTitle_" + index}
-                                onPress={() => {
-                                    this.changeActiveList(index);
-                                }}
-                            />)
-                    }) }
+                    showsHorizontalScrollIndicator={false}
+                    ref={this.headerListRef}
+                    data={musicList}
+                    keyExtractor={item => "header_"+ item.title.en}
+                    renderItem={this.renderHeaderItem}
+                />
 
-                </ScrollView>
-
-                <ScrollView style={styles.musicContainer}>
-                    {
-                        activeMusicGroups.map((group, index) => ( addMusicCards(group, index) ))
-                    }
-
-                    <View style={{ height: windowHeight / 10 }} />
-                </ScrollView>
+                <FlatList
+                    data={musicList}
+                    renderItem={this.renderScreen}
+                    keyExtractor={item => item.title.en}
+                    horizontal={true}
+                    pagingEnabled={true}
+                    ref={this.flatListRef}
+                    onViewableItemsChanged={this.onViewableItemsChanged }
+                />
             </View>
         )
     }
 
 }
 
-function addMusicCards(group, groupIndex){
+function addMeditationCards(group, groupIndex){
     const groupSize = group.length;
 
     if(groupSize === 1 && groupIndex === 0){
@@ -127,7 +184,7 @@ function getCard(card, index, size){
     const { lock, color, title, desc } = card;
     return (
         <Card
-            key={"discover_card_" + index}
+            key={"music_card_" + index}
             lock={lock}
             color={color}
             size={size}
@@ -145,14 +202,15 @@ const styles = StyleSheet.create({
         paddingHorizontal: windowWidth / 50,
     },
     musicContainer: {
-        padding: windowWidth / 50
+        padding: windowWidth / 50,
+        width: windowWidth,
+        flex : 1
     },
     cardContainer: {
         flexDirection: "row",
         justifyContent: "space-between"
     }
 });
-
 
 
 export default MusicScreen;

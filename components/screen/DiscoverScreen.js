@@ -4,6 +4,7 @@ import { DiscoverList } from "../../utils/Data";
 import Languages, { getLanguageText } from '../../utils/Language';
 import Card from '../Card';
 import Title from "../Title";
+import HeaderBar from "../HeaderBar";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -134,7 +135,9 @@ class DiscoverScreen extends Component {
         const { discoverList } = this.state;
 
         return (
+            
             <View>
+                <HeaderBar title={getLanguageText(Languages.DISCOVER)} />
                 <FlatList
                     style={styles.container}
                     horizontal={true}

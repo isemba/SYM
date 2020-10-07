@@ -38,7 +38,7 @@ export default function HomeScreen() {
                 name={'ios-aperture'}
                 size={12}
                 color={'yellow'}
-                style={{ padding: 10, fontSize: 20 }}
+                style={{ padding: 20, fontSize: 30 }}
                 onPress={() => {
                     navigate('Customize');
                 }}

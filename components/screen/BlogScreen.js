@@ -3,8 +3,7 @@ import React from "react";
 import Card from "../Card";
 import { Color } from "../../utils/Colors"
 import Languages, { getLanguageText } from "../../utils/Language";
-import HeaderBar from "../Card";
-import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
+import HeaderBar from "../HeaderBar";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
