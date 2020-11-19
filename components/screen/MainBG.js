@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Dimensions, View} from "react-native";
 import EventEmitter from "react-native-eventemitter";
 import CustomEvents from "../../models/CustomEvents";
+import { Color } from "../../utils/Colors";
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -23,16 +24,16 @@ export default class MainBG extends Component{
     }
 
     render() {
-        const backgroundColor = "rgba(13, 25, 163, "+ this.state.bgOpacity +")";
 
         return(
             <View style={{
-                backgroundColor,
+                backgroundColor: Color.MAIN_DARK,
                 width: windowWidth,
                 height: windowHeight,
                 position: "absolute",
                 top: 0,
-                left: 0
+                left: 0,
+                opacity: this.state.bgOpacity
             }} />
         )
     }

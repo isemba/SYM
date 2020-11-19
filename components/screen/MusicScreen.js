@@ -134,7 +134,7 @@ class MusicScreen extends Component {
 
         return (
             
-            <View>
+            <View style={styles.backGround}>
                 <HeaderBar title={getLanguageText(Languages.MUSIC)} />
                 <FlatList
                     style={styles.container}
@@ -200,6 +200,8 @@ function getCard(card, index, size){
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: windowWidth / 50,
+        marginBottom: 5
+
     },
     musicContainer: {
         padding: windowWidth / 50,
@@ -209,6 +211,9 @@ const styles = StyleSheet.create({
     cardContainer: {
         flexDirection: "row",
         justifyContent: "space-between"
+    },
+    backGround:{
+        backgroundColor: '#280d52'
     }
 });
 

@@ -81,7 +81,7 @@ export default class MainContent extends Component {
                     <Title  title={getLanguageText(Languages.WORD_OF_THE_DAY)} />
 
                     <View style={styles.cardContainer}>
-                        <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')} />
+                        <Card isSquare={true} size={96} source={require('../assets/images/deneme.png')} />
                     </View>
 
             </ScrollView>

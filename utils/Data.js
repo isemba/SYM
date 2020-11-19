@@ -3,22 +3,22 @@ import Languages, {MoodLanguages} from "./Language";
 
 
 export const Moods = [
-    {title: MoodLanguages.STRESSED, uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"},
-    {title: MoodLanguages.HAPPY, uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"},
-    {title: MoodLanguages.ANXIOUS, uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"},
-    {title: MoodLanguages.COMPASSIONED, uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"},
-    {title: MoodLanguages.DEMOTIVATED, uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"},
-    {title: MoodLanguages.DEPRESSED, uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"},
-    {title: MoodLanguages.DISTRACTED, uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"},
-    {title: MoodLanguages.GRATEFUL, uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"},
-    {title: MoodLanguages.IN_PAIN, uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"},
-    {title: MoodLanguages.INCAPABLE, uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"},
-    {title: MoodLanguages.NEED_SPACE, uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"},
-    {title: MoodLanguages.LONELY, uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"},
-    {title: MoodLanguages.SAD, uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"},
-    {title: MoodLanguages.SLEEPLESS, uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"},
-    {title: MoodLanguages.TIRED, uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"},
-    {title: MoodLanguages.UNEASY, uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"}
+    {title: MoodLanguages.STRESSED, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
+    {title: MoodLanguages.HAPPY, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Attention_Exercise.mp4"},
+    {title: MoodLanguages.ANXIOUS, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Attention_Exercise.mp4"},
+    {title: MoodLanguages.COMPASSIONED, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
+    {title: MoodLanguages.DEMOTIVATED, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
+    {title: MoodLanguages.DEPRESSED, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
+    {title: MoodLanguages.DISTRACTED, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
+    {title: MoodLanguages.GRATEFUL, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
+    {title: MoodLanguages.IN_PAIN, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
+    {title: MoodLanguages.INCAPABLE, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
+    {title: MoodLanguages.NEED_SPACE, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
+    {title: MoodLanguages.LONELY, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
+    {title: MoodLanguages.SAD, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
+    {title: MoodLanguages.SLEEPLESS, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
+    {title: MoodLanguages.TIRED, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
+    {title: MoodLanguages.UNEASY, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"}
 ];
 
 export const DiscoverList = [

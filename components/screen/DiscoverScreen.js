@@ -71,10 +71,6 @@ class DiscoverScreen extends Component {
            this.headerListRef.current.scrollToIndex({index});
            this.headerLocked = true;
 
-           setTimeout(()=>{
-               this.headerLocked = false;
-           }, 250);
-
        }catch (e){
 
        }
@@ -124,6 +120,8 @@ class DiscoverScreen extends Component {
 
             if(!this.headerLocked){
                 this.headerListRef.current.scrollToIndex({index});
+            }else{
+                this.headerLocked = false;
             }
 
         }
@@ -136,7 +134,7 @@ class DiscoverScreen extends Component {
 
         return (
             
-            <View>
+            <View style={styles.backGround}>
                 <HeaderBar title={getLanguageText(Languages.DISCOVER)} />
                 <FlatList
                     style={styles.container}
@@ -202,15 +200,22 @@ function getCard(card, index, size){
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: windowWidth / 50,
+        marginBottom: 5
+        
     },
     discoverContainer: {
         padding: windowWidth / 50,
         width: windowWidth,
-        flex : 1
+        flex : 1,
+        
     },
     cardContainer: {
         flexDirection: "row",
         justifyContent: "space-between"
+
+    },
+    backGround:{
+        backgroundColor: '#280d52'
     }
 });
 

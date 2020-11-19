@@ -4,7 +4,7 @@ export default function Logo() {
     return (
         <Image
             style={styles.tinyLogo}
-            source={require('../assets/images/logo.png')}
+            source={require('../assets/images/logo5.png')}
         />
     );
 }

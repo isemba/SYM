@@ -21,7 +21,7 @@ export default function MoodCard({mood, uri}){
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: Color.MAIN_DARK,
+        backgroundColor: Color.LIGHT,
         borderRadius: 10,
         justifyContent: "center",
         alignItems: "center",

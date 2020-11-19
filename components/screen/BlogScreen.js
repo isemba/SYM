@@ -10,7 +10,7 @@ const windowHeight = Dimensions.get('window').height;
 function BlogScreen() {
 
     return (
-        <View>
+        <View style={styles.backGround}>
             <HeaderBar title={getLanguageText(Languages.BLOG)} />
             <ScrollView style={styles.container}>
                 <View style={styles.blogCards}>
@@ -31,15 +31,18 @@ const styles = StyleSheet.create({
 
     container: {
         width: windowWidth,
-        height: windowHeight
+        height: windowHeight,
 
     },
     blogCards: {
         flexDirection: "row",
         justifyContent: 'space-between',
         marginHorizontal: 7,
-        flexWrap: "wrap"
-
+        flexWrap: "wrap",
+        paddingTop: 5
+    },
+    backGround:{
+        backgroundColor: '#280d52'
     }
 });
 

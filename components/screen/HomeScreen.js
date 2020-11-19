@@ -16,7 +16,7 @@ export default function HomeScreen() {
     return (
         <View style={{ flex: 1 }}>
 
-            <Video source={require("../../assets/videos/nightlights.mp4")}  // Can be a URL or a local file.
+            <Video  source={{ uri: 'https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/backgroundvideo-home-2.mp4' }}  // Can be a URL or a local file.
                 rate={1.0}                                     // Store reference
                 volume={1.0}
                 isMuted={true}

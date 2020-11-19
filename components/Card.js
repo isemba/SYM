@@ -12,6 +12,7 @@ export default function Card(props) {
     const { lock, title, desc, source } = props;
     const media = props.media ? props.media : MediaType.VIDEO;
     const size = props.size ? props.size : 47;
+    const isSquare = props.isSquare ? props.isSquare : false;
 
     return (
         <TouchableOpacity
@@ -36,27 +37,33 @@ export default function Card(props) {
             }}
         >
             <ImageBackground
-                style={[styles.container, {width: windowWidth * size / 100}]}
+                style={[styles.container, {width: windowWidth * size / 100, height: isSquare ? windowWidth * size / 100 : 200}]}
                 source={source}
                 imageStyle={{ borderRadius: radios }}
             >
 
                 {lock ? <Lock /> : null}
 
-                <View style={styles.bottom}>
-                    <Text style={styles.titleStyle}>
-                        {title}
-                    </Text>
-                    <Text style={styles.descStyle}>
-                        {desc}
-                    </Text>
-                </View>
+               {title ? renderTitle(title, desc) : null}
             </ImageBackground>
         </TouchableOpacity>
 
 
     )
 };
+function renderTitle(title, desc){
+    return(
+        <View style={styles.bottom}>
+        <Text style={styles.titleStyle}>
+            {title}
+        </Text>
+        <Text style={styles.descStyle}>
+            {desc}
+        </Text>
+    </View>
+    )
+    
+}
 
 function Lock() {
     return (
@@ -75,7 +82,6 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: Color.MENU,
         borderRadius: radios,
-        height: 200,
         justifyContent: "flex-end",
         marginBottom: 10
     },

@@ -48,8 +48,8 @@ function SettingsButton() {
 
 const style = StyleSheet.create({
     settings: {
-        color: "#000",
-        fontSize: 20,
+        color: "#fff",
+        fontSize: 26,
         padding: 10
     }
 });

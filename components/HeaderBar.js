@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Dimensions, TouchableOpacity, ImageBackground } from "react-native";
+import { Text, View, StyleSheet, Dimensions, ImageBackground } from "react-native";
 import React from "react";
 import { Color } from "../utils/Colors";
 
@@ -9,7 +9,7 @@ export default function HeaderBar(props) {
 
         <ImageBackground
             style={styles.container}
-            source={require('../assets/images/sun&moon.png')}
+            //source={require('../assets/images/sun_moon2.png')}
         >
             <Text style={styles.text}>{title}</Text>
         </ImageBackground>
@@ -21,13 +21,20 @@ const styles = StyleSheet.create({
         height: 80,
         alignItems: 'center',
         justifyContent: "center",
+        marginBottom: 5,
+        backgroundColor: '#280d52'
 
     },
     text: {
-        color: Color.MAIN,
+        color: Color.LIGHT_TEXT_COLOR,
         fontWeight: "bold",
         fontSize: 25,
         paddingVertical: 5,
+        textShadowColor: 'rgba(0,0,0,0.7)',
+        textShadowOffset: {width:3, height:3},
+        textShadowRadius: 4,
+        elevation: 5
+        
 
     },
     image: {
