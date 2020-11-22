@@ -108,6 +108,8 @@ class MusicScreen extends Component {
        // console.log("Visible items are", viewableItems);
        // console.log("Changed in this iteration", changed);
 
+       if(!viewableItems || viewableItems.length < 1) return;
+
         const index = viewableItems[0].index;
 
         if(this.headerListRef != null){
