@@ -5,6 +5,7 @@ import Languages, { getLanguageText } from '../../utils/Language';
 import Card from '../Card';
 import Title from "../Title";
 import HeaderBar from "../HeaderBar";
+import { Audio } from 'expo-av';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height; 
 class MusicScreen extends Component {
