@@ -13,7 +13,7 @@ export const StatusBarHeight = Platform.select({
     default: 0
 })
 export const TabBarHeight = Platform.select({
-    ios: isIPhoneX() ? 130 : 52,
+    ios: isIPhoneX() ? 80 : 52,
     android: 52,
     default: 52
 })

@@ -9,10 +9,10 @@ import ProfileStackScreen from "./ProfileStackScreen";
 import React, {Component} from "react";
 import {Color} from "../../utils/Colors";
 import Languages, {getLanguageText} from "../../utils/Language";
-import { color } from "react-native-reanimated";
+import BlogStackScreen from "./BlogStackScreen";
 const Tab = createBottomTabNavigator();
 
-export default class  TabStack extends Component {
+export default class TabStack extends Component {
 
     render(){
         return (
@@ -37,7 +37,7 @@ export default class  TabStack extends Component {
                             iconName = "ios-man";
                             break;
                     }
-    
+
                     return ({
                         tabBarIcon: ({ focused, color, size }) => {
                             return <Ionicons name={iconName} size={size} color={color} />;
@@ -45,18 +45,18 @@ export default class  TabStack extends Component {
                     })
                 }}
                 tabBarOptions={{
-                    activeTintColor: 'blue',
-                    inactiveTintColor: 'white',
+                    activeTintColor: 'white',
+                    inactiveTintColor: 'grey',
                     tabStyle: {
                         backgroundColor: Color.MENU,
                     }
                 }}
-    
+
             >
                 <Tab.Screen name="Today" component={HomeScreen} options={{ title: getLanguageText(Languages.TODAY) }} />
                 <Tab.Screen name="Discover" component={DiscoverScreen} options={{ title: getLanguageText(Languages.DISCOVER) }} />
                 <Tab.Screen name="Music" component={MusicScreen} options={{ title: getLanguageText(Languages.MUSIC) }} />
-                <Tab.Screen name="Blog" component={BlogScreen} options={{ title: getLanguageText(Languages.BLOG) }} />
+                <Tab.Screen name="Blog" component={BlogStackScreen} options={{ title: getLanguageText(Languages.BLOG) }} />
                 <Tab.Screen name="Profile" component={ProfileStackScreen} options={{ title: getLanguageText(Languages.PROFILE) }} />
             </Tab.Navigator>
         )

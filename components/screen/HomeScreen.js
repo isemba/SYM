@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
+import { View, StyleSheet, Image, Dimensions } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { navigate } from "../RootNavigation";
@@ -6,6 +6,7 @@ import Logo from "../Logo";
 import MainContent from "../MainContent";
 import MainBG from "./MainBG";
 import { Video } from "expo-av";
+import MenuIcon from "./MenuIcon";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -16,7 +17,7 @@ export default function HomeScreen() {
     return (
         <View style={{ flex: 1 }}>
 
-            <Video  source={{ uri: 'https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/backgroundvideo-home-2.mp4' }}  // Can be a URL or a local file.
+            <Video  source={{ uri: 'https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/background-videos/backgroundvideo-home-2.mp4' }}  // Can be a URL or a local file.
                 rate={1.0}                                     // Store reference
                 volume={1.0}
                 isMuted={true}
@@ -27,23 +28,14 @@ export default function HomeScreen() {
                 orientation="portrait"
                 useNativeControls={false}
                 onLoadStart={() => {
-                    console.log("video started!");
+                    console.log("bg video started!");
                 }}
                 onLoad={status => {
-                    console.log("video loaded with status: ", status);
+                    console.log("bg video loaded with status: ", status);
                 }}
             />
 
-            <Ionicons
-                name={'ios-aperture'}
-                size={12}
-                color={'yellow'}
-                style={{ padding: 20, fontSize: 30 }}
-                onPress={() => {
-                    navigate('Customize');
-                }}
-            />
-
+            <MenuIcon navigateTo={"Customize"}/>
 
             <View style={styles.logoContainer}>
                 <Logo />
@@ -67,6 +59,7 @@ const styles = StyleSheet.create({
         height: windowHeight
     },
     logoContainer: {
+        paddingTop: 20,
         alignItems: "center",
     }
 });

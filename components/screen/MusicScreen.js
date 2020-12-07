@@ -5,56 +5,65 @@ import Languages, { getLanguageText } from '../../utils/Language';
 import Card from '../Card';
 import Title from "../Title";
 import HeaderBar from "../HeaderBar";
+import {LinearGradient} from "expo-linear-gradient";
+import {Color} from "../../utils/Colors";
+import {getMeditationGroups} from "../../utils/Utils";
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height; 
+const windowHeight = Dimensions.get('window').height;
 class MusicScreen extends Component {
 
     flatListRef;
     headerListRef;
     headerLocked;
+    activeIndex = 0;
     state = {
         titles: [],
         musicList : [],
-        activeMeditationGroups: []
     }
 
     constructor(props){
         super(props);
-        MusicList[0].active = true;
+        let activeID;
+        if(this.props.route.params){
+            activeID = this.props.route.params.id;
+        }
 
-        MusicList.forEach(item => {
-            item.groups = this.getMeditationGroups(item.musics )
+        MusicList.forEach((item, index) => {
+            item.groups = getMeditationGroups(item.musics);
+            if(activeID){
+                item.groups.forEach(group => {
+                    group.forEach(music => {
+                        if(music.id === activeID){
+                            this.activeIndex = index;
+                        }
+                    });
+                });
+            }
         })
+
+        MusicList[this.activeIndex].active = true;
 
         this.flatListRef = React.createRef();
         this.headerListRef = React.createRef();
     }
 
     componentDidMount(){
-
+        console.log("activeIndex: " + this.activeIndex );
         this.setState({
             musicList : MusicList
-        })
-    }
-
-    getMeditationGroups(musics ) {
-        const activeMeditationGroups = [];
-        let groupIndex = -1;
-        for(let i = 0; i < musics .length; i++){
-            const med = musics [i];
-
-            if(i % 2 === 0){
-                groupIndex++;
-                activeMeditationGroups[groupIndex] = [];
+        }, ()=>{
+            if(this.activeIndex > 0){
+                setTimeout(()=>{
+                    this.changeActiveList(this.activeIndex);
+                }, 500);
             }
+        })
 
-            activeMeditationGroups[groupIndex].push(med);
-        }
 
-        return activeMeditationGroups;
     }
 
     changeActiveList = index => {
+        console.log("changeActiveList with: " + index);
         MusicList.forEach((item, ind) =>{
             item.active = index === ind;
         });
@@ -107,6 +116,8 @@ class MusicScreen extends Component {
        // console.log("Visible items are", viewableItems);
        // console.log("Changed in this iteration", changed);
 
+        if(!viewableItems || viewableItems.length == 0) return;
+
         const index = viewableItems[0].index;
 
         if(this.headerListRef != null){
@@ -130,11 +141,12 @@ class MusicScreen extends Component {
     }
 
     render() {
-        const { musicList } = this.state;
+        //let { id } = this.props.route.params;
 
+        const { musicList } = this.state;
         return (
-            
-            <View style={styles.backGround}>
+
+            <LinearGradient colors={Color.MAIN_BG_GRADIENT}>
                 <HeaderBar title={getLanguageText(Languages.MUSIC)} />
                 <FlatList
                     style={styles.container}
@@ -155,7 +167,9 @@ class MusicScreen extends Component {
                     ref={this.flatListRef}
                     onViewableItemsChanged={this.onViewableItemsChanged }
                 />
-            </View>
+
+
+            </LinearGradient>
         )
     }
 

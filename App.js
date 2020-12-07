@@ -3,20 +3,41 @@ import React, { Component } from 'react';
 import Navigation from "./components/Navigation";
 import {SafeAreaView, View, StatusBar} from "react-native";
 import * as SplashScreen from 'expo-splash-screen';
+import * as axios from "axios";
+import {LOGIN_URL} from "./environement";
+import {HomeData} from "./utils/Data";
+import Constants from 'expo-constants';
+import EventEmitter from "react-native-eventemitter";
+import CustomEvents from "./models/CustomEvents";
+import {navigate} from "./components/RootNavigation";
 
 export default class App extends Component {
     state = {
         appIsReady: false,
+        themeIndex: 0
     };
+
+
+    constructor(props) {
+        super(props);
+
+        console.disableYellowBox = true;
+    }
 
     async componentDidMount() {
         // Prevent native splash screen from autohiding
         try {
             await SplashScreen.preventAutoHideAsync();
         } catch (e) {
-            console.warn(e);
+            //console.warn(e);
         }
-        this.prepareResources();
+        await this.prepareResources();
+
+        EventEmitter.on(CustomEvents.THEME_SELECTED, themeIndex =>{
+            this.setState({themeIndex}, ()=>{
+                navigate("Main");
+            })
+        })
     }
 
     prepareResources = async () => {
@@ -24,11 +45,17 @@ export default class App extends Component {
         await downloadAssets();
 
         this.setState({ appIsReady: true }, async () => {
-            await SplashScreen.hideAsync();
+            try {
+                await SplashScreen.hideAsync();
+            }catch (e){
+
+            }
         });
     };
 
     render() {
+        console.log("this.state.themeIndex : " + this.state.themeIndex);
+
         if (!this.state.appIsReady) {
             return (
                 <View>
@@ -38,13 +65,31 @@ export default class App extends Component {
         }
 
         return (
-            <SafeAreaView style={{ flex: 1}}>
+            <View style={{ flex: 1}}>
                 <StatusBar hidden={true}/>
                 <Navigation />
-            </SafeAreaView>
+            </View>
         );
     }
 }
 
-async function performAPICalls() {}
+async function performAPICalls() {
+    try {
+        const loginData = await axios.post(LOGIN_URL, { deviceId: Constants.deviceId, name: "Samet" });
+        const { token, initial: { popular, today, blog, discover, music } } = loginData.data;
+        HomeData.POPULAR = JSON.parse(popular);
+        HomeData.BLOG = JSON.parse(blog);
+        HomeData.DISCOVER = JSON.parse(discover);
+        HomeData.MUSIC = JSON.parse(music);
+        HomeData.TODAY = today;
+
+        console.log("HomeData.POPULAR", HomeData.POPULAR);
+        console.log("HomeData.BLOG", HomeData.BLOG);
+        console.log("HomeData.DISCOVER", HomeData.DISCOVER);
+        console.log("HomeData.TODAY", HomeData.TODAY);
+        console.log("HomeData.MUSIC", HomeData.MUSIC);
+    }catch (e){
+        console.error(e);
+    }
+}
 async function downloadAssets() {}

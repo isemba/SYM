@@ -3,6 +3,8 @@ import {Dimensions, View} from "react-native";
 import EventEmitter from "react-native-eventemitter";
 import CustomEvents from "../../models/CustomEvents";
 import { Color } from "../../utils/Colors";
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -26,8 +28,9 @@ export default class MainBG extends Component{
     render() {
 
         return(
-            <View style={{
-                backgroundColor: Color.MAIN_DARK,
+            <LinearGradient
+                colors={Color.MAIN_BG_GRADIENT}
+                style={{
                 width: windowWidth,
                 height: windowHeight,
                 position: "absolute",

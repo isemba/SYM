@@ -1,15 +1,19 @@
 import { Text, View, StyleSheet, ImageBackground, Dimensions, TouchableOpacity } from "react-native";
+import { BlurView } from 'expo-blur';
 import React from "react";
-import { Color } from "../utils/Colors";
+import {ChangeTheme, Color} from "../utils/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { MediaType } from "../utils/EnumTypes";
+import {navigate} from "./RootNavigation";
+import EventEmitter from "react-native-eventemitter";
+import CustomEvents from "../models/CustomEvents";
 
 const windowWidth = Dimensions.get('window').width;
 const radios = 15;
 
 export default function Card(props) {
 
-    const { lock, title, desc, source } = props;
+    const { lock, title, desc, source, uri, text, themeIndex, id } = props;
     const media = props.media ? props.media : MediaType.VIDEO;
     const size = props.size ? props.size : 47;
     const isSquare = props.isSquare ? props.isSquare : false;
@@ -20,7 +24,7 @@ export default function Card(props) {
 
                 switch (media) {
                     case MediaType.BLOG:
-
+                        navigate('BlogContent', {uri, text, title});
                         break;
 
                     case MediaType.VIDEO:
@@ -28,7 +32,11 @@ export default function Card(props) {
                         break;
 
                     case MediaType.MUSIC:
-
+                        navigate('Music', {id});
+                        break;
+                    case MediaType.THEME:
+                        ChangeTheme(themeIndex);
+                        EventEmitter.emit(CustomEvents.THEME_SELECTED, themeIndex);
                         break;
 
                     default:
@@ -37,7 +45,7 @@ export default function Card(props) {
             }}
         >
             <ImageBackground
-                style={[styles.container, {width: windowWidth * size / 100, height: isSquare ? windowWidth * size / 100 : 200}]}
+                style={[styles.container, {width: windowWidth * size / 100, height: isSquare ? windowWidth * size / 100 : 300}]}
                 source={source}
                 imageStyle={{ borderRadius: radios }}
             >
@@ -53,16 +61,16 @@ export default function Card(props) {
 };
 function renderTitle(title, desc){
     return(
-        <View style={styles.bottom}>
-        <Text style={styles.titleStyle}>
-            {title}
-        </Text>
-        <Text style={styles.descStyle}>
-            {desc}
-        </Text>
-    </View>
+        <View style={[styles.bottom]} intensity={40}>
+            <Text style={styles.titleStyle}>
+                {title}
+            </Text>
+            <Text style={styles.descStyle}>
+                {desc}
+            </Text>
+        </View>
     )
-    
+
 }
 
 function Lock() {
@@ -93,8 +101,9 @@ const styles = StyleSheet.create({
     bottom: {
         borderBottomRightRadius: radios,
         borderBottomLeftRadius: radios,
-        padding: 10,
-        backgroundColor: "rgba(0, 0, 0, 0.3)"
+        padding: 14,
+        overflow: "hidden",
+        backgroundColor: "rgba(0,0,0,0.3)"
     },
     titleStyle: {
         color: Color.LIGHT_TEXT_COLOR,

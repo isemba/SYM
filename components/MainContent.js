@@ -6,32 +6,97 @@ import {navigate} from "./RootNavigation";
 import {Color} from "../utils/Colors";
 import Card from "./Card";
 import MoodCard from "./MoodCard";
-import {Moods} from "../utils/Data";
+import {Moods, HomeData} from "../utils/Data";
 import EventEmitter from "react-native-eventemitter";
 import CustomEvents from "../models/CustomEvents";
 import { TabBarHeight } from '../utils/DeviceInfo';
+import {AppLoading} from "expo";
+import {MediaType} from "../utils/EnumTypes";
 
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const emptyArea = windowHeight *  12 / 20;
+const clickArea = windowHeight *  2 / 20;
+const emptyArea = windowHeight *  10 / 20;
 
 export default class MainContent extends Component {
 
     MoodViews = [];
+    PopularViews = [];
+    DiscoverViews = [];
+    MusicViews = [];
+    BlogViews = [];
 
-    constructor(props) {
-        super(props);
+    state = {
+        initialized : false,
+        themeIndex: 0
+    }
 
+    componentDidMount() {
         Moods.forEach((item, index) => {
             this.MoodViews.push(
                 <MoodCard mood={getLanguageText(item.title)} key={"mood" + index} uri={item.uri} />
             )
+        });
+
+        HomeData.POPULAR.forEach((item, index) => {
+            this.PopularViews.push(
+                <View style={styles.cardContainer} key={"popular_"+ index}>
+                    <Card
+                        lock={false}
+                        color={Color.MENU}
+                        title={item.title}
+                        desc={item.desc}
+                        source={{ uri: item.url }}
+                        size={55}
+                    />
+                </View>
+            )
+        })
+
+        HomeData.DISCOVER.forEach((item, index) => {
+            this.DiscoverViews.push(
+                <View style={styles.cardContainer} key={"discover_"+ index}>
+                    <Card lock={false} color={Color.MENU} title={item.title} desc={getLanguageText(Languages.DISCOVER)} source={{ uri: item.url }} />
+                </View>
+            )
+        });
+
+        HomeData.MUSIC.forEach((item, index) => {
+            this.MusicViews.push(
+                <View style={styles.cardContainer} key={"music_"+ index}>
+                    <Card lock={false} color={Color.MENU} title={item.title} source={{ uri: item.url }} id={item.id} media={MediaType.MUSIC} />
+                </View>
+            )
+        });
+
+        HomeData.BLOG.forEach((item, index) => {
+            this.BlogViews.push(
+                <View style={styles.cardContainer} key={"blog_"+ index}>
+                    <Card lock={false} color={Color.MENU} title={item.title} source={{ uri: item.url }} />
+                </View>
+            )
+        });
+
+        this.setState({
+            initialized : true
+        })
+
+        EventEmitter.on(CustomEvents.THEME_SELECTED, themeIndex =>{
+            console.log("Main Content THEME_SELECTED")
+            this.setState({
+                themeIndex
+            })
         })
     }
 
 
     render() {
+        console.log("themeIndex: "+ this.state.themeIndex);
+
+        if(!this.state.initialized){
+            return <AppLoading />;
+        }
 
         return (
             <ScrollView
@@ -48,7 +113,8 @@ export default class MainContent extends Component {
                 }}
             >
 
-                <TouchableOpacity style={{ height: emptyArea, paddingTop: windowHeight / 10 }} onPress={()=>{navigate("Customize")}} />
+                <TouchableOpacity style={{ height: clickArea, paddingTop: windowHeight / 10 }} onPress={()=>{navigate("Customize")}} />
+                <View style={{ height: emptyArea, paddingTop: windowHeight / 10 }}/>
 
                 <Title  title={getLanguageText(Languages.HOW_ARE_YOU_FEELING)} />
 
@@ -60,29 +126,32 @@ export default class MainContent extends Component {
                 <Title title={getLanguageText(Languages.POPULAR)} />
 
                 <ScrollView horizontal={true}>
-                    <View style={styles.cardContainer}>
-                        <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')} />
-                    </View>
-                    <View style={styles.cardContainer}>
-                        <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')} />
-                    </View>
-                    <View style={styles.cardContainer}>
-                        <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')} />
-                    </View>
-                    <View style={styles.cardContainer}>
-                        <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')} />
-                    </View>
-                    <View style={styles.cardContainer}>
-                        <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../assets/images/SampleImage.jpg')} />
-                    </View>
-                    
+                    { this.PopularViews }
                 </ScrollView>
 
-                    <Title  title={getLanguageText(Languages.WORD_OF_THE_DAY)} />
+                <Title  title={getLanguageText(Languages.WORD_OF_THE_DAY)} />
 
-                    <View style={styles.cardContainer}>
-                        <Card isSquare={true} size={96} source={require('../assets/images/deneme.png')} />
-                    </View>
+                <View style={styles.cardContainer}>
+                    <Card isSquare={true} size={96} source={{ uri: HomeData.TODAY  }} />
+                </View>
+
+                <Title title={getLanguageText(Languages.DISCOVER)} />
+
+                <ScrollView horizontal={true}>
+                    { this.DiscoverViews }
+                </ScrollView>
+
+                <Title title={getLanguageText(Languages.MUSIC)} />
+
+                <ScrollView horizontal={true}>
+                    { this.MusicViews }
+                </ScrollView>
+
+                <Title title={getLanguageText(Languages.BLOG)} />
+
+                <ScrollView horizontal={true}>
+                    { this.BlogViews }
+                </ScrollView>
 
             </ScrollView>
         );

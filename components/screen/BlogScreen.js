@@ -1,31 +1,56 @@
 import { StyleSheet, View, Text, ScrollView, Dimensions } from "react-native";
-import React from "react";
+import React, { Component } from 'react';
 import Card from "../Card";
 import { Color } from "../../utils/Colors"
 import Languages, { getLanguageText } from "../../utils/Language";
 import HeaderBar from "../HeaderBar";
+import {LinearGradient} from "expo-linear-gradient";
+import {HomeData} from "../../utils/Data";
+import {MediaType} from "../../utils/EnumTypes";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-function BlogScreen() {
+class BlogScreen extends Component {
 
-    return (
-        <View style={styles.backGround}>
-            <HeaderBar title={getLanguageText(Languages.BLOG)} />
-            <ScrollView style={styles.container}>
-                <View style={styles.blogCards}>
-                    <Card size={96} lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../../assets/images/SampleImage.jpg')} />
-                    <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../../assets/images/SampleImage.jpg')} />
-                    <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../../assets/images/SampleImage.jpg')} />
-                    <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../../assets/images/SampleImage.jpg')} />
-                    <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../../assets/images/SampleImage.jpg')} />
-                    <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../../assets/images/SampleImage.jpg')} />
-                    <Card lock={false} color={Color.MENU} title={getLanguageText(Languages.POPULAR)} desc={getLanguageText(Languages.DISCOVER)} source={require('../../assets/images/SampleImage.jpg')} />
-                </View>
-            </ScrollView>
-        </View>
+    BlogViews = [];
 
-    );
+    constructor(props) {
+        super(props);
+
+        HomeData.BLOG.forEach((item, index) => {
+            const size = index === 0 ? 96 : 47;
+            this.BlogViews.push(
+                <Card
+                    size={size}
+                    lock={false}
+                    color={Color.MENU}
+                    title={item.title}
+                    desc={getLanguageText(Languages.DISCOVER)}
+                    source={{ uri: item.url }}
+                    media={MediaType.BLOG}
+                    uri={item.uri}
+                    key={"blogCard_"+index}
+                    text={item.text}
+                />
+            )
+        });
+    }
+
+    render() {
+        return (
+            <LinearGradient colors={Color.MAIN_BG_GRADIENT}>
+                <HeaderBar title={getLanguageText(Languages.BLOG)} />
+                <ScrollView style={styles.container}>
+                    <View style={styles.blogCards}>
+                        { this.BlogViews }
+                    </View>
+                    <View style={{ height: 140 }} />
+                </ScrollView>
+
+            </LinearGradient>
+
+        );
+    }
 }
 const styles = StyleSheet.create({
 

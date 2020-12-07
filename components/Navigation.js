@@ -17,10 +17,14 @@ export default function Navigation() {
                     component={TabStack}
                     options={{
                         title : "",
-                        headerShown: false
+                        headerShown: false,
+                        gestureEnabled: true
                     }} />
                 <MainStack.Screen name="Customize" component={CustomizeScreen} options={{
-                    headerBackTitleVisible: false
+                    headerBackTitleVisible: false,
+                    headerTitle: "",
+                    headerTransparent: true,
+                    headerShown:false
                 }} />
                 <MainStack.Screen name="Video" component={VideoScreen} options={{
                     title : "",

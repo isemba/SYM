@@ -5,6 +5,9 @@ import Languages, { getLanguageText } from '../../utils/Language';
 import Card from '../Card';
 import Title from "../Title";
 import HeaderBar from "../HeaderBar";
+import {LinearGradient} from "expo-linear-gradient";
+import {Color} from "../../utils/Colors";
+import {getMeditationGroups} from "../../utils/Utils";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -25,7 +28,7 @@ class DiscoverScreen extends Component {
         DiscoverList[0].active = true;
 
         DiscoverList.forEach(item => {
-            item.groups = this.getMeditationGroups(item.meditations)
+            item.groups = getMeditationGroups(item.meditations)
         })
 
         this.flatListRef = React.createRef();
@@ -39,24 +42,8 @@ class DiscoverScreen extends Component {
         })
     }
 
-    getMeditationGroups(meditations) {
-        const activeMeditationGroups = [];
-        let groupIndex = -1;
-        for(let i = 0; i < meditations.length; i++){
-            const med = meditations[i];
-
-            if(i % 2 === 0){
-                groupIndex++;
-                activeMeditationGroups[groupIndex] = [];
-            }
-
-            activeMeditationGroups[groupIndex].push(med);
-        }
-
-        return activeMeditationGroups;
-    }
-
     changeActiveList = index => {
+        console.log("changeActiveList to: " + index);
         DiscoverList.forEach((item, ind) =>{
             item.active = index === ind;
         });
@@ -102,8 +89,11 @@ class DiscoverScreen extends Component {
     )
 
     onViewableItemsChanged = ({ viewableItems, changed }) => {
-       // console.log("Visible items are", viewableItems);
+        console.log("Visible items are", viewableItems);
        // console.log("Changed in this iteration", changed);
+
+
+        if(!viewableItems || viewableItems.length == 0) return;
 
         const index = viewableItems[0].index;
 
@@ -118,11 +108,7 @@ class DiscoverScreen extends Component {
                 discoverList : DiscoverList
             });
 
-            if(!this.headerLocked){
-                this.headerListRef.current.scrollToIndex({index});
-            }else{
-                this.headerLocked = false;
-            }
+            this.headerListRef.current.scrollToIndex({index});
 
         }
 
@@ -133,8 +119,8 @@ class DiscoverScreen extends Component {
         const { discoverList } = this.state;
 
         return (
-            
-            <View style={styles.backGround}>
+
+            <LinearGradient colors={Color.MAIN_BG_GRADIENT}>
                 <HeaderBar title={getLanguageText(Languages.DISCOVER)} />
                 <FlatList
                     style={styles.container}
@@ -155,7 +141,7 @@ class DiscoverScreen extends Component {
                     ref={this.flatListRef}
                     onViewableItemsChanged={this.onViewableItemsChanged }
                 />
-            </View>
+            </LinearGradient>
         )
     }
 
@@ -201,22 +187,19 @@ const styles = StyleSheet.create({
     container: {
         paddingHorizontal: windowWidth / 50,
         marginBottom: 5
-        
+
     },
     discoverContainer: {
         padding: windowWidth / 50,
         width: windowWidth,
         flex : 1,
-        
+
     },
     cardContainer: {
         flexDirection: "row",
         justifyContent: "space-between"
 
     },
-    backGround:{
-        backgroundColor: '#280d52'
-    }
 });
 
 
