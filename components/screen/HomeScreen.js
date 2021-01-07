@@ -1,7 +1,5 @@
 import { View, StyleSheet, Image, Dimensions } from "react-native";
 import React from "react";
-import { Ionicons } from "@expo/vector-icons";
-import { navigate } from "../RootNavigation";
 import Logo from "../Logo";
 import MainContent from "../MainContent";
 import MainBG from "./MainBG";
@@ -17,7 +15,7 @@ export default function HomeScreen() {
     return (
         <View style={{ flex: 1 }}>
 
-            <Video  source={{ uri: 'https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/background-videos/backgroundvideo-home-2.mp4' }}  // Can be a URL or a local file.
+            <Video source={require('../../assets/videos/rain_loop.mp4')}  // Can be a URL or a local file.
                 rate={1.0}                                     // Store reference
                 volume={1.0}
                 isMuted={true}

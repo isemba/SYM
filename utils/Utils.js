@@ -1,3 +1,5 @@
+import {CONTENT_URL} from "../environement";
+
 export const getMeditationGroups = list => {
     const groups = [];
     let groupIndex = -1;
@@ -13,4 +15,18 @@ export const getMeditationGroups = list => {
     }
 
     return groups;
+}
+
+export const fixUrls = list => {
+    list.forEach(item => {
+
+        if(item.image){
+            item.image = CONTENT_URL + item.image;
+        }
+
+        if(item.url){
+            item.url = CONTENT_URL + item.url;
+        }
+
+    });
 }

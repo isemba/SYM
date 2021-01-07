@@ -76,7 +76,7 @@ class DiscoverScreen extends Component {
 
     renderScreen = ({item: { groups }, index}) => (
         <ScrollView
-            style={styles.discoverContainer}
+            contentContainerStyle={styles.discoverContainer}
             showsVerticalScrollIndicator={false}
             key={"discover_screen_"+index}
         >
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     discoverContainer: {
         padding: windowWidth / 50,
         width: windowWidth,
-        flex : 1,
+        flexGrow : 1,
 
     },
     cardContainer: {

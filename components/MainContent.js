@@ -47,7 +47,9 @@ export default class MainContent extends Component {
                         color={Color.MENU}
                         title={item.title}
                         desc={item.desc}
-                        source={{ uri: item.url }}
+                        source={{ uri: item.image }}
+                        uri={item.url}
+                        id={item.cid}
                         size={55}
                     />
                 </View>
@@ -57,7 +59,7 @@ export default class MainContent extends Component {
         HomeData.DISCOVER.forEach((item, index) => {
             this.DiscoverViews.push(
                 <View style={styles.cardContainer} key={"discover_"+ index}>
-                    <Card lock={false} color={Color.MENU} title={item.title} desc={getLanguageText(Languages.DISCOVER)} source={{ uri: item.url }} />
+                    <Card lock={false} color={Color.MENU} title={item.title} desc={getLanguageText(Languages.DISCOVER)} source={{ uri: item.image }} />
                 </View>
             )
         });
@@ -65,7 +67,7 @@ export default class MainContent extends Component {
         HomeData.MUSIC.forEach((item, index) => {
             this.MusicViews.push(
                 <View style={styles.cardContainer} key={"music_"+ index}>
-                    <Card lock={false} color={Color.MENU} title={item.title} source={{ uri: item.url }} id={item.id} media={MediaType.MUSIC} />
+                    <Card lock={false} color={Color.MENU} title={item.title} source={{ uri: item.image }} id={item.id} media={MediaType.MUSIC} />
                 </View>
             )
         });
@@ -73,7 +75,7 @@ export default class MainContent extends Component {
         HomeData.BLOG.forEach((item, index) => {
             this.BlogViews.push(
                 <View style={styles.cardContainer} key={"blog_"+ index}>
-                    <Card lock={false} color={Color.MENU} title={item.title} source={{ uri: item.url }} />
+                    <Card lock={false} color={Color.MENU} title={item.title} source={{ uri: item.image }} />
                 </View>
             )
         });

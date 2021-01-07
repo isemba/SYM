@@ -7,18 +7,31 @@ import {Ionicons} from "@expo/vector-icons";
 import {navigate } from "../RootNavigation";
 import {Color} from "../../utils/Colors";
 import Languages, {getLanguageText} from "../../utils/Language";
+import {Lato_400Regular, useFonts} from "@expo-google-fonts/lato";
 
 
 const ProfileStack = createStackNavigator();
 
 
 export default function ProfileStackScreen() {
+    let [fontLoaded] = useFonts({ Lato_400Regular});
+
     return (
         <ProfileStack.Navigator>
             <ProfileStack.Screen
                 name="Profile"
                 component={ProfileScreen}
-                options={{ title: getLanguageText(Languages.PROFILE), headerRight: SettingsButton, headerTransparent: true, headerTitle:false }}
+                options={{
+                    title: getLanguageText(Languages.PROFILE),
+                    headerRight: SettingsButton,
+                    headerTransparent: true,
+                    headerTitle:"Profil",
+                    headerTitleStyle : {
+                        color: Color.LIGHT,
+                        fontSize: 20,
+                        fontFamily: "Lato_400Regular"
+                    }
+                }}
             />
             <ProfileStack.Screen
                 name="Settings"

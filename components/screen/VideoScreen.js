@@ -10,8 +10,9 @@ export default class VideoScreen extends Component{
     render() {
         const { route } = this.props;
         if(!route) return null;
-        const {  params: { uri } } = route;
+        const {  params: { uri, id } } = route;
 
+        let statusSent = false;
         return (
             <View>
                 <StatusBar hidden={true} />
@@ -30,6 +31,11 @@ export default class VideoScreen extends Component{
                        }}
                        onLoad={ status =>{
                            console.log("video loaded with status: ", status);
+                       }}
+                       onPlaybackStatusUpdate={ status => {
+                           if(!statusSent && status.isPlaying && status.positionMillis > 100000){
+
+                           }
                        }}
                 />
             </View>

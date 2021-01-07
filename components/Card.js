@@ -28,7 +28,7 @@ export default function Card(props) {
                         break;
 
                     case MediaType.VIDEO:
-                        console.log("card pressed!" , media);
+                        navigate('Video', {uri, id});
                         break;
 
                     case MediaType.MUSIC:

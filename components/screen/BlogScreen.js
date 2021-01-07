@@ -28,7 +28,7 @@ class BlogScreen extends Component {
                     desc={getLanguageText(Languages.DISCOVER)}
                     source={{ uri: item.url }}
                     media={MediaType.BLOG}
-                    uri={item.uri}
+                    uri={item.image}
                     key={"blogCard_"+index}
                     text={item.text}
                 />
@@ -40,7 +40,7 @@ class BlogScreen extends Component {
         return (
             <LinearGradient colors={Color.MAIN_BG_GRADIENT}>
                 <HeaderBar title={getLanguageText(Languages.BLOG)} />
-                <ScrollView style={styles.container}>
+                <ScrollView contentContainerStyle={styles.container}>
                     <View style={styles.blogCards}>
                         { this.BlogViews }
                     </View>
@@ -56,8 +56,7 @@ const styles = StyleSheet.create({
 
     container: {
         width: windowWidth,
-        height: windowHeight,
-
+        flexGrow : 1
     },
     blogCards: {
         flexDirection: "row",

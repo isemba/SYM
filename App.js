@@ -4,12 +4,13 @@ import Navigation from "./components/Navigation";
 import {SafeAreaView, View, StatusBar} from "react-native";
 import * as SplashScreen from 'expo-splash-screen';
 import * as axios from "axios";
-import {LOGIN_URL} from "./environement";
+import {CONTENT_URL, LOGIN_URL} from "./environement";
 import {HomeData} from "./utils/Data";
 import Constants from 'expo-constants';
 import EventEmitter from "react-native-eventemitter";
 import CustomEvents from "./models/CustomEvents";
 import {navigate} from "./components/RootNavigation";
+import {fixUrls} from "./utils/Utils";
 
 export default class App extends Component {
     state = {
@@ -83,6 +84,10 @@ async function performAPICalls() {
         HomeData.MUSIC = JSON.parse(music);
         HomeData.TODAY = today;
 
+        fixUrls([...HomeData.BLOG, ...HomeData.DISCOVER, ...HomeData.MUSIC, ...HomeData.POPULAR]);
+
+
+
         console.log("HomeData.POPULAR", HomeData.POPULAR);
         console.log("HomeData.BLOG", HomeData.BLOG);
         console.log("HomeData.DISCOVER", HomeData.DISCOVER);
@@ -93,3 +98,5 @@ async function performAPICalls() {
     }
 }
 async function downloadAssets() {}
+
+

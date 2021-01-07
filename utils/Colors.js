@@ -13,7 +13,7 @@ const ThemeColors = [
         LIGHT_TEXT_COLOR: "#fff"
     },
     {
-        MAIN_BG_GRADIENT: ["rgb(43,131,65)", "rgb(53,65,69)"],
+        MAIN_BG_GRADIENT: ["rgb(109,71,43)", "rgb(47,23,16)"],
         HEADER_GRADIENT: ["rgb(213,239,119)", "rgb(103,179,87)"],
         MAIN_DARK: "rgb(255,0,0)",
         MAIN: "#7bf501",
