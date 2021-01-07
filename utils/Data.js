@@ -3,7 +3,7 @@ import Languages, {MoodLanguages} from "./Language";
 
 
 export const Moods = [
-    {title: MoodLanguages.STRESSED, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
+    {title: MoodLanguages.STRESSED, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/shri-matajis-poem.mp4"},
     {title: MoodLanguages.HAPPY, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Attention_Exercise.mp4"},
     {title: MoodLanguages.ANXIOUS, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Attention_Exercise.mp4"},
     {title: MoodLanguages.COMPASSIONED, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
