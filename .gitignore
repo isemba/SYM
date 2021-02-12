@@ -14,5 +14,5 @@ web-build/
 assets/video/*.mp4
 .
 fix.expo
-*.iml 
+*.iml
 .idea
