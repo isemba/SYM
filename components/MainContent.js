@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import {Dimensions, ScrollView, StyleSheet, View, TouchableOpacity} from 'react-native';
+import React, { Component, useState } from 'react';
+import {Dimensions, ScrollView, StyleSheet, View, TouchableOpacity, Modal} from 'react-native';
 import Title from "./Title";
 import Languages, {getLanguageText} from "../utils/Language";
 import {navigate} from "./RootNavigation";
@@ -10,14 +10,16 @@ import {Moods, HomeData} from "../utils/Data";
 import EventEmitter from "react-native-eventemitter";
 import CustomEvents from "../models/CustomEvents";
 import { TabBarHeight } from '../utils/DeviceInfo';
-import {AppLoading} from "expo";
+import AppLoading from "expo-app-loading";
 import {MediaType} from "../utils/EnumTypes";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Video} from "expo-av";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const clickArea = windowHeight *  2 / 20;
 const emptyArea = windowHeight *  10 / 20;
+
 
 export default class MainContent extends Component {
 
@@ -27,12 +29,31 @@ export default class MainContent extends Component {
     MusicViews = [];
     BlogViews = [];
 
+    
+
     state = {
         initialized : false,
         themeIndex: 0
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        that=this;
+        try {
+            const value = await AsyncStorage.getItem('@first')
+            if(value !== null) {
+              // value previously stored
+              console.log("shown before");
+            }else{
+                console.log('show welcome');
+                setTimeout(function(){
+                that.setState({
+                    showWelcome : true
+                })}, 3000);
+            }
+          } catch(e) {
+            // error reading value
+            console.log("local storage error")
+          }
         Moods.forEach((item, index) => {
             this.MoodViews.push(
                 <MoodCard mood={getLanguageText(item.title)} key={"mood" + index} uri={item.uri} />
@@ -59,7 +80,13 @@ export default class MainContent extends Component {
         HomeData.DISCOVER.forEach((item, index) => {
             this.DiscoverViews.push(
                 <View style={styles.cardContainer} key={"discover_"+ index}>
-                    <Card lock={false} color={Color.MENU} title={item.title} desc={getLanguageText(Languages.DISCOVER)} source={{ uri: item.image }} />
+                    <Card lock={false} 
+                        color={Color.MENU} 
+                        title={item.title} 
+                        desc={getLanguageText(Languages.DISCOVER)} 
+                        source={{ uri: item.image }} 
+                        uri={item.url}
+                        id={item.cid}/>
                 </View>
             )
         });
@@ -67,7 +94,7 @@ export default class MainContent extends Component {
         HomeData.MUSIC.forEach((item, index) => {
             this.MusicViews.push(
                 <View style={styles.cardContainer} key={"music_"+ index}>
-                    <Card lock={false} color={Color.MENU} title={item.title} source={{ uri: item.image }} id={item.id} media={MediaType.MUSIC} />
+                    <Card lock={false} color={Color.MENU} title={item.title} source={{ uri: item.image }} id={item.id} media={MediaType.MUSIC} target={item}/>
                 </View>
             )
         });
@@ -75,7 +102,7 @@ export default class MainContent extends Component {
         HomeData.BLOG.forEach((item, index) => {
             this.BlogViews.push(
                 <View style={styles.cardContainer} key={"blog_"+ index}>
-                    <Card lock={false} color={Color.MENU} title={item.title} source={{ uri: item.image }} />
+                    <Card lock={false} color={Color.MENU} title={item.title} source={{ uri: item.image }} media={MediaType.HOME_BLOG} target={item}/>
                 </View>
             )
         });
@@ -84,15 +111,67 @@ export default class MainContent extends Component {
             initialized : true
         })
 
-        EventEmitter.on(CustomEvents.THEME_SELECTED, themeIndex =>{
+        EventEmitter.addListener(CustomEvents.THEME_SELECTED, themeIndex =>{
             console.log("Main Content THEME_SELECTED")
             this.setState({
                 themeIndex
             })
-        })
+        });
     }
 
+    componentWillUnmount() {
+        EventEmitter.removeListener(CustomEvents.THEME_SELECTED, themeIndex =>{
+            console.log("Main Content THEME_SELECTED")
+            this.setState({
+                themeIndex
+            })
+        });
+    }
 
+    updateTheme(){
+    }
+
+    showWelcomeVideo(){
+        if(this.state.showWelcome){
+        return (
+            <Modal
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => {
+          console.log("Modal has been closed.");
+        }}
+      >
+            <View style={styles.welcomeVideo}>
+            <Video source={{uri:'https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/mantra/013-mm1.mp4'}}  // Can be a URL or a local file.
+                rate={1.0}                                     // Store reference
+                volume={1.0}
+                isMuted={false}
+                resizeMode={Video.RESIZE_MODE_COVER}
+                style={styles.video}
+                shouldPlay={true}
+                isLooping={false}
+                orientation="landscape"
+                useNativeControls={true}
+                onLoadStart={()=>{
+                    console.log("video started!");
+                }}
+                onLoad={ status =>{
+                    console.log("video loaded with status: ", status);
+                }}
+                onPlaybackStatusUpdate={ status => {
+                    //console.log(status)
+                    if (status.didJustFinish) {
+                        console.log("video ended!");
+                        setTimeout(function(){
+                            that.setState({
+                                showWelcome : false
+                            })}, 1000);
+                      }
+                }}
+            />
+        </View></Modal>)
+        }
+    }
     render() {
         console.log("themeIndex: "+ this.state.themeIndex);
 
@@ -155,6 +234,8 @@ export default class MainContent extends Component {
                     { this.BlogViews }
                 </ScrollView>
 
+
+                { this.showWelcomeVideo() }
             </ScrollView>
         );
     }
@@ -176,5 +257,22 @@ const styles = StyleSheet.create({
     },
     cardContainer:{
         marginRight: 10
+    },
+    welcomeVideo:{
+        width:windowWidth,
+        height: windowHeight - TabBarHeight,
+        zIndex:10,
+        flex:1,
+        display:"flex",
+        alignItems:"center",
+        justifyContent:"center",
+        backgroundColor:"rgba(0,0,0,.5)"
+    },
+    video:{
+        position: "absolute",
+        top: windowHeight / 3,
+        left: 0,
+        width: windowWidth,
+        height: windowHeight / 3
     }
 });
