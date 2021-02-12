@@ -1,12 +1,13 @@
 import React, { useState} from 'react';
-import { StyleSheet, Text, View, Dimensions, SafeAreaView, ActivityIndicator, Button } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, SafeAreaView, ActivityIndicator, ScrollView,ImageBackground } from 'react-native';
 import { Video } from 'expo-av';
 import {Color} from "../utils/Colors";
 import { useFonts, Lato_400Regular } from "@expo-google-fonts/lato";
 import {LinearGradient} from "expo-linear-gradient";
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 import { Ionicons } from '@expo/vector-icons';
 import WebView from "react-native-webview";
+import { HomeData } from "../utils/Data";
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -20,22 +21,31 @@ export default function BlogContent({route}){
     if(!fontLoaded){
         return <AppLoading />;
     }else {
-        const { uri, text, title } = route.params;
+        console.log(route.params);
+        const { uri, text, title, source } = route.params;
         const iconName = videoPlaying ? "ios-pause" : "ios-play-circle";
+        console.log(uri);
+        console.log(text);
+        console.log(title);
+        console.log(source);
 
+        HomeData.BLOG_CONTENT = {};
         return (
-            <LinearGradient style={styles.container} colors={Color.MAIN_BG_GRADIENT}>
-                <SafeAreaView style={{ alignItems: "center" }}>
-                    {!videoLoaded ? <View style={styles.indicator}><ActivityIndicator /></View> : null }
+            
+            <ScrollView contentContainerStyle={styles.container}>
+                <ImageBackground source={Color.BG_IMAGE} style={styles.image}>
+                    <View style={styles.blogContent}>                  
                     <Video
-                        source={{ uri }}
+                        source={{ uri: uri.uri }}
+                        posterSource={source}
                         rate={1.0}
                         volume={1.0}
                         resizeMode="cover"
                         style={{
                             width: windowWidth - 30,
                             height: 300,
-                            borderRadius: 10
+                            borderTopLeftRadius: 10,
+                            borderTopRightRadius: 10
                         }}
                         onLoad={status => {
                             console.log("blog video loaded with status: ", status);
@@ -57,8 +67,8 @@ export default function BlogContent({route}){
                     <View
                         style={{
                             alignItems: "flex-end",
-                            width: windowWidth - 40,
-                            marginTop: -29
+                            width: windowWidth - 30,
+                            marginTop: -34
                         }}
                     >
                         <Ionicons
@@ -109,10 +119,12 @@ export default function BlogContent({route}){
                     </View>
 
                     <Text style={styles.text}>
+                        Test Content
                         {text}
                     </Text>
-                </SafeAreaView>
-            </LinearGradient>
+                    </View>  
+                </ImageBackground>
+            </ScrollView>
 
 
         );
@@ -121,14 +133,28 @@ export default function BlogContent({route}){
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: "center",
+        display:"flex",
+        alignItems: "flex-start",
         flex: 1
+    },
+    blogContent: {
+        paddingTop:70,
+        paddingLeft:15,
+        paddingRight:15,
+        paddingBottom:50
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+        flex: 1,
+        resizeMode: "cover"   
     },
     text: {
         fontSize: 15,
         color: Color.LIGHT_TEXT_COLOR,
         fontFamily: "Lato_400Regular",
         padding: 15,
+        paddingTop:30
     },
     titleContainer: {
         paddingHorizontal: 20,
@@ -137,7 +163,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         backgroundColor: Color.MAIN_DARK,
-        width: windowWidth - 40,
+        width: windowWidth - 30,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20
     },

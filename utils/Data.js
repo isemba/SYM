@@ -187,10 +187,18 @@ export const MusicList = [
     }
 ]
 
+export const STATS = {
+    "days": 1,
+    "totalDuration": 0,
+    "totalMeditations": 0
+}
 export const HomeData = {
     POPULAR : [],
     BLOG: [],
     DISCOVER: [],
     MUSIC: [],
-    TODAY: ""
+    TODAY: "",
+    STATS:{},
+    TOKEN:"",
+    BLOG_CONTENT:{}
 }

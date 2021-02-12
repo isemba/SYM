@@ -14,7 +14,7 @@ export default class VideoScreen extends Component{
 
         let statusSent = false;
         return (
-            <View>
+            <View style={{backgroundColor:"rgba(0,0,0,.5)"}}>
                 <StatusBar hidden={true} />
                 <Video source={{ uri }}  // Can be a URL or a local file.
                        rate={1.0}                                     // Store reference
@@ -22,7 +22,7 @@ export default class VideoScreen extends Component{
                        isMuted={false}
                        resizeMode={Video.RESIZE_MODE_STRETCH}
                        style={styles.backgroundVideo}
-                       shouldPlay={false}
+                       shouldPlay={true}
                        isLooping={false}
                        orientation="landscape"
                        useNativeControls={true}

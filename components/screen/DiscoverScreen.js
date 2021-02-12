@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Dimensions, ScrollView, StyleSheet, View, FlatList } from 'react-native';
-import { DiscoverList } from "../../utils/Data";
+import { Dimensions, ScrollView, StyleSheet, View, FlatList, ImageBackground } from 'react-native';
+import { DiscoverList, HomeData } from "../../utils/Data";
 import Languages, { getLanguageText } from '../../utils/Language';
 import Card from '../Card';
 import Title from "../Title";
@@ -25,6 +25,8 @@ class DiscoverScreen extends Component {
 
     constructor(props){
         super(props);
+        console.log(HomeData.DISCOVER);
+
         DiscoverList[0].active = true;
 
         DiscoverList.forEach(item => {
@@ -120,7 +122,7 @@ class DiscoverScreen extends Component {
 
         return (
 
-            <LinearGradient colors={Color.MAIN_BG_GRADIENT}>
+            <ImageBackground source={Color.BG_IMAGE} style={styles.image}>
                 <HeaderBar title={getLanguageText(Languages.DISCOVER)} />
                 <FlatList
                     style={styles.container}
@@ -141,7 +143,7 @@ class DiscoverScreen extends Component {
                     ref={this.flatListRef}
                     onViewableItemsChanged={this.onViewableItemsChanged }
                 />
-            </LinearGradient>
+            </ImageBackground>
         )
     }
 
@@ -200,6 +202,12 @@ const styles = StyleSheet.create({
         justifyContent: "space-between"
 
     },
+    image: {
+        width: '100%',
+        height: '100%',
+        flex: 1,
+        resizeMode: "cover"   
+    }
 });
 
 
