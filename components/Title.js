@@ -1,7 +1,7 @@
 import {Text, View, StyleSheet, Dimensions, TouchableOpacity} from "react-native";
 import React from "react";
 import {Color} from "../utils/Colors";
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 import { useFonts, Lato_400Regular, Lato_300Light } from "@expo-google-fonts/lato";
 
 

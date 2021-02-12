@@ -78,11 +78,25 @@ async function performAPICalls() {
     try {
         const loginData = await axios.post(LOGIN_URL, { deviceId: Constants.deviceId, name: "Samet" });
         const { token, initial: { popular, today, blog, discover, music } } = loginData.data;
+
+        console.log("/****/");
+        console.log(loginData.data);
+        console.log("/****/");
+
+        HomeData.TOKEN = token;
+        console.log("token>>>")
+        console.log(HomeData.TOKEN)
         HomeData.POPULAR = JSON.parse(popular);
         HomeData.BLOG = JSON.parse(blog);
         HomeData.DISCOVER = JSON.parse(discover);
         HomeData.MUSIC = JSON.parse(music);
         HomeData.TODAY = today;
+
+        HomeData.STATS = loginData.data.stats;
+
+        console.log("/----/");
+        console.log(HomeData.STATS);
+        console.log("/----/");
 
         fixUrls([...HomeData.BLOG, ...HomeData.DISCOVER, ...HomeData.MUSIC, ...HomeData.POPULAR]);
 

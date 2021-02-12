@@ -9,15 +9,16 @@ import {MediaType} from "../../utils/EnumTypes";
 
 function CustomizeScreen() {
     const themes = [
-        {source: require('../../assets/images/SampleImage.jpg')},
-        {source: require('../../assets/images/SampleImage.jpg')},
-        {source: require('../../assets/images/SampleImage.jpg')}
+        {source: require('../../assets/images/theme1.jpg')},
+        {source: require('../../assets/images/theme2.jpg')},
+        {source: require('../../assets/images/theme3.jpg')},
+        {source: require('../../assets/images/theme4.jpg')}
     ]
 
     return (
 
         <LinearGradient style={styles.container} colors={Color.MAIN_BG_GRADIENT}>
-            <HeaderBar title="Sahneler" size={100} />
+            <HeaderBar title="Sahneler" size={60} />
             <MenuIcon navigateTo={"Main"}/>
 
             <ScrollView
@@ -32,7 +33,7 @@ function CustomizeScreen() {
                     const cardStyles = index === ColorSettings.SelectedTheme ? [styles.cardContainer, styles.active] : styles.cardContainer;
                     return (
                         <View style={cardStyles} key={"theme_"+index}>
-                            <Card lock={false} color={Color.MENU} source={theme.source} themeIndex={index} media={MediaType.THEME} />
+                            <Card lock={false} color={Color.MENU} source={theme.source} themeIndex={index} media={MediaType.THEME} style={{marginBottom:0, height:"100%"}}/>
                         </View>
                     )
                 }) }
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
     },
     active: {
         borderWidth: 2,
-        borderRadius: 15,
+        borderRadius: 17,
         borderColor: Color.LIGHT
     }
 });

@@ -1,4 +1,5 @@
 import React from "react";
+import {Image} from "react-native";
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 import {navigationRef, navigate} from "./RootNavigation";
@@ -29,7 +30,10 @@ export default function Navigation() {
                 <MainStack.Screen name="Video" component={VideoScreen} options={{
                     title : "",
                     headerTransparent: true,
-                    headerBackTitleVisible: false
+                    headerBackTitleVisible: false,
+                    headerBackImage: ()=>(<Image source={require('../assets/images/back.png')} resizeMode="center" style={{ width: 32, height: 32 }} />),
+                    cardStyle: { opacity: 1, backgroundColor: 'rgba(0,0,0,.9)' },
+                    transparentCard: true
                 }} />
             </MainStack.Navigator>
         </NavigationContainer>

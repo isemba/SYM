@@ -7,34 +7,43 @@ import { MediaType } from "../utils/EnumTypes";
 import {navigate} from "./RootNavigation";
 import EventEmitter from "react-native-eventemitter";
 import CustomEvents from "../models/CustomEvents";
+import { HomeData } from "../utils/Data";
 
 const windowWidth = Dimensions.get('window').width;
 const radios = 15;
 
 export default function Card(props) {
 
-    const { lock, title, desc, source, uri, text, themeIndex, id } = props;
+    const { lock, title, desc, source, uri, text, themeIndex, id, target } = props;
     const media = props.media ? props.media : MediaType.VIDEO;
     const size = props.size ? props.size : 47;
     const isSquare = props.isSquare ? props.isSquare : false;
 
+    //console.log(props)
     return (
         <TouchableOpacity
             onPress={() => {
 
                 switch (media) {
                     case MediaType.BLOG:
-                        navigate('BlogContent', {uri, text, title});
+                        navigate('BlogContent', {uri, text, title, source});
                         break;
-
+                    case MediaType.HOME_BLOG:
+                        console.log("homeblog click");
+                        console.log(target);
+                        HomeData.BLOG_CONTENT = target;
+                        navigate('Blog');
+                        break;
                     case MediaType.VIDEO:
                         navigate('Video', {uri, id});
                         break;
 
                     case MediaType.MUSIC:
-                        navigate('Music', {id});
+                        navigate('Music', {target});
                         break;
                     case MediaType.THEME:
+                        console.log("theme click");
+                        console.log(themeIndex);
                         ChangeTheme(themeIndex);
                         EventEmitter.emit(CustomEvents.THEME_SELECTED, themeIndex);
                         break;
@@ -45,9 +54,9 @@ export default function Card(props) {
             }}
         >
             <ImageBackground
-                style={[styles.container, {width: windowWidth * size / 100, height: isSquare ? windowWidth * size / 100 : 300}]}
+                style={[styles.container, props.style, {width: windowWidth * size / 100, height: isSquare ? windowWidth * size / 100 : 300}]}
                 source={source}
-                imageStyle={{ borderRadius: radios }}
+                imageStyle={{ borderRadius: radios, resizeMode: "cover" }}
             >
 
                 {lock ? <Lock /> : null}

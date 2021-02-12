@@ -3,7 +3,7 @@ import React from "react";
 import { Color } from "../utils/Colors";
 import {LinearGradient} from "expo-linear-gradient";
 import { useFonts, Lato_400Regular } from "@expo-google-fonts/lato";
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 import {isIPhoneX} from "../utils/DeviceInfo";
 
 const windowWidth = Dimensions.get('window').width;
@@ -35,7 +35,7 @@ export default function HeaderBar(props) {
 
 const styles = StyleSheet.create({
     container: {
-        height: 70,
+        height: 55,
         alignItems: 'center',
         justifyContent: "center",
         marginBottom: 5,
@@ -48,10 +48,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: "Lato_400Regular",
         paddingVertical: 5,
-        textShadowColor: 'rgba(0,0,0,0.7)',
-        textShadowOffset: {width:3, height:3},
-        textShadowRadius: 4,
-        elevation: 5
+        
 
 
     },

@@ -1,21 +1,46 @@
 import { View, StyleSheet, Image, Dimensions } from "react-native";
-import React from "react";
+import React, {Component} from "react";
 import Logo from "../Logo";
 import MainContent from "../MainContent";
 import MainBG from "./MainBG";
 import { Video } from "expo-av";
 import MenuIcon from "./MenuIcon";
+import {Color} from "../../utils/Colors";
+import EventEmitter from "react-native-eventemitter";
+import CustomEvents from "../../models/CustomEvents";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export default function HomeScreen() {
+export default class HomeScreen extends Component{
+    state = {
+        bg:Color.BG_VIDEO
+    };
 
+    componentDidMount() {
+        that=this;
+        EventEmitter.addListener(CustomEvents.THEME_SELECTED, themeIndex =>{
+            console.log("Main Content THEME_SELECTED")
+            this.setState({
+                bg:Color.BG_VIDEO
+            })
+        });
+    }
 
+    componentWillUnmount() {
+        EventEmitter.removeListener(CustomEvents.THEME_SELECTED, themeIndex =>{
+            console.log("Main Content THEME_SELECTED")
+            this.setState({
+                bg:Color.BG_VIDEO
+            })
+        });
+    }
+
+    render(){
     return (
         <View style={{ flex: 1 }}>
 
-            <Video source={require('../../assets/videos/rain_loop.mp4')}  // Can be a URL or a local file.
+            <Video source={this.state.bg}  // Can be a URL or a local file.
                 rate={1.0}                                     // Store reference
                 volume={1.0}
                 isMuted={true}
@@ -46,6 +71,7 @@ export default function HomeScreen() {
 
         </View>
     );
+            }
 }
 
 const styles = StyleSheet.create({

@@ -2,15 +2,19 @@ import React, { Component, useState, useEffect } from 'react';
 import { Dimensions, StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, ScrollView, Switch, Platform, TouchableWithoutFeedback, TextInput } from 'react-native';
 import { Color } from "../utils/Colors";
 import {Lato_400Regular, Lato_100Thin, useFonts} from "@expo-google-fonts/lato";
+import { useNavigation } from '@react-navigation/native';
+import { HomeData } from "../utils/Data";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 export default function ProfileCard() {
+    const navigation = useNavigation();
+
     const [fontLoaded] = useFonts({ Lato_400Regular, Lato_100Thin});
-    const [strike, setStrike] = useState(22);
-    const [joinCount, setJoinCount] = useState(3);
-    const [joinTime, setJoinTime] = useState(143);
-    const [joinStrike, setJoinStrike] = useState(12);
+    const [strike, setStrike] = useState(HomeData.STATS.days);
+    const [joinCount, setJoinCount] = useState(HomeData.STATS.totalMeditations);
+    const [joinTime, setJoinTime] = useState(HomeData.STATS.totalDuration);
+    const [joinStrike, setJoinStrike] = useState(HomeData.STATS.days);
     const [reminders, setReminders] = useState(false);
     const [remindHour, onChangeRemindHour] = useState(9);
     const [remindMinute, onChangeRemindMinute] = useState(40);
@@ -88,13 +92,15 @@ export default function ProfileCard() {
             </View>
             <View style={{
                 flexDirection: "row",
-                marginTop: 10,
+                marginTop: 5,
                 marginBottom: 20,
-                justifyContent: "center"
+                justifyContent: "center",
+                alignItems:"center"
             }}>
-                <Text style={[styles.text, { fontSize: 20 }]}>Saat </Text>
+                <Text style={[styles.text, { fontSize: 20 ,marginTop:2, marginRight:5 }]}>Saat </Text>
+                <View style={{display:"flex", flexDirection:"row",paddingTop:6,paddingBottom:6, paddingLeft:10, paddingRight:10, backgroundColor:"rgba(118,118,128,0.12)", borderRadius:5}}>
                 <TextInput
-                    style={[styles.text, { fontSize: 20 }]}
+                    style={[styles.text, { fontSize: 20, textAlign:"right" }]}
                     onChangeText={text => onChangeRemindHour(text)}
                     numeric={true}
                     keyboardType={'numeric'}
@@ -107,7 +113,7 @@ export default function ProfileCard() {
                     value={remindMinute+""}
                     numeric={true}
                     keyboardType={'numeric'}
-                />
+                /></View>
 
             </View>
         </View>
@@ -143,12 +149,16 @@ export default function ProfileCard() {
 
                 { Platform.OS === "ios" ? <SwitchArea text="Apple Sağlık" value={appleHealth} setValue={setAppleHealth}/> : null }
                 <TouchableOpacity
-                    style={{ marginBottom: 10 }}
+                    style={{ marginBottom: 10 }} onPress={()=>{
+                        navigation.navigate('Faq');
+                    }}
                 >
                     <Text style={styles.text}>Sıkça Sorulan Sorular </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={{ marginBottom: 10 }}
+                    style={{ marginBottom: 10 }} onPress={()=>{
+                        navigation.navigate('Contact');
+                    }}
                 >
                     <Text style={styles.text}>Bize Ulaşın </Text>
                 </TouchableOpacity>
@@ -220,14 +230,15 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        width: windowWidth
+        width: windowWidth - 20,
+        marginLeft:5
     },
     infoLabel: {
         fontFamily: "Lato_400Regular",
         color: Color.LIGHT_TEXT_COLOR,
-        opacity: 0.4,
+        opacity: 0.6,
         textAlign: "center",
-        fontSize: 13
+        fontSize: 10
     },
     infoCount: {
         fontFamily: "Lato_400Regular",
