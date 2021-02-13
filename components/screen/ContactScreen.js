@@ -23,17 +23,16 @@ const SocialIcon = ({source}) => (
 )
 export class ContactScreen extends Component {
     constructor(props) {
-        
+
 		super(props);
 		this.state = {
             email: "",
             name: "",
             message: ""
         };
-        let that=this;       
 	}
 
-    
+
     onTextChange = (name) => (value) => {
         console.log(name);
         console.log(value);
@@ -50,7 +49,7 @@ export class ContactScreen extends Component {
     async onSendClick(){
 		Keyboard.dismiss();
 
-		this.setState({ 
+		this.setState({
 			resultError: false
 		});
         console.log(this.state);
@@ -80,19 +79,19 @@ export class ContactScreen extends Component {
             try {
                 console.log("send");
                 console.log(HomeData.TOKEN)
-                await axios.post('http://ec2-52-49-171-251.eu-west-1.compute.amazonaws.com:3000/contact', { message:"test" },{
+                await axios.post(CONTACT_URL, { message:"test" },{
                     headers: {
-                      'authorization': HomeData.TOKEN 
+                      'authorization': HomeData.TOKEN
                     }}).then((response)=>{console.log(response)});
             }catch (e){
                 console.error(e);
-            }		
+            }
 		}else{
             this.setState({
                 emailError:errObj.emailError,
                 nameError:errObj.nameError,
                 messageError:errObj.messageError
-            }); 
+            });
         console.log(this.state);
 
         }
@@ -105,7 +104,7 @@ export class ContactScreen extends Component {
                         <View style={styles.logoContainer}>
                             <Logo />
                         </View>
-                    
+
                         <View style={styles.formHolder}>
                             <Text style={styles.formTitle}> {getLanguageText(Languages.CONTACT)} </Text>
                             <View style={[styles.inputHolder, {borderBottomColor: this.state.emailError ? "#ff0000":( this.state.emailActive? "rgba(255,255,255,1)":"rgba(255,255,255,0.5)") }]}>
@@ -215,7 +214,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         width:"100%",
-        flexGrow: 1        
+        flexGrow: 1
     },
     contactHolder:{
         paddingTop:90,
@@ -227,7 +226,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         flex: 1,
-        resizeMode: "cover"   
+        resizeMode: "cover"
     },
     logoContainer: {
         paddingTop: 20,
@@ -236,8 +235,8 @@ const styles = StyleSheet.create({
     },
     formTitle:{
         fontSize:12,
-        color:'#fff', 
-        fontFamily: "Lato_400Regular"       
+        color:'#fff',
+        fontFamily: "Lato_400Regular"
     },
     formHolder:{
         marginBottom:30
@@ -280,7 +279,7 @@ const styles = StyleSheet.create({
         fontSize:16,
         marginBottom:10
     },
-    textInput:{ 
+    textInput:{
         height: 30,
         width: width-110,
         color:'#fff',
@@ -332,7 +331,7 @@ const styles = StyleSheet.create({
         textDecorationLine:"underline",
         textAlign:"center"
     }
-    
+
 });
 
 

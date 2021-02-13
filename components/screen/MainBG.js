@@ -16,19 +16,21 @@ export default class MainBG extends Component{
     };
 
     componentDidMount() {
-        EventEmitter.on(CustomEvents.BG_RATIO_CHANGED,bgOpacity =>{
-            this.setState({bgOpacity});
-        });
+        EventEmitter.on(CustomEvents.BG_RATIO_CHANGED,this.updateBgRatio);
     }
 
     componentWillUnmount() {
+        EventEmitter.off(CustomEvents.BG_RATIO_CHANGED, this.updateBgRatio);
+    }
 
+    updateBgRatio = bgOpacity =>{
+        this.setState({bgOpacity});
     }
 
     render() {
 
         return(
-            
+
             <LinearGradient
                 colors={Color.MAIN_BG_GRADIENT}
                 style={{

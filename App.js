@@ -34,11 +34,17 @@ export default class App extends Component {
         }
         await this.prepareResources();
 
-        EventEmitter.on(CustomEvents.THEME_SELECTED, themeIndex =>{
-            this.setState({themeIndex}, ()=>{
-                navigate("Main");
-            })
+        EventEmitter.on(CustomEvents.THEME_SELECTED, this.updateTheme)
+    }
+
+    updateTheme = themeIndex =>{
+        this.setState({themeIndex}, ()=>{
+            navigate("Main");
         })
+    }
+
+    componentWillUnmount() {
+        EventEmitter.off(CustomEvents.THEME_SELECTED, this.updateTheme)
     }
 
     prepareResources = async () => {
@@ -47,7 +53,7 @@ export default class App extends Component {
 
         this.setState({ appIsReady: true }, async () => {
             try {
-                await SplashScreen.hideAsync();
+                await SplashScreen.preventAutoHideAsync();
             }catch (e){
 
             }

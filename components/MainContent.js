@@ -30,7 +30,6 @@ export default class MainContent extends Component {
     BlogViews = [];
 
 
-
     state = {
         initialized : false,
         themeIndex: 0
@@ -111,25 +110,21 @@ export default class MainContent extends Component {
             initialized : true
         })
 
-        EventEmitter.addListener(CustomEvents.THEME_SELECTED, themeIndex =>{
-            console.log("Main Content THEME_SELECTED")
-            this.setState({
-                themeIndex
-            })
-        })
+        EventEmitter.on(CustomEvents.THEME_SELECTED, this.updateTheme)
     }
 
     componentWillUnmount() {
-        EventEmitter.removeListener(CustomEvents.THEME_SELECTED, themeIndex =>{
-            console.log("Main Content THEME_SELECTED")
-            this.setState({
-                themeIndex
-            })
-        });
+        EventEmitter.off(CustomEvents.THEME_SELECTED, this.updateTheme);
     }
 
-    updateTheme(){
+    updateTheme = (themeIndex) => {
+        console.log("Main Content THEME_SELECTED")
+        this.setState({
+            themeIndex
+        })
     }
+
+
 
     showWelcomeVideo(){
         if(this.state.showWelcome){
