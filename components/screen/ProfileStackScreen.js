@@ -27,15 +27,22 @@ export default function ProfileStackScreen() {
                 component={ProfileScreen}
                 options={{
                     title: getLanguageText(Languages.PROFILE),
-                    headerRight: SettingsButton,
+                    
+                    headerBackTitleVisible: false,
                     headerTransparent: true,
-                    headerTitle:"Profil",
-                    headerTitleStyle : {
-                        color: Color.LIGHT,
-                        fontSize: 20,
-                        fontFamily: "Lato_400Regular"
-                    }
-                }}
+                    headerTitle:getLanguageText(Languages.PROFILE),
+                    headerTitleStyle : style.headerMainTitle,
+                    
+                    headerBackground: ()=> (
+                        <LinearGradient
+                          colors={[Color.HEADER_GRADIENT[0], Color.HEADER_GRADIENT[1]]}
+                          style={{ flex: 1 }}
+                          start={{x: 0, y: 0}}
+                          end={{x: 0, y: 1}}
+                        />
+                      ),
+                    }}
+              
             />
             <ProfileStack.Screen
                 name="Settings"
@@ -134,5 +141,12 @@ const style = StyleSheet.create({
         fontFamily: "Lato_400Regular",
         textAlign:"center",
         paddingRight:60
+    },
+    headerMainTitle:{
+        color: Color.LIGHT_TEXT_COLOR,
+        fontSize: 20,
+        fontFamily: "Lato_400Regular",
+        textAlign:"center",
+        paddingLeft:30
     }
 });

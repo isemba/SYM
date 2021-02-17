@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import {Dimensions, StyleSheet, Text, View, TouchableWithoutFeedback} from 'react-native';
 import {Color} from "../utils/Colors";
-import {navigate} from "./RootNavigation";
+import {navigate, setWelcome} from "./RootNavigation";
 import {useFonts, Lato_400Regular, Lato_300Light} from "@expo-google-fonts/lato";
 import AppLoading from "expo-app-loading";
+import { HomeData } from "../utils/Data";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 export default function MoodCard({mood, uri}){
     let [fontLoaded] = useFonts({ Lato_400Regular, Lato_300Light});
 
-    console.log("MOOD CARD RENEDER: " + mood);
+    //console.log("MOOD CARD RENEDER: " + mood);
 
     if(!fontLoaded){
         return <AppLoading />;
@@ -18,6 +19,11 @@ export default function MoodCard({mood, uri}){
         return (
             <TouchableWithoutFeedback
                 onPress={()=>{
+                    if(HomeData.STARTER.showVideo){
+                        HomeData.STARTER.showVideo = false;
+                        setWelcome();
+                        navigate('WelcomeVideo');
+                    } else 
                     navigate("Video", { uri });
                 }}
             >
@@ -35,7 +41,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         justifyContent: "center",
         alignItems: "center",
-        width: windowWidth * 9 / 40,
+        width: windowWidth * 12 / 40,
         height: windowWidth * 9 / 80,
         marginBottom: 10,
         paddingHorizontal: 5

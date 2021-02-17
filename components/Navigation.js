@@ -6,7 +6,7 @@ import {navigationRef, navigate} from "./RootNavigation";
 import TabStack from "./screen/TabStack";
 import CustomizeScreen from "./screen/CustomizeScreen";
 import VideoScreen from "./screen/VideoScreen";
-
+import WelcomeVideoScreen from "./screen/WelcomeVideoScreen";
 
 const MainStack = createStackNavigator();
 export default function Navigation() {
@@ -32,6 +32,14 @@ export default function Navigation() {
                     headerTransparent: true,
                     headerBackTitleVisible: false,
                     headerBackImage: ()=>(<Image source={require('../assets/images/back.png')} resizeMode="center" style={{ width: 32, height: 32 }} />),
+                    cardStyle: { opacity: 1, backgroundColor: 'rgba(0,0,0,.9)' },
+                    transparentCard: true
+                }} />
+                <MainStack.Screen name="WelcomeVideo" component={WelcomeVideoScreen} options={{
+                    title : "",
+                    headerTransparent: true,
+                    headerBackTitleVisible: false, 
+                    headerLeft: null,                   
                     cardStyle: { opacity: 1, backgroundColor: 'rgba(0,0,0,.9)' },
                     transparentCard: true
                 }} />

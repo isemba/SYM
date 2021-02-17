@@ -19,13 +19,19 @@ export const getMeditationGroups = list => {
 
 export const fixUrls = list => {
     list.forEach(item => {
-
+        //console.log(item)
         if(item.image){
             item.image = CONTENT_URL + item.image;
         }
 
         if(item.url){
             item.url = CONTENT_URL + item.url;
+        }
+        if(item.audio){
+            item.audio = CONTENT_URL + item.audio;
+        }
+        if(item.video){
+            item.video = CONTENT_URL + item.video;
         }
 
     });

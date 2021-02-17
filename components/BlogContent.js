@@ -24,12 +24,7 @@ export default function BlogContent({route}){
         console.log(route.params);
         const { uri, text, title, source } = route.params;
         const iconName = videoPlaying ? "ios-pause" : "ios-play-circle";
-        console.log(uri);
-        console.log(text);
-        console.log(title);
-        console.log(source);
-
-        HomeData.BLOG_CONTENT = {};
+        
         return (
             
             <ScrollView contentContainerStyle={styles.container}>

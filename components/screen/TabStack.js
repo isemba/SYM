@@ -24,21 +24,18 @@ export default class TabStack extends Component {
         this.setState({
             bg:Color.BOTTOM_BG
         })
-        EventEmitter.addListener(CustomEvents.THEME_SELECTED, themeIndex =>{
-            console.log("Main Content THEME_SELECTED")
-            this.setState({
-                bg:Color.BOTTOM_BG
-            })
-        });
+        EventEmitter.on(CustomEvents.THEME_SELECTED, this.updateTheme);
     }
 
     componentWillUnmount() {
-        EventEmitter.removeListener(CustomEvents.THEME_SELECTED, themeIndex =>{
-            console.log("Main Content THEME_SELECTED")
-            this.setState({
-                bg:Color.BOTTOM_BG
-            })
-        });
+        EventEmitter.off(CustomEvents.THEME_SELECTED, this.updateTheme);
+    }
+
+    updateTheme = themeIndex => {
+        console.log("Main Content THEME_SELECTED")
+        this.setState({
+            bg:Color.BOTTOM_BG
+        })
     }
     
     render(){

@@ -18,22 +18,18 @@ export default class HomeScreen extends Component{
     };
 
     componentDidMount() {
-        that=this;
-        EventEmitter.addListener(CustomEvents.THEME_SELECTED, themeIndex =>{
-            console.log("Main Content THEME_SELECTED")
-            this.setState({
-                bg:Color.BG_VIDEO
-            })
-        });
+        EventEmitter.on(CustomEvents.THEME_SELECTED, this.updateTheme);
     }
 
     componentWillUnmount() {
-        EventEmitter.removeListener(CustomEvents.THEME_SELECTED, themeIndex =>{
-            console.log("Main Content THEME_SELECTED")
-            this.setState({
-                bg:Color.BG_VIDEO
-            })
-        });
+        EventEmitter.off(CustomEvents.THEME_SELECTED, this.updateTheme);
+    }
+
+    updateTheme = themeIndex => {
+        console.log("Main Content THEME_SELECTED")
+        this.setState({
+            bg:Color.BG_VIDEO
+        })
     }
 
     render(){

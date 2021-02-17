@@ -12,8 +12,9 @@ import CustomEvents from "../models/CustomEvents";
 import { TabBarHeight } from '../utils/DeviceInfo';
 import AppLoading from "expo-app-loading";
 import {MediaType} from "../utils/EnumTypes";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {Video} from "expo-av";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -43,20 +44,26 @@ export default class MainContent extends Component {
             if(value !== null) {
               // value previously stored
               console.log("shown before");
+              HomeData.STARTER.showVideo=false;
             }else{
                 console.log('show welcome');
-                setTimeout(function(){
+                /*setTimeout(function(){
                 that.setState({
                     showWelcome : true
-                })}, 3000);
+                })}, 3000);*/
+                HomeData.STARTER.showVideo=true;
             }
           } catch(e) {
             // error reading value
-            console.log("local storage error")
+            console.log("local storage error");
+            HomeData.STARTER.showVideo=true;
           }
-        Moods.forEach((item, index) => {
+        //Moods.forEach((item, index) => {
+        HomeData.MOODS.forEach((item, index) => {
+            /*console.log("mood");
+            console.log(item.title);*/
             this.MoodViews.push(
-                <MoodCard mood={getLanguageText(item.title)} key={"mood" + index} uri={item.uri} />
+                <MoodCard mood={item.title} key={"mood" + index} uri={item.url} />
             )
         });
 
@@ -102,7 +109,12 @@ export default class MainContent extends Component {
         HomeData.BLOG.forEach((item, index) => {
             this.BlogViews.push(
                 <View style={styles.cardContainer} key={"blog_"+ index}>
-                    <Card lock={false} color={Color.MENU} title={item.title} source={{ uri: item.image }} media={MediaType.HOME_BLOG} target={item}/>
+                    <Card lock={false} 
+                    color={Color.MENU} 
+                    title={item.title} 
+                    source={{ uri: item.image }} 
+                    media={MediaType.HOME_BLOG} 
+                    uri={item.url}/>
                 </View>
             )
         });
@@ -111,67 +123,61 @@ export default class MainContent extends Component {
             initialized : true
         })
 
-        EventEmitter.addListener(CustomEvents.THEME_SELECTED, themeIndex =>{
-            console.log("Main Content THEME_SELECTED")
-            this.setState({
-                themeIndex
-            })
-        });
+        EventEmitter.on(CustomEvents.THEME_SELECTED, this.updateTheme)
     }
 
     componentWillUnmount() {
-        EventEmitter.removeListener(CustomEvents.THEME_SELECTED, themeIndex =>{
-            console.log("Main Content THEME_SELECTED")
-            this.setState({
-                themeIndex
-            })
-        });
+        EventEmitter.off(CustomEvents.THEME_SELECTED, this.updateTheme);
     }
 
-    updateTheme(){
+    updateTheme = (themeIndex) => {
+        console.log("Main Content THEME_SELECTED")
+        this.setState({
+            themeIndex
+        })
     }
 
-    showWelcomeVideo(){
-        if(this.state.showWelcome){
-        return (
-            <Modal
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => {
-          console.log("Modal has been closed.");
-        }}
-      >
-            <View style={styles.welcomeVideo}>
-            <Video source={{uri:'https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/mantra/013-mm1.mp4'}}  // Can be a URL or a local file.
-                rate={1.0}                                     // Store reference
-                volume={1.0}
-                isMuted={false}
-                resizeMode={Video.RESIZE_MODE_COVER}
-                style={styles.video}
-                shouldPlay={true}
-                isLooping={false}
-                orientation="landscape"
-                useNativeControls={true}
-                onLoadStart={()=>{
-                    console.log("video started!");
-                }}
-                onLoad={ status =>{
-                    console.log("video loaded with status: ", status);
-                }}
-                onPlaybackStatusUpdate={ status => {
-                    //console.log(status)
-                    if (status.didJustFinish) {
-                        console.log("video ended!");
-                        setTimeout(function(){
-                            that.setState({
-                                showWelcome : false
-                            })}, 1000);
-                      }
-                }}
-            />
-        </View></Modal>)
-        }
-    }
+    // showWelcomeVideo(){
+    //     if(this.state.showWelcome){
+    //     return (
+    //         <Modal
+    //     animationType="slide"
+    //     transparent={true}
+    //     onRequestClose={() => {
+    //       console.log("Modal has been closed.");
+    //     }}
+    //   >
+    //         <View style={styles.welcomeVideo}>
+    //         <Video source={{uri:'https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/mantra/013-mm1.mp4'}}  // Can be a URL or a local file.
+    //             rate={1.0}                                     // Store reference
+    //             volume={1.0}
+    //             isMuted={false}
+    //             resizeMode={Video.RESIZE_MODE_CONTAIN}
+    //             style={styles.video}
+    //             shouldPlay={true}
+    //             isLooping={false}
+    //             orientation="landscape"
+    //             useNativeControls={true}
+    //             onLoadStart={()=>{
+    //                 console.log("video started!");
+    //             }}
+    //             onLoad={ status =>{
+    //                 console.log("video loaded with status: ", status);
+    //             }}
+    //             onPlaybackStatusUpdate={ status => {
+    //                 //console.log(status)
+    //                 if (status.didJustFinish) {
+    //                     console.log("video ended!");
+    //                     setTimeout(function(){
+    //                         that.setState({
+    //                             showWelcome : false
+    //                         })}, 1000);
+    //                   }
+    //             }}
+    //         />
+    //     </View></Modal>)
+    //     }
+    // }
     render() {
         console.log("themeIndex: "+ this.state.themeIndex);
 
@@ -212,7 +218,7 @@ export default class MainContent extends Component {
 
                 <Title  title={getLanguageText(Languages.WORD_OF_THE_DAY)} />
 
-                <View style={styles.cardContainer}>
+                <View style={styles.cardContainer}  pointerEvents="none">
                     <Card isSquare={true} size={96} source={{ uri: HomeData.TODAY  }} />
                 </View>
 
@@ -235,7 +241,7 @@ export default class MainContent extends Component {
                 </ScrollView>
 
 
-                { this.showWelcomeVideo() }
+                {/* { this.showWelcomeVideo() } */}
             </ScrollView>
         );
     }
