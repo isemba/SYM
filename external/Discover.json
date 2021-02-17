@@ -1,467 +1,738 @@
 [
 	{
-		"cid": "1",
+		"cid": 1,
 		"media": "video",
 		"url": "ayd/001-ayd.mp4",
 		"image": "",
 		"title": "Aydınlanma - Giriş",
+		"group": {
+			"id": 1,
+			"title": "Başlangıç"
+		}
 	},
 	{
-		"cid": "2",
+		"cid": 2,
 		"media": "video",
-		"url": "sayd/002-ayd.mp4",
+		"url": "ayd/002-ayd.mp4",
 		"image": "ayd/ayd-images/002-ayd3x.png",
-		"title": "Aydınlanma - Kısa",
+		"title": "Aydınlanma Meditasyonu 7 dakika",
+		"group": {
+			"id": 2,
+			"title": "Aydınlanma Meditasyonu"
+		}
 	},
 	{
-		"cid": "3",
+		"cid": 3,
 		"media": "video",
 		"url": "ayd/003-ayd.mp4",
 		"image": "ayd/ayd-images/003-ayd3x.png",
-		"title": "Aydınlanma - Uzun",
+		"title": "Aydınlanma Meditasyonu 10 dakika",
+		"group": {
+			"id": 2,
+			"title": "Aydınlanma Meditasyonu"
+		}
 	},
 	{
-		"cid": "4",
+		"cid": 4,
 		"media": "video",
 		"url": "quick-start/004-1-min.mp4",
 		"image": "quick-start/quick-start-images/004-1-min3x.png",
-		"title": "1 Dakika",
+		"title": "1 Dakika Meditasyon",
+		"group": {
+			"id": 3,
+			"title": "Hızlı Başla"
+		}
 	},
 	{
-		"cid": "5",
+		"cid": 5,
 		"media": "video",
 		"url": "quick-start/005-3-min.mp4",
 		"image": "quick-start/quick-start-images/005-3-min3x.png",
-		"title": "3 Dakika",
+		"title": "3 Dakika Meditasyon",
+		"group": {
+			"id": 3,
+			"title": "Hızlı Başla"
+		}
 	},
 	{
-		"cid": "6",
+		"cid": 6,
 		"media": "video",
 		"url": "quick-start/006-5-min.mp4",
 		"image": "quick-start/quick-start-images/006-5-min3x.png",
-		"title": "5 Dakika",
+		"title": "5 Dakika Meditasyon",
+		"group": {
+			"id": 3,
+			"title": "Hızlı Başla"
+		}
 	},
 	{
-		"cid": "7",
+		"cid": 7,
 		"media": "video",
 		"url": "elements/007-earth.mp4",
 		"image": "elements/elements-images/007-earth3x.png",
-		"title": "Toprak",
+		"title": "Toprak Elementi Meditasyonu",
+		"group": {
+			"id": 4,
+			"title": "Elementler"
+		}
 	},
 	{
-		"cid": "8",
+		"cid": 8,
 		"media": "video",
 		"url": "elements/008-fire.mp4",
 		"image": "elements/elements-images/008-fire3x.png",
-		"title": "Ateş",
+		"title": "Ateş Elementi Meditasyonu",
+		"group": {
+			"id": 4,
+			"title": "Elementler"
+		}
 	},
 	{
-		"cid": "9",
+		"cid": 9,
 		"media": "video",
 		"url": "elements/009-water.mp4",
 		"image": "elements/elements-images/009-water3x.png",
-		"title": "Su",
+		"title": "Su Elementi Meditasyonu",
+		"group": {
+			"id": 4,
+			"title": "Elementler"
+		}
 	},
 	{
-		"cid": "10",
+		"cid": 10,
 		"media": "video",
 		"url": "elements/010-air.mp4",
 		"image": "elements/elements-images/010-air3x.png",
-		"title": "Hava",
+		"title": "Hava Elementi Meditasyonu",
+		"group": {
+			"id": 4,
+			"title": "Elementler"
+		}
 	},
 	{
-		"cid": "11",
+		"cid": 11,
 		"media": "video",
 		"url": "elements/011-eather.mp4",
 		"image": "elements/elements-images/011-eather3x.png",
-		"title": "Ether",
+		"title": "Ether Elementi Meditasyonu",
+		"group": {
+			"id": 4,
+			"title": "Elementler"
+		}
 	},
 	{
-		"cid": "12",
+		"cid": 12,
 		"media": "video",
 		"url": "elements/012-light.mp4",
 		"image": "elements/elements-images/012-light3x.png",
-		"title": "Işık",
+		"title": "Işık Elementi Meditasyonu",
+		"group": {
+			"id": 4,
+			"title": "Elementler"
+		}
 	},
 	{
-		"cid": "13",
+		"cid": 13,
 		"media": "video",
 		"url": "mantra/013-mm1.mp4",
 		"image": "mantra/mantra-images/013-mm13x.png",
-		"title": "1. Merkez",
+		"title": "Mantralı Meditasyon 1",
+		"group": {
+			"id": 5,
+			"title": "Mantralı Meditasyon"
+		}
 	},
 	{
-		"cid": "14",
+		"cid": 14,
 		"media": "video",
 		"url": "mantra/014-mm2.mp4",
 		"image": "mantra/mantra-images/014-mm23x.png",
-		"title": "2. Merkez",
+		"title": "Mantralı Meditasyon 2",
+		"group": {
+			"id": 5,
+			"title": "Mantralı Meditasyon"
+		}
 	},
 	{
-		"cid": "15",
+		"cid": 15,
 		"media": "video",
 		"url": "mantra/015-mm3.mp4",
 		"image": "mantra/mantra-images/015-mm33x.png",
-		"title": "3. Merkez",
+		"title": "Mantralı Meditasyon 3",
+		"group": {
+			"id": 5,
+			"title": "Mantralı Meditasyon"
+		}
 	},
 	{
-		"cid": "16",
+		"cid": 16,
 		"media": "video",
 		"url": "mantra/016-mm4.mp4",
 		"image": "mantra/mantra-images/016-mm43x.png",
-		"title": "4. Merkez",
+		"title": "Mantralı Meditasyon 4",
+		"group": {
+			"id": 5,
+			"title": "Mantralı Meditasyon"
+		}
 	},
 	{
-		"cid": "17",
+		"cid": 17,
 		"media": "video",
 		"url": "mantra/017-mm5.mp4",
 		"image": "mantra/mantra-images/017-mm53x.png",
-		"title": "5. Merkez",
+		"title": "Mantralı Meditasyon 5",
+		"group": {
+			"id": 5,
+			"title": "Mantralı Meditasyon"
+		}
 	},
 	{
-		"cid": "18",
+		"cid": 18,
 		"media": "video",
 		"url": "mantra/018-mm6.mp4",
 		"image": "mantra/mantra-images/018-mm63x.png",
-		"title": "6. Merkez",
+		"title": "Mantralı Meditasyon 6",
+		"group": {
+			"id": 5,
+			"title": "Mantralı Meditasyon"
+		}
 	},
 	{
-		"cid": "19",
+		"cid": 19,
 		"media": "video",
 		"url": "mantra/019-mm7.mp4",
 		"image": "mantra/mantra-images/019-mm73x.png",
-		"title": "7. Merkez",
+		"title": "Mantralı Meditasyon 7",
+		"group": {
+			"id": 5,
+			"title": "Mantralı Meditasyon"
+		}
 	},
 	{
-		"cid": "20",
+		"cid": 20,
 		"media": "video",
 		"url": "mantra/020-mm-l.mp4",
 		"image": "mantra/mantra-images/020-mm-l3x.png",
-		"title": "Sol Kanal",
+		"title": "Mantralı Meditasyon Sol",
+		"group": {
+			"id": 5,
+			"title": "Mantralı Meditasyon"
+		}
 	},
 	{
-		"cid": "21",
+		"cid": 21,
 		"media": "video",
 		"url": "mantra/021-mm-r.mp4",
 		"image": "mantra/mantra-images/021-mm-r23x.png",
-		"title": "Sağ Kanal",
+		"title": "Mantralı Meditasyon Sağ",
+		"group": {
+			"id": 5,
+			"title": "Mantralı Meditasyon"
+		}
 	},
 	{
-		"cid": "22",
+		"cid": 22,
 		"media": "video",
 		"url": "mantra/022-mm-c.mp4",
 		"image": "mantra/mantra-images/022-mm-c23x.png",
-		"title": "Orta Kanal",
+		"title": "Mantralı Meditasyon Orta",
+		"group": {
+			"id": 5,
+			"title": "Mantralı Meditasyon"
+		}
 	},
 	{
-		"cid": "23",
+		"cid": 23,
 		"media": "video",
 		"url": "affirm/023-aff1.mp4",
 		"image": "affirm/affirm-images/023-aff13x.png",
-		"title": "1. Merkez",
+		"title": "Olumlama Meditasyonu 1",
+		"group": {
+			"id": 6,
+			"title": "Olumlama Meditasyonu"
+		}
 	},
 	{
-		"cid": "24",
+		"cid": 24,
 		"media": "video",
 		"url": "affirm/024-aff2.mp4",
 		"image": "affirm/affirm-images/024-aff23x.png",
-		"title": "2. Merkez",
+		"title": "Olumlama Meditasyonu 2",
+		"group": {
+			"id": 6,
+			"title": "Olumlama Meditasyonu"
+		}
 	},
 	{
-		"cid": "25",
+		"cid": 25,
 		"media": "video",
 		"url": "affirm/025-aff3.mp4",
 		"image": "affirm/affirm-images/025-aff33x.png",
-		"title": "3. Merkez",
+		"title": "Olumlama Meditasyonu 3",
+		"group": {
+			"id": 6,
+			"title": "Olumlama Meditasyonu"
+		}
 	},
 	{
-		"cid": "26",
+		"cid": 26,
 		"media": "video",
 		"url": "affirm/026-aff4.mp4",
 		"image": "affirm/affirm-images/026-aff43x.png",
-		"title": "4. Merkez",
+		"title": "Olumlama Meditasyonu 4",
+		"group": {
+			"id": 6,
+			"title": "Olumlama Meditasyonu"
+		}
 	},
 	{
-		"cid": "27",
+		"cid": 27,
 		"media": "video",
 		"url": "affirm/027-aff5.mp4",
 		"image": "affirm/affirm-images/027-aff53x.png",
-		"title": "5. Merkez",
+		"title": "Olumlama Meditasyonu 5",
+		"group": {
+			"id": 6,
+			"title": "Olumlama Meditasyonu"
+		}
 	},
 	{
-		"cid": "28",
+		"cid": 28,
 		"media": "video",
 		"url": "affirm/028-aff6.mp4",
 		"image": "affirm/affirm-images/028-aff13x.png",
-		"title": "6. Merkez",
+		"title": "Olumlama Meditasyonu 6",
+		"group": {
+			"id": 6,
+			"title": "Olumlama Meditasyonu"
+		}
 	},
 	{
-		"cid": "29",
+		"cid": 29,
 		"media": "video",
 		"url": "affirm/029-aff7.mp4",
 		"image": "affirm/affirm-images/029-aff73x.png",
-		"title": "7. Merkez",
+		"title": "Olumlama Meditasyonu 7",
+		"group": {
+			"id": 6,
+			"title": "Olumlama Meditasyonu"
+		}
 	},
 	{
-		"cid": "30",
+		"cid": 30,
 		"media": "video",
 		"url": "affirm/030-aff-l.mp4",
 		"image": "affirm/affirm-images/030-aff-l3x.png",
-		"title": "Sol Kanal",
+		"title": "Olumlama Meditasyonu Sol",
+		"group": {
+			"id": 6,
+			"title": "Olumlama Meditasyonu"
+		}
 	},
 	{
-		"cid": "31",
+		"cid": 31,
 		"media": "video",
 		"url": "affirm/031-aff-r.mp4",
 		"image": "affirm/affirm-images/031-aff-r3x.png",
-		"title": "Sağ Kanal",
+		"title": "Olumlama Meditasyonu Sağ",
+		"group": {
+			"id": 6,
+			"title": "Olumlama Meditasyonu"
+		}
 	},
 	{
-		"cid": "32",
+		"cid": 32,
 		"media": "video",
 		"url": "affirm/032-aff-c.mp4",
 		"image": "affirm/affirm-images/032-aff-c3x.png",
-		"title": "Orta Kanal",
+		"title": "Olumlama Meditasyonu Orta",
+		"group": {
+			"id": 6,
+			"title": "Olumlama Meditasyonu"
+		}
 	},
 	{
-		"cid": "33",
+		"cid": 33,
 		"media": "video",
 		"url": "single-med/033-om-s.mp4",
 		"image": "single-med/single-med-images/033-om-s3x.png",
-		"title": "Omkar Tekniği - Kısa",
+		"title": "Müzikle Meditasyon 1",
+		"group": {
+			"id": 7,
+			"title": "Müzikle Meditasyon 1"
+		}
 	},
 	{
-		"cid": "34",
+		"cid": 34,
 		"media": "video",
 		"url": "single-med/034-om-l.mp4",
 		"image": "single-med/single-med-images/034-om-l3x.png",
-		"title": "Omkar Tekniği - Uzun",
+		"title": "Müzilikle Meditasyon 2",
+		"group": {
+			"id": 8,
+			"title": "Müzikle Meditasyon 2"
+		}
 	},
 	{
-		"cid": "35",
+		"cid": 35,
 		"media": "video",
 		"url": "single-med/035-graditude.mp4",
 		"image": "single-med/single-med-images/035-graditude3x.png",
-		"title": "Teşekkür",
+		"title": "Teşekkür Meditasyonu",
+		"group": {
+			"id": 9,
+			"title": "Teşekkür Meditasyonu"
+		}
 	},
 	{
-		"cid": "36",
+		"cid": 36,
 		"media": "video",
 		"url": "single-med/036-breath.mp4",
 		"image": "single-med/single-med-images/036-breath3x.png",
 		"title": "Nefes Egzersizi",
+		"group": {
+			"id": 10,
+			"title": "Nefes Egzersizi"
+		}
 	},
 	{
-		"cid": "37",
+		"cid": 37,
 		"media": "video",
 		"url": "single-med/037-sleep.mp4",
 		"image": "single-med/single-med-images/037-sleep3x.png",
-		"title": "Uyku",
+		"title": "Uyku Öncesi Meditasyonu",
+		"group": {
+			"id": 11,
+			"title": "Uyku Öncesi Meditasyonu"
+		}
 	},
 	{
-		"cid": "38",
+		"cid": 38,
 		"media": "video",
 		"url": "single-med/038-stress.mp4",
 		"image": "single-med/single-med-images/038-stress3x.png",
 		"title": "Stres Yönetimi",
+		"group": {
+			"id": 12,
+			"title": "Stres Yönetimi"
+		}
 	},
 	{
-		"cid": "39",
+		"cid": 39,
 		"media": "video",
 		"url": "single-med/039-attention.mp4",
 		"image": "single-med/single-med-images/039-attention3x.png",
-		"title": "Dikkat",
+		"title": "Dikkat Meditasyonu",
+		"group": {
+			"id": 13,
+			"title": "Dikkat Meditasyonu"
+		}
 	},
 	{
-		"cid": "40",
+		"cid": 40,
 		"media": "video",
 		"url": "7steps/040-aura.mp4",
 		"image": "7steps/7steps-images/040-aura3x.png",
 		"title": "Aura Koruma",
+		"group": {
+			"id": 14,
+			"title": "Yedi Adım"
+		}
 	},
 	{
-		"cid": "41",
+		"cid": 41,
 		"media": "video",
 		"url": "7steps/041-step1.mp4",
 		"image": "7steps/7steps-images/041-step13x.png",
 		"title": "1. Adım",
+		"group": {
+			"id": 14,
+			"title": "Yedi Adım"
+		}
 	},
 	{
-		"cid": "42",
+		"cid": 42,
 		"media": "video",
 		"url": "7steps/042-step2.mp4",
 		"image": "7steps/7steps-images/042-step23x.png",
 		"title": "2. Adım",
+		"group": {
+			"id": 14,
+			"title": "Yedi Adım"
+		}
 	},
 	{
-		"cid": "43",
+		"cid": 43,
 		"media": "video",
 		"url": "7steps/043-step3.mp4",
 		"image": "7steps/7steps-images/043-step33x.png",
 		"title": "3. Adım",
+		"group": {
+			"id": 14,
+			"title": "Yedi Adım"
+		}
 	},
 	{
-		"cid": "44",
+		"cid": 44,
 		"media": "video",
 		"url": "7steps/044-step4.mp4",
 		"image": "7steps/7steps-images/044-step43x.png",
 		"title": "4. Adım",
+		"group": {
+			"id": 14,
+			"title": "Yedi Adım"
+		}
 	},
 	{
-		"cid": "45",
+		"cid": 45,
 		"media": "video",
 		"url": "7steps/045-step5.mp4",
 		"image": "7steps/7steps-images/045-step53x.png",
 		"title": "5. Adım",
+		"group": {
+			"id": 14,
+			"title": "Yedi Adım"
+		}
 	},
 	{
-		"cid": "46",
+		"cid": 46,
 		"media": "video",
 		"url": "s7steps/046-step6.mp4",
 		"image": "7steps/7steps-images/046-step63x.png",
 		"title": "6. Adım",
+		"group": {
+			"id": 14,
+			"title": "Yedi Adım"
+		}
 	},
 	{
-		"cid": "47",
+		"cid": 47,
 		"media": "video",
 		"url": "7steps/047-step7.mp4",
 		"image": "7steps/7steps-images/047-step73x.png",
 		"title": "7. Adım",
+		"group": {
+			"id": 14,
+			"title": "Yedi Adım"
+		}
 	},
-	{   "cid": "48",
+	{   "cid": 48,
 		"media": "blog",
 		"url": "blog/048-SM.mp4",
 		"image": "blog/blog-images/048-SM3x.png",
-		"title": "Shri Mataji'nin Hayatı"
-
+		"title": "Shri Mataji'nin Hayatı",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "49",
+		"cid": 49,
 		"media": "blog",
 		"url": "blog/049-poem.mp4",
 		"image": "blog/blog-images/049-poem3x.png",
-		"title": "Shri Matajinin Şiiri"
+		"title": "Toz Taneciği - Şiir",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "50",
+		"cid": 50,
 		"media": "blog",
 		"url": "blog/050-head.mp4",
 		"image": "blog/blog-images/050-head3x.png",
-		"title": "Kafa Masajı"
+		"title": "Kafa Masajı",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "51",
+		"cid": 51,
 		"media": "blog",
 		"url": "blog/051-kundalini.mp4",
 		"image": "blog/blog-images/051-kundalini3x.png",
-		"title": "Kundalini"
+		"title": "Kundalini",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "52",
+		"cid": 52,
 		"media": "blog",
 		"url": "blog/052-exp.mp4",
 		"image": "blog/blog-images/052-exp3x.png",
-		"title": "Gerçek ile Deneyim"
+		"title": "Gerçek ile Deneyim",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "53",
+		"cid": 53,
 		"media": "blog",
 		"url": "blog/053-stones.mp4",
 		"image": "blog/blog-images/053-stones3x.png",
-		"title": "Taşlar ve Günler"
+		"title": "Enerji Taşları ve Günler",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "55",
+		"cid": 54,
+		"media": "blog",
+		"url": "blog/054-planets.mp4",
+		"image": "blog/blog-images/054-planets3x.png",
+		"title": "Ülkeler ve Gezegenler",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
+	},
+	{
+		"cid": 55,
 		"media": "blog",
 		"url": "blog/055-ata.mp4",
 		"image": "blog/blog-images/055-ata3x.png",
-		"title": "Mustafa Kemal Atatürk"
+		"title": "Aydınlanmış Kişilerden Atatürk",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "56",
+		"cid": 56,
 		"media": "blog",
 		"url": "blog/056-gandhi.mp4",
 		"image": "blog/blog-images/056-gandhi3x.png",
-		"title": "Mahatma Gandhi"
+		"title": "Aydınlanmış Kişilerden Gandhi",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "57",
+		"cid": 57,
 		"media": "blog",
 		"url": "blog/057-hacibektas.mp4",
 		"image": "sblog/blog-images/057-hacibektas3x.png",
-		"title": "Hacı Bektaş Veli"
+		"title": "Aydınlanmış Kişilerden Hacı Bektaş Veli",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "58",
+		"cid": 58,
 		"media": "blog",
 		"url": "blog/058-cibran.mp4",
 		"image": "blog/blog-images/058-cibran3x.png",
-		"title": "Halil Cibran"
+		"title": "Aydınlanmış Kişilerden Halil Cibran",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "59",
+		"cid": 59,
 		"media": "blog",
 		"url": "blog/059-rumi.mp4",
 		"image": "blog/blog-images/059-rumi3x.png",
-		"title": "Mevlana Celaleddin Rumi"
+		"title": "Aydınlanmış Kişilerden Mevlana",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "60",
+		"cid": 60,
 		"media": "blog",
 		"url": "blog/060-yunus.mp4",
 		"image": "blog/blog-images/060-yunus3x.png",
-		"title": "Yunus Emre"
+		"title": "Aydınlanmış Kişilerden Yunus Emre",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "61",
+		"cid": 61,
 		"media": "blog",
 		"url": "blog/061-tagore.mp4",
 		"image": "blog/blog-images/061-tagore3x.png",
-		"title": "",
-		"subtitle": "Rabindranath Tagore"
+		"title": "Aydınlanmış Kişilerden Tagore",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "62",
+		"cid": 62,
 		"media": "blog",
 		"url": "blog/062-mic.mp4",
 		"image": "blog/blog-images/062-mic3x.png",
-		"title": "",
-		"subtitle": "Michelangelo"
+		"title": "Aydınlanmış Kişilerden Michelangelo",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "63",
+		"cid": 63,
 		"media": "blog",
 		"url": "blog/063-leo.mp4",
 		"image": "blog/blog-images/063-leo3x.png",
-		"title": "",
-		"subtitle": "Leonardo Da Vinci"
+		"title": "Aydınlanmış Kişilerden Da Vinci",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "64",
+		"cid": 64,
 		"media": "blog",
 		"url": "blog/064-raph.mp4",
 		"image": "blog/blog-images/064-raph3x.png",
-		"title": "Raffaello Sanzio"
+		"title": "Aydınlanmış Kişilerden Raphael",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "65",
+		"cid": 65,
 		"media": "blog",
 		"url": "blog/065-rubens.mp4",
 		"image": "blog/blog-images/065-rubens3x.png",
-		"title": "Peter Paul Rubens"
+		"title": "Aydınlanmış Kişilerden Rubens",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "66",
+		"cid": 66,
 		"media": "blog",
 		"url": "blog/066-mozart.mp4",
-		"image": "blog/blog-images/066-mozart3x.png",
-		"title": "Wolfgang Amadeus Mozart"
+		"image": "blog/blog-images/065-mozart3x.png",
+		"title": "Aydınlanmış Kişilerden Mozart",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	},
 	{
-		"cid": "67",
+		"cid": 67,
 		"media": "blog",
 		"url": "blog/067-blake.mp4",
 		"image": "blog/blog-images/067-blake3x.png",
-		"title": "William Blake"
+		"title": "Aydınlanmış Kişilerden William Blake",
+		"group": {
+			"id": 15,
+			"title": "Blog"
+		}
 	}
 ]
