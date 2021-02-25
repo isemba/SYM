@@ -79,9 +79,10 @@ export class ContactScreen extends Component {
             try {
                 console.log("send");
                 console.log(HomeData.TOKEN)
-                await axios.post(CONTACT_URL, { message:"test" },{
+
+                await axios.post(CONTACT_URL, { message:this.state.message },{
                     headers: {
-                      'authorization': HomeData.TOKEN
+                      'authorization': `Bearer ${HomeData.TOKEN}`
                     }}).then((response)=>{console.log(response)});
             }catch (e){
                 console.error(e);
@@ -331,7 +332,5 @@ const styles = StyleSheet.create({
         textDecorationLine:"underline",
         textAlign:"center"
     }
-
 });
-
 

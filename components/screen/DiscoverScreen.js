@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Dimensions, ScrollView, StyleSheet, View, FlatList, ImageBackground } from 'react-native';
-import { DiscoverList, HomeData } from "../../utils/Data";
+import { HomeData } from "../../utils/Data";
 import Languages, { getLanguageText } from '../../utils/Language';
 import Card from '../Card';
 import Title from "../Title";
@@ -12,6 +12,7 @@ import {getMeditationGroups} from "../../utils/Utils";
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+var DiscoverList;
 class DiscoverScreen extends Component {
 
     flatListRef;
@@ -26,6 +27,7 @@ class DiscoverScreen extends Component {
     constructor(props){
         super(props);
         console.log(HomeData.DISCOVER);
+        DiscoverList = HomeData.VIDEOLIST;
 
         DiscoverList[0].active = true;
 
@@ -67,7 +69,8 @@ class DiscoverScreen extends Component {
 
     renderHeaderItem = ({item, index}) => (
         <Title
-            title={getLanguageText(item.title)}
+            //title={getLanguageText(item.title)}
+            title={item.title}
             active={item.active}
             key={"discoverTitle_" + index}
             onPress={() => {
@@ -130,14 +133,14 @@ class DiscoverScreen extends Component {
                     showsHorizontalScrollIndicator={false}
                     ref={this.headerListRef}
                     data={discoverList}
-                    keyExtractor={item => "header_"+ item.title.en}
+                    keyExtractor={item => "header_"+ item.title}
                     renderItem={this.renderHeaderItem}
                 />
 
                 <FlatList
                     data={discoverList}
                     renderItem={this.renderScreen}
-                    keyExtractor={item => item.title.en}
+                    keyExtractor={item => item.title}
                     horizontal={true}
                     pagingEnabled={true}
                     ref={this.flatListRef}
@@ -169,16 +172,18 @@ function addMeditationCards(group, groupIndex){
 }
 
 function getCard(card, index, size){
-    const { lock, color, title, desc } = card;
+    const { lock, color, title, desc, image, url } = card;
     return (
         <Card
             key={"discover_card_" + index}
             lock={lock}
             color={color}
             size={size}
-            title={getLanguageText(title)}
-            desc={getLanguageText(desc)}
-            source={require('../../assets/images/SampleImage.jpg')}
+            title={title}
+            desc={desc}
+            //source={require('../../assets/images/SampleImage.jpg')}
+            source={{uri:image}}
+            uri={url}
         />
     )
 }

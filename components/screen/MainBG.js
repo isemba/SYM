@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Dimensions, View} from "react-native";
+import {Dimensions, View, StyleSheet} from "react-native";
 import EventEmitter from "react-native-eventemitter";
 import CustomEvents from "../../models/CustomEvents";
 import { Color } from "../../utils/Colors";
@@ -27,20 +27,45 @@ export default class MainBG extends Component{
         this.setState({bgOpacity});
     }
 
+
     render() {
-
         return(
-
             <LinearGradient
-                colors={Color.MAIN_BG_GRADIENT}
-                style={{
-                width: windowWidth,
-                height: windowHeight,
-                position: "absolute",
-                top: 0,
-                left: 0,
-                opacity: this.state.bgOpacity
-            }} />
+            colors={Color.MAIN_BG_GRADIENT}
+            style={{
+            width: windowWidth,
+            height: windowHeight,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            opacity: this.state.bgOpacity
+        }} />
+   //     <BlurView
+   //   style={styles.absolute}
+   //   blurType="light"
+   //   blurAmount={10}
+   //   reducedTransparencyFallbackColor="white"
+   //   style={{
+   //     width: windowWidth,
+   //     height: windowHeight,
+   //     position: "absolute",
+   //     top: 0,
+   //     left: 0,
+   //     opacity: this.state.bgOpacity}}
+   ///>
         )
     }
 }
+const styles = StyleSheet.create({
+    container: {
+      justifyContent: "center",
+      alignItems: "center"
+    },
+    absolute: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0
+    }
+  });

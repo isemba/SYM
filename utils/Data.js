@@ -13,7 +13,7 @@ export const Moods = [
     {title: MoodLanguages.GRATEFUL, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
     {title: MoodLanguages.IN_PAIN, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
     {title: MoodLanguages.INCAPABLE, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
-    {title: MoodLanguages.NEED_SPACE, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
+    // {title: MoodLanguages.NEED_SPACE, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
     {title: MoodLanguages.LONELY, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
     {title: MoodLanguages.SAD, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
     {title: MoodLanguages.SLEEPLESS, uri: "https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/Shri-Matajis-Poem.mp4"},
@@ -200,5 +200,11 @@ export const HomeData = {
     TODAY: "",
     STATS:{},
     TOKEN:"",
-    BLOG_CONTENT:{}
+    BLOG_CONTENT:{},
+    MOODS:[],
+    STARTER:{},
+    MUSICLIST:[],
+    VIDEOLIST:[],
+    BLOGLIST:[],
+    THEMES:[]
 }

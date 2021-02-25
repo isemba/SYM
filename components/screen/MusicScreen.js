@@ -7,9 +7,13 @@ import Title from "../Title";
 import HeaderBar from "../HeaderBar";
 import {LinearGradient} from "expo-linear-gradient";
 import {Color} from "../../utils/Colors";
+import {checkNetworkInfo} from "../../utils/Connection";
 import {getMeditationGroups} from "../../utils/Utils";
 import { Ionicons } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
+import {navigate, setWelcome} from "../RootNavigation";
+
+import Slider from '@react-native-community/slider';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -32,6 +36,7 @@ class MusicScreen extends Component {
         //console.log(HomeData.MUSIC)
         /*MusicList = HomeData.MUSIC;
         console.log(MusicList);*/
+        
 
         var tmObj;
         if(props.route.params != null && props.route.params != undefined && props.route.params.target != null){
@@ -44,6 +49,7 @@ class MusicScreen extends Component {
             }
         }
 
+        
         this.state = {
             titles: [],
             musicList : [],
@@ -52,9 +58,16 @@ class MusicScreen extends Component {
             soundPosition: null,
             soundDuration: null
         }
-        let ml = MusicList;
-        let hd =  HomeData.MUSIC;
+        
 
+        /*let hd = HomeData.MUSICLIST;
+        console.log(hd);
+
+        let ml = MusicList;
+        let hd =  HomeData.MUSICLIST;*/
+        /*ml.forEach((item) => {
+            console.log(item)
+        });
         ml.forEach((item) => {
             item.musics = [];
             item.groups=[];
@@ -62,15 +75,7 @@ class MusicScreen extends Component {
             let t2 = item.title.tr.split(' ')[0];
             let t3 = item.title.en.split(' ')[0].toLowerCase();
             let t4 = item.title.tr.split(' ')[0].toLowerCase();
-            //console.log(item.title);
             hd.forEach((m) => {
-                /*console.log(">>>")
-                console.log(m.url);
-                console.log(t1);
-                console.log(t2);
-                console.log(t3);
-                console.log(t4);
-                console.log("***")*/
 
                 if(m.url.indexOf(t1) > 0 || m.url.indexOf(t2) > 0 || m.url.indexOf(t3) > 0 || m.url.indexOf(t4) > 0) item.musics.push(m)
             });
@@ -78,15 +83,17 @@ class MusicScreen extends Component {
 
         });
         var filtered = ml.filter(function(el) { return el.musics.length > 0; });
-
-        musicList = filtered;
+        */
+        //musicList = filtered;
+        musicList = HomeData.MUSICLIST;
         if(this.props.route.params){
             activeID = this.props.route.params.target.cid;
         }
         
 
         musicList.forEach((item, index) => {
-            item.groups = getMeditationGroups(item.musics);
+            console.log(item.title);
+            item.groups = getMeditationGroups(item.meditations);
             if(activeID){
                 item.groups.forEach(group => {
                     group.forEach(music => {
@@ -107,11 +114,13 @@ class MusicScreen extends Component {
     }
 
     componentDidMount(){
+               
         console.log("activeIndex: " + this.activeIndex );
         this.props.navigation.addListener('blur', this._onBlur);
+        this.props.navigation.addListener('focus', this._onFocus);
         var tmObj;
         if(this.state.activeObj.url == ""){
-            tmObj = musicList[this.activeIndex].musics[0];
+            tmObj = musicList[this.activeIndex].meditations[0];
         }else{
             tmObj = this.state.activeObj;
         }
@@ -126,12 +135,29 @@ class MusicScreen extends Component {
             }
             this.checkSoundFile(true);
             console.log(this.state.activeObj)
-        });   
+        });  
+        
+    }
+    _onFocus = () => {
+        console.log("network >>>");
+        checkNetworkInfo();
+        if(HomeData.STARTER.showVideo){
+            HomeData.STARTER.showVideo = false;
+            setWelcome();
+            navigate('WelcomeVideo');
+        } 
     }
     _onBlur = () => {
         console.log("navigate away");
         this.checkSoundFile(false);
     }
+    _onPlaybackStatusUpdate = playbackStatus => {        
+        this.setState({
+            soundDuration: playbackStatus.durationMillis,
+            soundPosition: playbackStatus.positionMillis,
+        });        
+      };
+    
     async checkSoundFile(load){
         console.log("checkSoundFile "+load);
         if(that.state.isPlaying){
@@ -151,12 +177,24 @@ class MusicScreen extends Component {
         });
     }
     async loadSound(){
-        console.log("load playing? "+that.state.isPlaying)
-        await sound.loadAsync({uri:that.state.activeObj.url}).then((status)=>{
-            that.setState({isLoaded:true, hasSoundLoaded:true});
-        });   
+        if(!this.state.isLoading){
+            console.log("load playing? "+that.state.isPlaying)
+            that.setState({isLoading:true}, ()=> that.loadTargetSound()); 
+            
+        }
     }
-
+    async loadTargetSound(){
+        try{
+            await sound.loadAsync({uri:that.state.activeObj.url}).then((status)=>{
+                that.setState({isLoading:false,isLoaded:true, hasSoundLoaded:true});
+                console.log("soundloaded")
+                sound.setOnPlaybackStatusUpdate(that._onPlaybackStatusUpdate);
+                //sound.setProgressUpdateIntervalAsync(500);
+            });
+        }catch(e){
+            console.error(e);
+        }
+    }
     playPause(){
         if(that.state.isLoaded){
             console.log(that.state.isPlaying);
@@ -211,7 +249,8 @@ class MusicScreen extends Component {
     renderHeaderItem = ({item, index}) => (
         
         <Title
-            title={getLanguageText(item.title)}
+            //title={getLanguageText(item.title)}
+            title={item.title}
             active={item.active}
             key={"musicTitle_" + index}
             onPress={() => {
@@ -262,6 +301,37 @@ class MusicScreen extends Component {
 
     }
 
+    _onSeekSliderValueChange = (value) => {
+        console.log("SEEK SLIDER VALUE", value);
+        if (this.sound != null && !this.isSeeking) {
+          this.isSeeking = true;
+          this.shouldPlayAtEndOfSeek = this.state.shouldPlay;
+          this.sound.pauseAsync();
+        }
+      }
+    
+      _onSeekSliderSlidingComplete = async (value) => {
+        if (this.sound != null) {
+          this.isSeeking = false;
+          const seekPosition = value * this.state.soundDuration;
+          if (this.shouldPlayAtEndOfSeek) {
+            this.sound.playFromPositionAsync(seekPosition);
+          } else {
+            this.sound.setPositionAsync(seekPosition);
+          }
+        }
+      }
+    
+      _getSeekSliderPosition() {
+        if (
+          sound != null &&
+          this.state.soundPosition != null &&
+          this.state.soundDuration != null
+        ) {
+          return this.state.soundPosition / this.state.soundDuration;
+        }
+        return 0;
+      }
     render() {
         //let { id } = this.props.route.params;
 
@@ -271,12 +341,13 @@ class MusicScreen extends Component {
             <ImageBackground source={Color.BG_IMAGE} style={styles.image}>
                 <HeaderBar title={getLanguageText(Languages.MUSIC)} />
                 <FlatList
-                    style={[styles.container, {marginBottom:10, height:70}]}
+                    style={[styles.container, {marginBottom:10, height:105}]}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                     ref={this.headerListRef}
                     data={musicList}
-                    keyExtractor={item => "header_"+ item.title.en}
+                    //keyExtractor={item => "header_"+ item.title.en}
+                    keyExtractor={item => "header_"+ item.title}
                     renderItem={this.renderHeaderItem}
                 />
 
@@ -286,10 +357,23 @@ class MusicScreen extends Component {
                     style={[styles.ccontainer, {width: windowWidth * 96 / 100, height: 160}]}
                     source={{uri:this.state.activeObj.image}}
                     imageStyle={{ borderRadius: 15, resizeMode: "cover" }}/>
+                    <Slider
+                        style={styles.playbackSlider}
+                        minimumTrackTintColor="#fff"
+                        maximumTrackTintColor="#000"
+                        thumbTintColor="#fff"                            
+                        value={this._getSeekSliderPosition()}
+                        onValueChange={this._onSeekSliderValueChange}
+                        onSlidingComplete={this._onSeekSliderSlidingComplete}
+                        disabled={
+                        !this.state.isPlaybackAllowed || this.state.isLoading
+                        }
+                        />
                     <View style={styles.bottomBar}>
                         <View style={styles.title}>
                             <Text style={styles.titleStyle}>{this.state.activeObj.title}</Text>
                         </View>
+                        
                         <View style={styles.controls}>
                             <TouchableOpacity style={styles.control, {opacity: this.state.isLoaded ? 1 : 0.5}} onPress={() => {if(this.state.isLoaded)this.playPause()}}>
                             {this.state.isPlaying ? (
@@ -306,7 +390,7 @@ class MusicScreen extends Component {
                 <FlatList
                     data={musicList}
                     renderItem={this.renderScreen}
-                    keyExtractor={item => item.title.en}
+                    keyExtractor={item => item.title}
                     horizontal={true}
                     pagingEnabled={true}
                     ref={this.flatListRef}
@@ -454,7 +538,16 @@ const styles = StyleSheet.create({
         height: '100%',
         flex: 1,
         resizeMode: "cover"   
-    }
+    },
+    playbackSlider: {       
+        position:'absolute',
+        zIndex:35,
+        top:153,
+        left:20,
+        opacity:1,
+        width: (windowWidth * 96 / 100)-40,
+
+      }
 });
 
 

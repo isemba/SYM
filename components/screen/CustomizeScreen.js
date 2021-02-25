@@ -6,14 +6,16 @@ import MenuIcon from "./MenuIcon";
 import {LinearGradient} from "expo-linear-gradient";
 import HeaderBar from "../HeaderBar";
 import {MediaType} from "../../utils/EnumTypes";
+import { HomeData } from "../../utils/Data";
 
 function CustomizeScreen() {
-    const themes = [
-        {source: require('../../assets/images/theme1.jpg')},
-        {source: require('../../assets/images/theme2.jpg')},
-        {source: require('../../assets/images/theme3.jpg')},
-        {source: require('../../assets/images/theme4.jpg')}
-    ]
+    // const themes = [
+    //     {source: require('../../assets/images/theme1.jpg')},
+    //     {source: require('../../assets/images/theme2.jpg')},
+    //     {source: require('../../assets/images/theme3.jpg')},
+    //     {source: require('../../assets/images/theme4.jpg')}
+    // ]
+    const themes = HomeData.THEMES;
 
     return (
 
@@ -30,10 +32,10 @@ function CustomizeScreen() {
             >
                 { themes.map((theme, index) => {
                     console.log("ColorSettings.SelectedTheme: " + ColorSettings.SelectedTheme);
-                    const cardStyles = index === ColorSettings.SelectedTheme ? [styles.cardContainer, styles.active] : styles.cardContainer;
+                    const cardStyles = index === ColorSettings.SelectedTheme ? [styles.cardContainer, styles.active] : [styles.cardContainer, styles.inactive];
                     return (
                         <View style={cardStyles} key={"theme_"+index}>
-                            <Card lock={false} color={Color.MENU} source={theme.source} themeIndex={index} media={MediaType.THEME} style={{marginBottom:0, height:"100%"}}/>
+                            <Card lock={false} color={Color.MENU} source={{uri:theme.image}} themeIndex={index} media={MediaType.THEME} style={{marginBottom:0, height:"100%"}}/>
                         </View>
                     )
                 }) }
@@ -57,6 +59,9 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 17,
         borderColor: Color.LIGHT
+    },
+    inactive:{
+        opacity:0.5
     }
 });
 export default CustomizeScreen;

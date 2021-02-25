@@ -1,11 +1,16 @@
 import {Video} from "expo-av";
 import React, { Component } from "react";
-import {Dimensions, StyleSheet, View, StatusBar} from "react-native";
+import {Dimensions, StyleSheet, View, StatusBar, Platform } from "react-native";
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+
+
+
 export default class VideoScreen extends Component{
+
 
     render() {
         const { route } = this.props;
@@ -14,18 +19,19 @@ export default class VideoScreen extends Component{
 
         let statusSent = false;
         return (
-            <View style={{backgroundColor:"rgba(0,0,0,.5)"}}>
+            <View style={styles.container}>
                 <StatusBar hidden={true} />
                 <Video source={{ uri }}  // Can be a URL or a local file.
                        rate={1.0}                                     // Store reference
                        volume={1.0}
                        isMuted={false}
-                       resizeMode={Video.RESIZE_MODE_STRETCH}
+                       resizeMode={Video.RESIZE_MODE_CONTAIN}
                        style={styles.backgroundVideo}
                        shouldPlay={true}
                        isLooping={false}
                        orientation="landscape"
                        useNativeControls={true}
+                       onFullscreenUpdate={onFullscreenUpdate}
                        onLoadStart={()=>{
                            console.log("video started!");
                        }}
@@ -43,13 +49,33 @@ export default class VideoScreen extends Component{
     }
 }
 
-
+const onFullscreenUpdate = async ({fullscreenUpdate}) => {
+    console.log("onFullscreenUpdate");
+    console.log(fullscreenUpdate);
+    console.log(Platform.OS);
+    if (Platform.OS === 'android') {
+        switch (fullscreenUpdate) {
+            case Video.FULLSCREEN_UPDATE_PLAYER_DID_PRESENT:
+                await ScreenOrientation.unlockAsync()
+                break;
+            case Video.FULLSCREEN_UPDATE_PLAYER_WILL_DISMISS:
+                await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT)
+                break;
+        }
+    }
+};
 const styles = StyleSheet.create({
+    container:{
+        backgroundColor:"rgba(0,0,0,.5)",
+        display:"flex",
+        alignItems:"center",
+        justifyContent:"center"
+    },
     backgroundVideo: {
-        position: "absolute",
-        top: windowHeight / 3,
+        //position: "absolute",
+        //top: windowHeight / 3,
         left: 0,
-        width: windowWidth,
-        height: windowHeight / 3
+        width: '100%',
+        height: '100%'
     }
 });

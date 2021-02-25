@@ -1,5 +1,21 @@
 const ThemeColors = [
     {
+        MAIN_BG_GRADIENT: ["rgb(162,184,188)", "rgb(96,103,104)"],
+        HEADER_GRADIENT: ["rgb(162,184,188)", "rgb(96,103,104)"],
+        MAIN_DARK: "rgb(11,0,0)",
+        MAIN: "#01f0f5",
+        LIGHT: "#e0b6a0",
+        MENU: "rgb(11,0,0)",
+        TITLE: "rgba(48,16,62, 0.4)",
+        MOOD_BG: "rgba(124 ,118 ,117 , 0.8)",
+        ACTIVE_TITLE: "rgba(248,116,162, 0.5)",
+        DARK_TEXT_COLOR: "#000",
+        LIGHT_TEXT_COLOR: "#fff",
+        BOTTOM_BG:"#3e4342",
+        BG_VIDEO:require("../assets/videos/waves.mp4"),
+        BG_IMAGE:require("../assets/images/bg-waves.png")
+    },
+    {
         MAIN_BG_GRADIENT: ["rgb(100,63,39)", "rgb(11,0,0)"],
         HEADER_GRADIENT: ["rgb(118,83,65)", "rgb(65,40,28)"],
         MAIN_DARK: "rgb(11,0,0)",
