@@ -206,5 +206,9 @@ export const HomeData = {
     MUSICLIST:[],
     VIDEOLIST:[],
     BLOGLIST:[],
-    THEMES:[]
+    THEMES:[],
+    BG_MUSIC:{
+        volume:50,
+        timer:3
+    }
 }

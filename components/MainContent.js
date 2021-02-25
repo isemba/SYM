@@ -40,23 +40,18 @@ export default class MainContent extends Component {
         try {
             const value = await AsyncStorage.getItem('@first')
             if(value !== null) {
-              // value previously stored
               console.log("shown before");
               HomeData.STARTER.showVideo=false;
             }else{
                 console.log('show welcome');
-                /*setTimeout(function(){
-                that.setState({
-                    showWelcome : true
-                })}, 3000);*/
                 HomeData.STARTER.showVideo=true;
             }
           } catch(e) {
-            // error reading value
             console.log("local storage error");
             HomeData.STARTER.showVideo=true;
           }
-        //Moods.forEach((item, index) => {
+        
+          
         HomeData.MOODS.forEach((item, index) => {
             /*console.log("mood");
             console.log(item.title);*/
@@ -292,7 +287,7 @@ const styles = StyleSheet.create({
     container : {
         position: "absolute",
         width: windowWidth,
-        height: windowHeight - TabBarHeight,
+        height: windowHeight - TabBarHeight +5 ,
         paddingHorizontal: windowWidth / 50
     },
     moodContainer: {

@@ -2,7 +2,7 @@ import {Video} from "expo-av";
 import React, { Component } from "react";
 import {Dimensions, StyleSheet, View, StatusBar, Platform } from "react-native";
 import * as ScreenOrientation from 'expo-screen-orientation';
-
+import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -11,13 +11,32 @@ const windowHeight = Dimensions.get('window').height;
 
 export default class VideoScreen extends Component{
 
+    constructor(props){
+        console.log(props);
+        super(props);
+        //useKeepAwake();
+    }
+    componentDidMount(){
+        this.props.navigation.addListener('blur', this._onBlur);
+        this.props.navigation.addListener('focus', this._onFocus);
 
+    }
+    _onFocus = () => {
+        console.log("Video _onFocus");
+        activateKeepAwake();
+    }
+    _onBlur = () => {
+        console.log("_onBlur");
+        deactivateKeepAwake();
+    }
     render() {
+        
         const { route } = this.props;
         if(!route) return null;
         const {  params: { uri, id } } = route;
 
         let statusSent = false;
+        
         return (
             <View style={styles.container}>
                 <StatusBar hidden={true} />
