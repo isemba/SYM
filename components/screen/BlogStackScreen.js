@@ -42,7 +42,7 @@ export default class BlogStackScreen extends Component{
                           colors={[Color.HEADER_GRADIENT[0], Color.HEADER_GRADIENT[1]]}
                           style={{ flex: 1 }}
                           start={{x: 0, y: 0}}
-                          end={{x: 0, y: 1}}
+                          end={{x: 1, y: 0}}
                         />
                       ),
                     }}
@@ -62,7 +62,7 @@ export default class BlogStackScreen extends Component{
                           colors={[Color.HEADER_GRADIENT[0], Color.HEADER_GRADIENT[1]]}
                           style={{ flex: 1 }}
                           start={{x: 0, y: 0}}
-                          end={{x: 0, y: 1}}
+                          end={{x: 1, y: 0}}
                         />
                       ),
                     }}

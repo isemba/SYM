@@ -1,13 +1,42 @@
-import React, { Component, useState, useEffect } from 'react';
-import { Dimensions, StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, ScrollView, Switch, Platform, TouchableWithoutFeedback, TextInput } from 'react-native';
+import React, { Component, useState, useEffect, useRef } from 'react';
+import { Button, Dimensions, StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, ScrollView, Switch, Platform, TouchableWithoutFeedback, TextInput } from 'react-native';
 import { Color } from "../utils/Colors";
 import {Lato_400Regular, Lato_100Thin, useFonts} from "@expo-google-fonts/lato";
 import { useNavigation } from '@react-navigation/native';
 import { HomeData } from "../utils/Data";
+import { captureRef } from 'react-native-view-shot';
+import * as Sharing from 'expo-sharing';
+import { render } from 'react-dom';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+function useCapture() {
+    const captureViewRef = useRef();
+
+    function onCapture() {
+        console.log("onCapture");
+        //console.log(captureViewRef);
+      captureRef(captureViewRef, {
+        format: "jpg",
+        quality: 0.9
+      }).then(
+        uri => {
+            console.log('Image saved to', uri);
+            Sharing.shareAsync('file://' + uri);
+          },
+        error => alert("Oops, snapshot failed", error));
+    }
+
+    return {
+      captureViewRef,
+      onCapture
+    };
+  }
+  
 export default function ProfileCard() {
+
+
+
     const navigation = useNavigation();
 
     const [fontLoaded] = useFonts({ Lato_400Regular, Lato_100Thin});
@@ -22,13 +51,14 @@ export default function ProfileCard() {
     const [remindDays, setRemindDays] = useState([
         {text: "P", open: false},
         {text: "S", open: false},
-        {text: "Ç", open: true},
+        {text: "Ç", open: false},
         {text: "P", open: false},
         {text: "C", open: false},
         {text: "C", open: false},
-        {text: "P", open: true},
+        {text: "P", open: false},
     ]);
     const [renderMe, setRenderMe] = useState(false);
+    const { captureViewRef, onCapture } = useCapture();
 
     const InfoArea = ({ text, count }) => (
         <View style={{flex: 1}}>
@@ -119,6 +149,8 @@ export default function ProfileCard() {
         </View>
     )
 
+
+
     return (
         <ScrollView contentContainerStyle={styles.container}>
            <View style={styles.profileArea}>
@@ -126,16 +158,16 @@ export default function ProfileCard() {
                    <Text style={styles.strikeText}>{strike}</Text>
                </ImageBackground>
 
-               <View style={styles.infoArea}>
+               <View style={styles.infoArea} ref={captureViewRef}>
                    <InfoArea text="KATILDIĞI MEDiTASYONLAR" count={joinCount}/>
                    <InfoArea text="MEDiTASYONDAKi DAKiKALARIN" count={joinTime}/>
                    <InfoArea text="ART ARDA GÜNLERiN" count={joinStrike}/>
                </View>
 
-               <View style={styles.shareArea}>
-                   <Image  source={require("../assets/images/export.png")} />
+               <TouchableOpacity style={styles.shareArea} onPress={/*onCapture*/ null}>
+                   <Image source={require("../assets/images/export.png")} />
                    <Text style={[styles.text, { paddingTop: 2, marginLeft: 5 }]}>İstatistiklerini Paylaş</Text>
-               </View>
+               </TouchableOpacity>
            </View>
 
             <View >
@@ -144,6 +176,8 @@ export default function ProfileCard() {
                 >
                     <Text style={styles.text}>Takvim ve Geçmiş > </Text>
                 </TouchableOpacity>
+                
+                
                 <SwitchArea text="Anımsatıcılar" value={reminders} setValue={setReminders}/>
                 { reminders ? <RemindersBar days={remindDays} /> : null }
 
@@ -169,14 +203,15 @@ export default function ProfileCard() {
                 <View style={styles.socialIcons}>
                     <SocialIcon source={require("../assets/images/fbIcon.png")}/>
                     <SocialIcon source={require("../assets/images/instagramIcon.png")}/>
-                    <SocialIcon source={require("../assets/images/twitterIcon.png")}/>
-                    <SocialIcon source={require("../assets/images/whatsappIcon.png")}/>
+                    {/* <SocialIcon source={require("../assets/images/twitterIcon.png")}/>
+                    <SocialIcon source={require("../assets/images/whatsappIcon.png")}/> */}
                 </View>
             </View>
 
         </ScrollView>
     )
-
+       
+            
 
 };
 

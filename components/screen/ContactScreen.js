@@ -197,8 +197,8 @@ export class ContactScreen extends Component {
                         <View style={styles.socialIcons}>
                             <SocialIcon source={require("../../assets/images/fbIcon.png")}/>
                             <SocialIcon source={require("../../assets/images/instagramIcon.png")}/>
-                            <SocialIcon source={require("../../assets/images/twitterIcon.png")}/>
-                            <SocialIcon source={require("../../assets/images/whatsappIcon.png")}/>
+                            {/* <SocialIcon source={require("../../assets/images/twitterIcon.png")}/>
+                            <SocialIcon source={require("../../assets/images/whatsappIcon.png")}/> */}
                         </View>
                         <TouchableOpacity style={styles.linkBtn} onPress={ ()=>{ Linking.openURL('http://www.sahajayogaportal.org')}}>
                             <Text style={styles.linkBtnText}>www.sahajayogaportal.org</Text>
@@ -319,6 +319,7 @@ const styles = StyleSheet.create({
     },
     socialIcons: {
         flexDirection: "row",
+        justifyContent:"center",
         marginBottom: 20
     },
     socialIcon: {
