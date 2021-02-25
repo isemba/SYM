@@ -138,6 +138,10 @@ class MusicScreen extends Component {
         });  
         
     }
+    componentWillUnmount() {
+        sound.stopAsync().then(sound.unloadAsync());
+        //this.unloadSound(false);
+    }
     _onFocus = () => {
         console.log("network >>>");
         checkNetworkInfo();
@@ -146,26 +150,32 @@ class MusicScreen extends Component {
             setWelcome();
             navigate('WelcomeVideo');
         } 
+
+        console.log(sound)
     }
     _onBlur = () => {
-        console.log("navigate away");
-        this.checkSoundFile(false);
+        //console.log("navigate away");
+        //this.checkSoundFile(false);
     }
-    _onPlaybackStatusUpdate = playbackStatus => {        
-        this.setState({
-            soundDuration: playbackStatus.durationMillis,
-            soundPosition: playbackStatus.positionMillis,
-        });        
+    _onPlaybackStatusUpdate = playbackStatus => {     
+        if(playbackStatus.isLoaded && playbackStatus.isPlaying)  {
+            this.setState({
+                soundDuration: playbackStatus.durationMillis,
+                soundPosition: playbackStatus.positionMillis,
+            });    
+        }    
       };
     
     async checkSoundFile(load){
         console.log("checkSoundFile "+load);
-        if(that.state.isPlaying){
-            await sound.stopAsync().then(()=> that.unloadSound(load))            
+        console.log(this.state);
+        if(this.state.isPlaying){
+            await sound.stopAsync();
+            this.unloadSound(load)        
         }else if(that.state.hasSoundLoaded){
-            that.unloadSound(load)
-        }else{
-            that.loadSound()
+            this.unloadSound(load)
+        }else if(load){
+             this.loadSound()
         }
             
     }
@@ -179,16 +189,20 @@ class MusicScreen extends Component {
     async loadSound(){
         if(!this.state.isLoading){
             console.log("load playing? "+that.state.isPlaying)
-            that.setState({isLoading:true}, ()=> that.loadTargetSound()); 
+            that.setState({isLoading:true, isPlaying:false}, ()=> that.loadTargetSound()); 
             
         }
     }
     async loadTargetSound(){
         try{
+            //console.log(sound);
             await sound.loadAsync({uri:that.state.activeObj.url}).then((status)=>{
-                that.setState({isLoading:false,isLoaded:true, hasSoundLoaded:true});
-                console.log("soundloaded")
-                sound.setOnPlaybackStatusUpdate(that._onPlaybackStatusUpdate);
+                that.setState({isLoading:false,isLoaded:true, hasSoundLoaded:true}, ()=>{
+                    console.log("soundloaded")
+                    sound.setOnPlaybackStatusUpdate(that._onPlaybackStatusUpdate);
+                    that.playPause();
+                });
+                
                 //sound.setProgressUpdateIntervalAsync(500);
             });
         }catch(e){
@@ -341,7 +355,7 @@ class MusicScreen extends Component {
             <ImageBackground source={Color.BG_IMAGE} style={styles.image}>
                 <HeaderBar title={getLanguageText(Languages.MUSIC)} />
                 <FlatList
-                    style={[styles.container, {marginBottom:10, height:105}]}
+                    style={[styles.container, {marginBottom:10, height:105 ,paddingRight:20}]}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                     ref={this.headerListRef}
@@ -461,11 +475,11 @@ function getCard(card, index, size){
 
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: windowWidth / 50,
+        paddingHorizontal: 10,
         marginBottom: 5
     },
     musicContainer: {
-        padding: windowWidth / 50,
+        padding: 10,
         width: windowWidth,
         flex : 1
     },

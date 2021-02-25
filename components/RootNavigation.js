@@ -13,4 +13,13 @@ export async function setWelcome(){
     console.log("first value >>>")
     console.log(value);
 }
+export async function setTheme(index){
+    console.log("setWelcome")
+    const setvalue = await AsyncStorage.setItem('@themeIndex', index.toString());
+    const value = await AsyncStorage.getItem('@themeIndex');
+    console.log("themeIndex value >>>")
+    console.log(value);
+}
+
+
 

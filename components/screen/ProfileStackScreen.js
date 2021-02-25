@@ -38,7 +38,7 @@ export default function ProfileStackScreen() {
                           colors={[Color.HEADER_GRADIENT[0], Color.HEADER_GRADIENT[1]]}
                           style={{ flex: 1 }}
                           start={{x: 0, y: 0}}
-                          end={{x: 0, y: 1}}
+                          end={{x: 1, y: 0}}
                         />
                       ),
                     }}
@@ -62,7 +62,7 @@ export default function ProfileStackScreen() {
                           colors={[Color.HEADER_GRADIENT[0], Color.HEADER_GRADIENT[1]]}
                           style={{ flex: 1 }}
                           start={{x: 0, y: 0}}
-                          end={{x: 0, y: 1}}
+                          end={{x: 1, y: 0}}
                         />
                       ) }}
             />
@@ -81,7 +81,7 @@ export default function ProfileStackScreen() {
                           colors={[Color.HEADER_GRADIENT[0], Color.HEADER_GRADIENT[1]]}
                           style={{ flex: 1 }}
                           start={{x: 0, y: 0}}
-                          end={{x: 0, y: 1}}
+                          end={{x: 1, y: 0}}
                         />
                       ),
                     }}
@@ -147,6 +147,7 @@ const style = StyleSheet.create({
         fontSize: 20,
         fontFamily: "Lato_400Regular",
         textAlign:"center",
-        paddingLeft:30
+        paddingLeft:20,
+        paddingRight:30
     }
 });

@@ -16,7 +16,7 @@ import {ChangeTheme, ColorSettings} from "./utils/Colors";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import audioPlayer from "./components/Player";
-//import TrackPlayer from 'react-native-track-player';
+
 
 export default class App extends Component {
     state = {
@@ -81,6 +81,7 @@ export default class App extends Component {
 
         console.log(nextAppState)
         if(this.state.appState != "background" && nextAppState === "background" && HomeData.BG_MUSIC.timer > 0){
+
             this.setBgTimer()
         }
         this.setState({
@@ -253,6 +254,8 @@ const performAPICalls = async () => {
             }
         }
         console.log("HomeData.THEMES", HomeData.THEMES);
+        that.setState({musicReady:true});
+        that.playBgMusic();
         try {
             /*console.log("send");
             console.log(HomeData.TOKEN)*/
