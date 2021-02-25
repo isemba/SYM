@@ -24,6 +24,8 @@ export default function HeaderBar(props) {
             <LinearGradient
                 style={[styles.container, containerStyle]}
                 colors={Color.HEADER_GRADIENT}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 0}}
             >
                 {isIPhoneX() ? <View style={{ height: 10 }} /> : null}
                 <Text style={styles.text}>{title}</Text>

@@ -4,7 +4,7 @@ import React from "react";
 import {ChangeTheme, Color} from "../utils/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { MediaType } from "../utils/EnumTypes";
-import {navigate} from "./RootNavigation";
+import {navigate, setWelcome} from "./RootNavigation";
 import EventEmitter from "react-native-eventemitter";
 import CustomEvents from "../models/CustomEvents";
 import { HomeData } from "../utils/Data";
@@ -14,44 +14,40 @@ const radios = 15;
 
 export default function Card(props) {
 
-    const { lock, title, desc, source, uri, text, themeIndex, id, target } = props;
+    
+    const { lock, title, desc, source, uri, text, themeIndex, id, target, url, callback } = props;
     const media = props.media ? props.media : MediaType.VIDEO;
     const size = props.size ? props.size : 47;
     const isSquare = props.isSquare ? props.isSquare : false;
 
+    const onCardPress= ()=>{
+        switch (media) {
+            case MediaType.BLOG:
+            case MediaType.HOME_BLOG:
+            case MediaType.VIDEO:
+                if(HomeData.STARTER.showVideo){
+                    HomeData.STARTER.showVideo = false;
+                    setWelcome();
+                    navigate('WelcomeVideo');
+                } else navigate('Video', {uri, id});
+
+                break;
+
+            case MediaType.MUSIC:
+                navigate('Music', {target});
+                break;
+            case MediaType.THEME:
+                callback(themeIndex)
+                break;
+
+            default:
+                break;
+        }
+    }
     //console.log(props)
     return (
         <TouchableOpacity
-            onPress={() => {
-
-                switch (media) {
-                    case MediaType.BLOG:
-                        navigate('BlogContent', {uri, text, title, source});
-                        break;
-                    case MediaType.HOME_BLOG:
-                        console.log("homeblog click");
-                        console.log(target);
-                        HomeData.BLOG_CONTENT = target;
-                        navigate('Blog');
-                        break;
-                    case MediaType.VIDEO:
-                        navigate('Video', {uri, id});
-                        break;
-
-                    case MediaType.MUSIC:
-                        navigate('Music', {target});
-                        break;
-                    case MediaType.THEME:
-                        console.log("theme click");
-                        console.log(themeIndex);
-                        ChangeTheme(themeIndex);
-                        EventEmitter.emit(CustomEvents.THEME_SELECTED, themeIndex);
-                        break;
-
-                    default:
-                        break;
-                }
-            }}
+            onPress={onCardPress}
         >
             <ImageBackground
                 style={[styles.container, props.style, {width: windowWidth * size / 100, height: isSquare ? windowWidth * size / 100 : 300}]}

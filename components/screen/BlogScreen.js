@@ -18,7 +18,9 @@ class BlogScreen extends Component {
     constructor(props) {
         super(props);
 
-        HomeData.BLOG.forEach((item, index) => {
+        console.log(HomeData.BLOGLIST);
+
+        HomeData.BLOGLIST.forEach((item, index) => {
             //console.log(item);
             const size = index === 0 ? 96 : 47;
             this.BlogViews.push(                
@@ -30,7 +32,7 @@ class BlogScreen extends Component {
                     desc={getLanguageText(Languages.DISCOVER)}
                     source={{uri:item.image}}
                     media={MediaType.BLOG}
-                    uri={{ uri: item.url }}
+                    uri={item.url}
                     key={"blogCard_"+index}
                     text={item.text}
                 />

@@ -20,7 +20,6 @@ export default class TabStack extends Component {
     };
 
     componentDidMount() {
-        that = this;
         this.setState({
             bg:Color.BOTTOM_BG
         })
@@ -29,6 +28,13 @@ export default class TabStack extends Component {
 
     componentWillUnmount() {
         EventEmitter.off(CustomEvents.THEME_SELECTED, this.updateTheme);
+    }
+
+    updateTheme = themeIndex => {
+        console.log("Main Content THEME_SELECTED")
+        this.setState({
+            bg:Color.BOTTOM_BG
+        })
     }
 
     updateTheme = themeIndex => {
