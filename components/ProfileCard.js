@@ -1,40 +1,31 @@
-import React, { useState, useRef } from 'react';
-import { Dimensions, StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, ScrollView, Switch, Platform, TouchableWithoutFeedback, TextInput } from 'react-native';
+import React, { Component, useState, useEffect, useRef } from 'react';
+import { Share, Linking,Button, Dimensions, StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, ScrollView, Switch, Platform, TouchableWithoutFeedback, TextInput } from 'react-native';
 import { Color } from "../utils/Colors";
 import {Lato_400Regular, Lato_100Thin, useFonts} from "@expo-google-fonts/lato";
 import { useNavigation } from '@react-navigation/native';
 import { HomeData } from "../utils/Data";
-import { captureRef } from 'react-native-view-shot';
+import Languages, {getLanguageText} from "../utils/Language";
+
+//import { captureRef } from 'react-native-view-shot';
+import ViewShot from 'react-native-view-shot';
 import * as Sharing from 'expo-sharing';
+import { render } from 'react-dom';
+import Constants from 'expo-constants';
+import * as Notifications from 'expo-notifications';
+import * as Permissions from 'expo-permissions';
+
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: false,
+    }),
+  });
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-function useCapture() {
-    const captureViewRef = useRef();
-
-    function onCapture() {
-        console.log("onCapture");
-        //console.log(captureViewRef);
-      captureRef(captureViewRef, {
-        format: "jpg",
-        quality: 0.9
-      }).then(
-        uri => {
-            console.log('Image saved to', uri);
-            Sharing.shareAsync('file://' + uri);
-          },
-        error => alert("Oops, snapshot failed", error));
-    }
-
-    return {
-      captureViewRef,
-      onCapture
-    };
-  }
 
 export default function ProfileCard() {
-
-
 
     const navigation = useNavigation();
 
@@ -57,8 +48,18 @@ export default function ProfileCard() {
         {text: "P", open: false},
     ]);
     const [renderMe, setRenderMe] = useState(false);
-    const { captureViewRef, onCapture } = useCapture();
+    //const { onCapture } = useCapture();
+    const viewShotRef = useRef();
 
+    const onCapture = ()=> {
+        console.log("onCapture");
+        //console.log(viewShotRef && viewShotRef.current)
+        viewShotRef.current.capture().then(uri => {
+            console.log('Image saved to', uri);
+            Sharing.shareAsync('file://' + uri);
+          },
+        error => alert("Oops, snapshot failed", error));
+    }
     const InfoArea = ({ text, count }) => (
         <View style={{flex: 1}}>
             <Text style={styles.infoLabel}>{text}</Text>
@@ -66,10 +67,10 @@ export default function ProfileCard() {
         </View>
     );
 
-    const SocialIcon = ({source}) => (
+    const SocialIcon = ({source, link}) => (
         <TouchableOpacity
             onPress={()=>{
-
+                Linking.openURL(link)
             }}
             style={{ paddingHorizontal: 15 }}
         >
@@ -145,25 +146,91 @@ export default function ProfileCard() {
                 /></View>
 
             </View>
+            <TouchableOpacity style={styles.sendBtn} onPress={ ()=>{ onNotificationClick()}}>
+                <Text style={styles.sendBtnText}>{getLanguageText(Languages.NOTIFICATIONS)}</Text>
+            </TouchableOpacity>
         </View>
     )
 
 
+    const onNotificationClick = ()=>{
+        console.log("onNotificationClick");
+        console.log(remindDays);
+        console.log(remindHour);
+        console.log(remindMinute);
+        registerForPushNotificationsAsync().then(token => {
+            setToken(token);
+          });
+          enableNotification();
+    }
+    const enableNotification = async ()=>{
+        Notifications.cancelAllScheduledNotificationsAsync();
+        console.log("enableNotification");
+        let sch = { 
+            hour:  parseInt(remindHour),
+            minute: parseInt(remindMinute),
+            repeats: true
+         }
+         console.log(sch);
+        await Notifications.scheduleNotificationAsync({
+            content: {
+              title: Languages.NOTIFICATIONS_TITLE,
+              body: Languages.NOTIFICATIONS_BODY,
+            },
+            trigger: sch
+          });
+      }
 
+    const [token, setToken] = useState(null);
+    async function registerForPushNotificationsAsync() {
+        let token;
+        if (Constants.isDevice) {
+          const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+          let finalStatus = existingStatus;
+          if (existingStatus !== 'granted') {
+            const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+            finalStatus = status;
+          }
+          if (finalStatus !== 'granted') {
+            alert('Failed to get push token for push notification!');
+            return;
+          }
+          token = (await Notifications.getExpoPushTokenAsync()).data;
+        } else {
+          alert('Must use physical device for Push Notifications');
+        }
+      
+        if (Platform.OS === 'android') {
+          Notifications.setNotificationChannelAsync('default', {
+            name: 'default',
+            importance: Notifications.AndroidImportance.MAX,
+            vibrationPattern: [250, 250, 250, 250],
+            lightColor: '#FF231F7C',
+          });
+        }
+      
+        return token;
+      }
+     
     return (
         <ScrollView contentContainerStyle={styles.container}>
            <View style={styles.profileArea}>
-               <ImageBackground style={styles.strikeImage} source={require('../assets/images/rozet.png')}>
+               
+
+               <ViewShot
+                style={styles.screenShot}
+                ref={viewShotRef}
+                options={{format: 'jpg', quality: 0.9}}>
+                <ImageBackground style={styles.strikeImage} source={require('../assets/images/rozet.png')}>
                    <Text style={styles.strikeText}>{strike}</Text>
                </ImageBackground>
-
-               <View style={styles.infoArea} ref={captureViewRef}>
-                   <InfoArea text="KATILDIĞI MEDiTASYONLAR" count={joinCount}/>
-                   <InfoArea text="MEDiTASYONDAKi DAKiKALARIN" count={joinTime}/>
-                   <InfoArea text="ART ARDA GÜNLERiN" count={joinStrike}/>
-               </View>
-
-               <TouchableOpacity style={styles.shareArea} onPress={/*onCapture*/ null}>
+                <View style={styles.infoArea}>
+                    <InfoArea text="KATILDIĞI MEDiTASYONLAR" count={joinCount}/>
+                    <InfoArea text="MEDiTASYONDAKi DAKiKALARIN" count={joinTime}/>
+                    <InfoArea text="ART ARDA GÜNLERiN" count={joinStrike}/>
+                </View>
+               </ViewShot>
+               <TouchableOpacity style={styles.shareArea} onPress={onCapture}>
                    <Image source={require("../assets/images/export.png")} />
                    <Text style={[styles.text, { paddingTop: 2, marginLeft: 5 }]}>İstatistiklerini Paylaş</Text>
                </TouchableOpacity>
@@ -175,8 +242,8 @@ export default function ProfileCard() {
                 >
                     <Text style={styles.text}>Takvim ve Geçmiş > </Text>
                 </TouchableOpacity>
-
-
+                
+                
                 <SwitchArea text="Anımsatıcılar" value={reminders} setValue={setReminders}/>
                 { reminders ? <RemindersBar days={remindDays} /> : null }
 
@@ -200,8 +267,8 @@ export default function ProfileCard() {
             <View>
                 <Text style={styles.socialLabel}>Bizi Tavsiye Edin</Text>
                 <View style={styles.socialIcons}>
-                    <SocialIcon source={require("../assets/images/fbIcon.png")}/>
-                    <SocialIcon source={require("../assets/images/instagramIcon.png")}/>
+                <SocialIcon source={require("../assets/images/fbIcon.png")} link={"https://www.facebook.com/Sahaja-Yoga-Meditasyon-112360240901664"}/>
+                <SocialIcon source={require("../assets/images/instagramIcon.png")} link={"http://www.instagram.com/sahajayogameditasyon/"}/>
                     {/* <SocialIcon source={require("../assets/images/twitterIcon.png")}/>
                     <SocialIcon source={require("../assets/images/whatsappIcon.png")}/> */}
                 </View>
@@ -209,8 +276,8 @@ export default function ProfileCard() {
 
         </ScrollView>
     )
-
-
+       
+            
 
 };
 
@@ -220,7 +287,8 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: "space-between",
         alignItems: "center",
-        flexGrow: 1
+        flexGrow: 1,
+        paddingBottom:50
     },
     profileArea: {
         alignItems: "center",
@@ -247,6 +315,11 @@ const styles = StyleSheet.create({
     },
     backGround:{
         backgroundColor: '#280d52'
+    },
+    screenShot:{
+        display:"flex",
+        flexDirection:"column",
+        alignItems:"center"
     },
     strikeImage: {
         width: 200,
@@ -303,5 +376,20 @@ const styles = StyleSheet.create({
         marginTop: 0,
         borderColor: "#707070",
         borderWidth: 2
-    }
+    },
+    sendBtn:{
+        width:150,
+        height:40,
+        borderRadius:20,
+        backgroundColor:"#fff",
+        color:"#000",
+        fontSize:18,
+        marginLeft:"auto",
+        marginRight:"auto",
+        display:"flex",
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"center",
+        marginBottom:20
+    },
 });

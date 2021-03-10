@@ -2,13 +2,13 @@
   "expo": {
     "name": "SahajaYogaMeditasyon",
     "slug": "SahajaYogaMeditasyon",
-    "version": "1.0.4",
+    "version": "1.0.9",
     "orientation": "portrait",
     "icon": "./assets/appicon.png",
     "splash": {
-      "image": "./assets/appsplash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#00BACE"
+      "image": "./assets/splash2.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -16,18 +16,20 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true,
-      "requireFullScreen": true,
-      "bundleIdentifier": "com.sahajayogameditasyon.sahajayoga"
-    },
     "android": {
+      "useNextNotificationsApi": true,
       "package": "com.sahajayogameditasyon.sahajayoga",
-      "versionCode": 1
+      "versionCode": 5,
+      "permissions": ["READ_INTERNAL_STORAGE"]
+    },
+    "ios": {
+      "supportsTablet": false,
+      "requireFullScreen": true,
+      "bundleIdentifier": "com.sahajayogameditasyon.sahajayoga",
+      "buildNumber": "5"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "description": ""
+    }
   }
 }

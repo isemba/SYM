@@ -17,7 +17,7 @@ export default function MoodCard({mood, uri}){
     const [bgColor, changeBgColor] = useState(Color.MOOD_BG);
     const updateTheme = themeIndex => {
         console.log("Mood Card THEME_SELECTED")
-        
+
         changeBgColor(Color.MOOD_BG);
         /*this.setState({
             bg:Color.BOTTOM_BG
@@ -27,11 +27,11 @@ export default function MoodCard({mood, uri}){
     }
     useEffect(() => {
         EventEmitter.on(CustomEvents.THEME_SELECTED, updateTheme);
-    
+
         return () => {
             EventEmitter.off(CustomEvents.THEME_SELECTED, updateTheme);
         };
-      }, [updateTheme]);
+    }, [updateTheme]);
 
     if(!fontLoaded){
         return <AppLoading />;
@@ -43,8 +43,8 @@ export default function MoodCard({mood, uri}){
                         HomeData.STARTER.showVideo = false;
                         setWelcome();
                         navigate('WelcomeVideo');
-                    } else 
-                    navigate("Video", { uri });
+                    } else
+                        navigate("Video", { uri });
                 }}
             >
                 <View style={[styles.container, {backgroundColor: bgColor}]}>
@@ -57,7 +57,7 @@ export default function MoodCard({mood, uri}){
 
 const styles = StyleSheet.create({
     container:{
-        
+
         borderRadius: 8,
         justifyContent: "center",
         alignItems: "center",
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     },
     text: {
         color: Color.LIGHT_TEXT_COLOR,
-        fontFamily: "Lato_300Light",
+        fontFamily: "Lato_400Regular",
         fontSize: 14,
         textAlign: 'center'
 

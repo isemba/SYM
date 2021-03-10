@@ -17,16 +17,17 @@ class DiscoverScreen extends Component {
 
     flatListRef;
     headerListRef;
-    headerLocked;
+    headerLocked = false;
     state = {
         titles: [],
         discoverList : [],
-        activeMeditationGroups: []
+        activeMeditationGroups: [],
+        activeIndex:0
     }
 
     constructor(props){
         super(props);
-        console.log(HomeData.DISCOVER);
+        //console.log(HomeData.DISCOVER);
         DiscoverList = HomeData.VIDEOLIST;
 
         DiscoverList[0].active = true;
@@ -34,33 +35,41 @@ class DiscoverScreen extends Component {
         DiscoverList.forEach(item => {
             item.groups = getMeditationGroups(item.meditations)
         })
-
+        //this.state.discoverList = DiscoverList;
+        
+        this.dList = DiscoverList;
         this.flatListRef = React.createRef();
         this.headerListRef = React.createRef();
     }
 
     componentDidMount(){
 
-        this.setState({
+        /*this.setState({
             discoverList : DiscoverList
-        })
+        })*/
     }
 
     changeActiveList = index => {
         console.log("changeActiveList to: " + index);
-        DiscoverList.forEach((item, ind) =>{
+        /*DiscoverList.forEach((item, ind) =>{
             item.active = index === ind;
         });
 
         this.setState({
             discoverList : DiscoverList
+        });*/
+        this.setState({
+            activeIndex : index
         });
-
        try {
+           this.headerLocked = true;
+           this.headerListRef.current.scrollToIndex({index});
            this.flatListRef.current.scrollToIndex({index});
 
-           this.headerListRef.current.scrollToIndex({index});
-           this.headerLocked = true;
+           
+           setTimeout(() => {
+            this.headerLocked = false;
+           }, 1000);
 
        }catch (e){
 
@@ -71,7 +80,7 @@ class DiscoverScreen extends Component {
         <Title
             //title={getLanguageText(item.title)}
             title={item.title}
-            active={item.active}
+            active={this.state.activeIndex == index}
             key={"discoverTitle_" + index}
             onPress={() => {
                 this.changeActiveList(index);
@@ -94,7 +103,7 @@ class DiscoverScreen extends Component {
     )
 
     onViewableItemsChanged = ({ viewableItems, changed }) => {
-        console.log("Visible items are", viewableItems);
+        //console.log("Visible items are", viewableItems);
        // console.log("Changed in this iteration", changed);
 
 
@@ -102,18 +111,26 @@ class DiscoverScreen extends Component {
 
         const index = viewableItems[0].index;
 
+        this.setState({
+            activeIndex : index
+        });
         if(this.headerListRef != null){
 
 
-            DiscoverList.forEach((item, ind) =>{
+            /*DiscoverList.forEach((item, ind) =>{
+                console.log("discoverlist item");
+                console.log(item);
                 item.active = index === ind;
             });
 
             this.setState({
                 discoverList : DiscoverList
-            });
+            });*/
 
-            this.headerListRef.current.scrollToIndex({index});
+            console.log("onViewableItemsChanged > "+this.headerLocked)
+            if(!this.headerLocked){
+                this.headerListRef.current.scrollToIndex({index});
+            } 
 
         }
 
@@ -132,19 +149,21 @@ class DiscoverScreen extends Component {
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                     ref={this.headerListRef}
-                    data={discoverList}
+                    data={this.dList}
                     keyExtractor={item => "header_"+ item.title}
                     renderItem={this.renderHeaderItem}
+                    contentContainerStyle={{paddingRight:20}}
                 />
 
                 <FlatList
-                    data={discoverList}
+                    data={this.dList}
                     renderItem={this.renderScreen}
                     keyExtractor={item => item.title}
                     horizontal={true}
                     pagingEnabled={true}
                     ref={this.flatListRef}
-                    onViewableItemsChanged={this.onViewableItemsChanged }
+                    scrollEnabled={false}
+                    //onViewableItemsChanged={this.onViewableItemsChanged }
                 />
             </ImageBackground>
         )

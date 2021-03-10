@@ -25,12 +25,13 @@ class MusicScreen extends Component {
     headerListRef;
     headerLocked;
     activeIndex = 0;
+    listIndex=0
     
     
 
     constructor(props){
         super(props);
-        console.log("props >>>")
+        //console.log("props >>>")
         if(props.route.params != null && props.route.params != undefined) console.log(props.route.params.target);
         let activeID;
         //console.log(HomeData.MUSIC)
@@ -56,7 +57,9 @@ class MusicScreen extends Component {
             activeObj:tmObj,
             isPlaying:false,
             soundPosition: null,
-            soundDuration: null
+            soundDuration: null,
+            shouldPlayImmediately:false,
+            activeIndex:0
         }
         
 
@@ -119,14 +122,18 @@ class MusicScreen extends Component {
         this.props.navigation.addListener('blur', this._onBlur);
         this.props.navigation.addListener('focus', this._onFocus);
         var tmObj;
+        var sp = false;
         if(this.state.activeObj.url == ""){
             tmObj = musicList[this.activeIndex].meditations[0];
         }else{
             tmObj = this.state.activeObj;
+            sp = true;
         }
+        this.mList = musicList;
         this.setState({
-            musicList : musicList,
-            activeObj:tmObj
+            //musicList : musicList,
+            activeObj:tmObj,
+            shouldPlayImmediately:sp
         }, ()=>{
             if(this.activeIndex > 0){
                 setTimeout(()=>{
@@ -139,6 +146,16 @@ class MusicScreen extends Component {
         
     }
     componentWillUnmount() {
+        this.props.navigation.removeListener('blur', this._onBlur);
+        this.props.navigation.removeListener('focus', this._onFocus);
+        this.setState({
+            shouldPlayImmediately:false,
+            activeObj:{
+                image:"",
+                title:"",
+                url:""
+            }
+        })
         sound.stopAsync().then(sound.unloadAsync());
         //this.unloadSound(false);
     }
@@ -151,11 +168,13 @@ class MusicScreen extends Component {
             navigate('WelcomeVideo');
         } 
 
-        console.log(sound)
+        //console.log(sound)
     }
     _onBlur = () => {
         //console.log("navigate away");
         //this.checkSoundFile(false);
+
+        
     }
     _onPlaybackStatusUpdate = playbackStatus => {     
         if(playbackStatus.isLoaded && playbackStatus.isPlaying)  {
@@ -200,7 +219,7 @@ class MusicScreen extends Component {
                 that.setState({isLoading:false,isLoaded:true, hasSoundLoaded:true}, ()=>{
                     console.log("soundloaded")
                     sound.setOnPlaybackStatusUpdate(that._onPlaybackStatusUpdate);
-                    that.playPause();
+                    if(that.state.shouldPlayImmediately) that.playPause();
                 });
                 
                 //sound.setProgressUpdateIntervalAsync(500);
@@ -237,23 +256,26 @@ class MusicScreen extends Component {
     }
     changeActiveList = index => {
         console.log("changeActiveList with: " + index);
-        musicList.forEach((item, ind) =>{
+        /*musicList.forEach((item, ind) =>{
             item.active = index === ind;
         });
 
         this.setState({
             musicList : musicList
+        });*/
+
+        this.setState({
+            activeIndex : index
         });
-
        try {
-           this.flatListRef.current.scrollToIndex({index});
-
-           this.headerListRef.current.scrollToIndex({index});
            this.headerLocked = true;
+           this.headerListRef.current.scrollToIndex({index});
+           this.flatListRef.current.scrollToIndex({index});         
+           
 
            setTimeout(()=>{
                this.headerLocked = false;
-           }, 250);
+           }, 1000);
 
        }catch (e){
 
@@ -265,7 +287,7 @@ class MusicScreen extends Component {
         <Title
             //title={getLanguageText(item.title)}
             title={item.title}
-            active={item.active}
+            active={this.state.activeIndex == index}
             key={"musicTitle_" + index}
             onPress={() => {
                 this.changeActiveList(index);
@@ -289,16 +311,17 @@ class MusicScreen extends Component {
 
     onViewableItemsChanged = ({ viewableItems, changed }) => {
        // console.log("Visible items are", viewableItems);
-       // console.log("Changed in this iteration", changed);
+        //console.log("Changed in this iteration", changed);
 
         if(!viewableItems || viewableItems.length == 0) return;
 
+        console.log(viewableItems[0])
         const index = viewableItems[0].index;
 
         if(this.headerListRef != null){
+            //this.changeActiveList(index)
 
-
-            musicList.forEach((item, ind) =>{
+            /*musicList.forEach((item, ind) =>{
                 item.active = index === ind;
             });
 
@@ -306,7 +329,12 @@ class MusicScreen extends Component {
                 musicList : musicList
             });
 
+            */
+           //console.log("onViewableItemsChanged > "+index)
             if(!this.headerLocked){
+                this.setState({
+                    activeIndex : index
+                });
                 this.headerListRef.current.scrollToIndex({index});
             }
 
@@ -349,7 +377,8 @@ class MusicScreen extends Component {
     render() {
         //let { id } = this.props.route.params;
 
-        const { musicList } = this.state;
+        //const { musicList } = this.state;
+        //const { musicList } = this.mList;
         return (
 
             <ImageBackground source={Color.BG_IMAGE} style={styles.image}>
@@ -359,10 +388,11 @@ class MusicScreen extends Component {
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                     ref={this.headerListRef}
-                    data={musicList}
+                    data={this.mList}
                     //keyExtractor={item => "header_"+ item.title.en}
                     keyExtractor={item => "header_"+ item.title}
                     renderItem={this.renderHeaderItem}
+                    contentContainerStyle={{paddingRight:20}}
                 />
 
                 <View style={styles.player}>
@@ -402,13 +432,14 @@ class MusicScreen extends Component {
                 </View>
 
                 <FlatList
-                    data={musicList}
+                    data={this.mList}
                     renderItem={this.renderScreen}
                     keyExtractor={item => item.title}
                     horizontal={true}
                     pagingEnabled={true}
+                    scrollEnabled={false}
                     ref={this.flatListRef}
-                    onViewableItemsChanged={this.onViewableItemsChanged }
+                    //onViewableItemsChanged={this.onViewableItemsChanged }
                 />
 
 
@@ -420,7 +451,7 @@ class MusicScreen extends Component {
 
 function playMusic(card){
     console.log(card);
-    that.setState({activeObj:card});
+    that.setState({activeObj:card, shouldPlayImmediately:true});
     that.checkSoundFile(true);
 }
 function addMeditationCards(group, groupIndex){

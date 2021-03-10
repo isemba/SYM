@@ -20,6 +20,7 @@ export default class TabStack extends Component {
     };
 
     componentDidMount() {
+        that = this;
         this.setState({
             bg:Color.BOTTOM_BG
         })
@@ -36,14 +37,7 @@ export default class TabStack extends Component {
             bg:Color.BOTTOM_BG
         })
     }
-
-    updateTheme = themeIndex => {
-        console.log("Main Content THEME_SELECTED")
-        this.setState({
-            bg:Color.BOTTOM_BG
-        })
-    }
-
+    
     render(){
         return (
             <Tab.Navigator
@@ -52,7 +46,7 @@ export default class TabStack extends Component {
                     let iconName;
                     let iconImage;
                     let iconImagePassive;
-
+                    
                     switch (route.name) {
                         case "Today":
                             iconName = "ios-home";
@@ -88,8 +82,23 @@ export default class TabStack extends Component {
                     })
                 }}
                 tabBarOptions={{
+                    tabStyle: { borderTopWidth: 0 },
                     activeTintColor: 'white',
                     inactiveTintColor: '#767676',
+                    borderTopColor: "transparent",
+                    elevation: 0,
+                    style:{
+                        borderTopWidth: 0,
+                        borderTopColor: "transparent",
+                        elevation: 0,
+                        backgroundColor:"transparent",
+                        shadowColor: 'transparent',
+                        shadowRadius: 0,
+                        shadowOffset: {
+                            height: 0,
+                        },
+                        border:"none"
+                    },
                     tabStyle: {
                         backgroundColor: this.state.bg,
                     }

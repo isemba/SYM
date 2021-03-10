@@ -7,13 +7,14 @@ import CheckBox from '@react-native-community/checkbox';
 import { CONTACT_URL } from "../../environement";
 import * as axios from "axios";
 import {HomeData} from "../../utils/Data";
+import { Color } from "../../utils/Colors"
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
-const SocialIcon = ({source}) => (
+const SocialIcon = ({source, link}) => (
     <TouchableOpacity
         onPress={()=>{
-
+            Linking.openURL(link)
         }}
         style={{ paddingHorizontal: 15 }}
     >
@@ -24,13 +25,13 @@ const SocialIcon = ({source}) => (
 export class ContactScreen extends Component {
     constructor(props) {
 
-		super(props);
-		this.state = {
+        super(props);
+        this.state = {
             email: "",
             name: "",
             message: ""
         };
-	}
+    }
 
 
     onTextChange = (name) => (value) => {
@@ -39,68 +40,67 @@ export class ContactScreen extends Component {
 
         this.setState({ [name]: value });
         console.log(this.state);
-      };
+    };
 
 
     validateEmail = (email) => {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          return re.test(email);
+        return re.test(email);
     }
     async onSendClick(){
-		Keyboard.dismiss();
+        Keyboard.dismiss();
 
-		this.setState({
-			resultError: false
-		});
+        this.setState({
+            resultError: false
+        });
         console.log(this.state);
         let errObj={
             nameError:false,
             emailError:false,
             messageError:false
         };
-		var err = false;
-		if(!this.validateEmail(this.state.email)){
-			err = true;
-			errObj.emailError= true;
-		}
-		if(!this.state.nameOk){
-			err = true;
-			errObj.nameError= true;
+        var err = false;
+        if(!this.validateEmail(this.state.email)){
+            err = true;
+            errObj.emailError= true;
+        }
+        if(!this.state.nameOk){
+            err = true;
+            errObj.nameError= true;
         }
         if(this.state.message == null || this.state.message == undefined || this.state.message == ""){
-			err = true;
-			errObj.messageError= true;
-		}
+            err = true;
+            errObj.messageError= true;
+        }
 
-		console.log(errObj);
+        console.log(errObj);
 
-		if(!err){
-			console.log('send message');
+        if(!err){
+            console.log('send message');
             try {
                 console.log("send");
                 console.log(HomeData.TOKEN)
-
                 await axios.post(CONTACT_URL, { message:this.state.message },{
                     headers: {
-                      'authorization': `Bearer ${HomeData.TOKEN}`
+                        'authorization': HomeData.TOKEN
                     }}).then((response)=>{console.log(response)});
             }catch (e){
                 console.error(e);
             }
-		}else{
+        }else{
             this.setState({
                 emailError:errObj.emailError,
                 nameError:errObj.nameError,
                 messageError:errObj.messageError
             });
-        console.log(this.state);
+            console.log(this.state);
 
         }
-	}
+    }
     render() {
         return (
             <ScrollView contentContainerStyle={styles.container}>
-                <ImageBackground source={require('../../assets/images/bg-fire.png')} style={styles.image}>
+                <ImageBackground source={Color.BG_IMAGE} style={styles.image}>
                     <View style={styles.contactHolder}>
                         <View style={styles.logoContainer}>
                             <Logo />
@@ -115,7 +115,7 @@ export class ContactScreen extends Component {
                                 <TextInput
                                     style={styles.textInput}
                                     underlineColorAndroid='transparent'
-                                    placeholderTextColor='#A8A8A8'
+                                    placeholderTextColor='rgba(255,255,255,0.5)'
                                     placeholder= {getLanguageText(Languages.FORM_EMAIL)}
                                     onChangeText={(text) => {
                                         let a = text.length > 0 ? true : false;
@@ -128,7 +128,7 @@ export class ContactScreen extends Component {
                                     }}
                                     onFocus={()=> this.setState({emailError:false})}
                                     value={this.state.email}
-                                    />
+                                />
                                 <View style={[styles.inputCheck, {opacity : this.state.emailOk ? 1 : 0}]}>
                                     <Image source={require('../../assets/images/form-check-icon.png')} />
                                 </View>
@@ -140,7 +140,7 @@ export class ContactScreen extends Component {
                                 <TextInput
                                     style={styles.textInput}
                                     underlineColorAndroid='transparent'
-                                    placeholderTextColor='#A8A8A8'
+                                    placeholderTextColor='rgba(255,255,255,0.5)'
                                     placeholder= {getLanguageText(Languages.FORM_NAME)}
                                     onChangeText={(text) => {
                                         let a = text.length > 0 ? true : false;
@@ -153,7 +153,7 @@ export class ContactScreen extends Component {
                                     }}
                                     onFocus={()=> this.setState({nameError:false})}
                                     value={this.state.name}
-                                    />
+                                />
                                 <View style={[styles.inputCheck, {opacity : this.state.nameOk ? 1 : 0}]}>
                                     <Image source={require('../../assets/images/form-check-icon.png')} />
                                 </View>
@@ -189,20 +189,24 @@ export class ContactScreen extends Component {
                                         check: value,
                                     })}
                                 />
-                                <Text style={styles.checkBoxText}> {getLanguageText(Languages.FORM_CHECK)} </Text>
+                                <TouchableOpacity style={styles.linkBtn} onPress={ ()=>{ Linking.openURL('https://sahaja-public.s3-eu-west-1.amazonaws.com/policy.html')}}>
+                                    <Text style={styles.checkBoxText}>{getLanguageText(Languages.FORM_CHECK)}</Text>
+                                    <Text style={[styles.checkBoxText, {textDecorationLine: "underline"}]}>{getLanguageText(Languages.FORM_CHECK_LINK)}</Text>
+                                </TouchableOpacity>
+
                             </View>
                             <TouchableOpacity style={styles.sendBtn} onPress={ ()=>{ this.onSendClick()}}>
                                 <Text style={styles.sendBtnText}>{getLanguageText(Languages.FORM_SEND)}</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styles.socialIcons}>
-                            <SocialIcon source={require("../../assets/images/fbIcon.png")}/>
-                            <SocialIcon source={require("../../assets/images/instagramIcon.png")}/>
+                            <SocialIcon source={require("../../assets/images/fbIcon.png")} link={"https://www.facebook.com/Sahaja-Yoga-Meditasyon-112360240901664"}/>
+                            <SocialIcon source={require("../../assets/images/instagramIcon.png")} link={"http://www.instagram.com/sahajayogameditasyon/"}/>
                             {/* <SocialIcon source={require("../../assets/images/twitterIcon.png")}/>
                             <SocialIcon source={require("../../assets/images/whatsappIcon.png")}/> */}
                         </View>
-                        <TouchableOpacity style={styles.linkBtn} onPress={ ()=>{ Linking.openURL('http://www.sahajayogaportal.org')}}>
-                            <Text style={styles.linkBtnText}>www.sahajayogaportal.org</Text>
+                        <TouchableOpacity style={styles.linkBtn} onPress={ ()=>{ Linking.openURL('http://www.sahajayogameditasyon.com')}}>
+                            <Text style={styles.linkBtnText}>www.sahajayogameditasyon.com</Text>
                         </TouchableOpacity>
                     </View>
                 </ImageBackground>
@@ -333,5 +337,6 @@ const styles = StyleSheet.create({
         textDecorationLine:"underline",
         textAlign:"center"
     }
+
 });
 

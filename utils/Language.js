@@ -12,7 +12,8 @@ const Languages = {
     FORM_EMAIL:{en: "E-MAIL", tr: "E-POSTA"},
     FORM_NAME:{en: "NAME SURNAME", tr: "ADINIZ SOYADINIZ"},
     FORM_MESSAGE:{en: "MESSAGE", tr: "MESAJINIZ"},
-    FORM_CHECK:{en: "Check", tr: "Check"},
+    FORM_CHECK:{en: "I'd like to know about Sahaja Yoga Meditasyon programs and events.", tr: "Sahaja Yoga Meditasyon program ve etkinliklerinden haberdar olmak istiyorum."},
+    FORM_CHECK_LINK:{en: "Information Text", tr: "Aydınlatma Metni"},
     FORM_SEND:{en: "Send", tr: "Gönder"},
     HOW_ARE_YOU_FEELING:{ en: "How are you feeling?", tr: "Nasıl Hissediyorsun?"},
     WORD_OF_THE_DAY:{ en: "Word of the day", tr: "Günün Sözü"},
@@ -36,7 +37,9 @@ const Languages = {
     SLEEP_MUSICS:{ en: "Sleep Sounds", tr:  "Uyku Sesleri" },
     CHILL_AMBIENT_MUSICS:{ en: "Chill & Ambient Musics", tr:  "Chill & Ambiyans Müzikleri" },
     CLASSIC_MUSICS:{ en: "Classic Musics", tr:  "Klasik Müzikler" },
-
+    NOTIFICATIONS:{en:"Apply", tr:"Uygula"},
+    NOTIFICATIONS_TITLE:{en:"Meditation Reminder", tr:"Meditasyon Hatırlatıcı"},
+    NOTIFICATIONS_BODY:{en:"Meditation Reminder", tr:"Meditasyon Hatırlatıcı"},
 
 };
 
@@ -65,9 +68,9 @@ export function getLanguageText(obj) {
         return obj[lang];
     } catch (error) {
         console.error(error);
-       return ''; 
+        return '';
     }
-    
+
 }
 
 export default Languages;

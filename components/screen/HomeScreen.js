@@ -38,6 +38,8 @@ export default class HomeScreen extends Component{
         EventEmitter.emit(CustomEvents.MEDIA_ACTIVE);
     }
     componentWillUnmount() {
+        this.props.navigation.removeListener('focus', this._onFocus);
+        //this.props.navigation.removeListener('blur', this._onBlur);
         EventEmitter.off(CustomEvents.THEME_SELECTED, this.updateTheme);
     }
 

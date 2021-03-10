@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import {Dimensions, StyleSheet, View, StatusBar, Platform } from "react-native";
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
+import * as axios from "axios";
+import {UPDATE_URL} from "../../environement";
+import {HomeData} from "../../utils/Data";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -16,6 +19,9 @@ export default class VideoScreen extends Component{
         super(props);
         //useKeepAwake();
     }
+
+    statusSent = false;
+
     componentDidMount(){
         this.props.navigation.addListener('blur', this._onBlur);
         this.props.navigation.addListener('focus', this._onFocus);
@@ -29,14 +35,27 @@ export default class VideoScreen extends Component{
         console.log("_onBlur");
         deactivateKeepAwake();
     }
+
+    sendStatusUpdate = (cid, dur) =>{
+        axios.post(
+            UPDATE_URL,
+            { cid, dur },
+            {
+                headers: {
+                    'authorization': `Bearer ${HomeData.TOKEN}`
+                }
+            }
+            );
+    }
+
     render() {
-        
+
         const { route } = this.props;
         if(!route) return null;
-        const {  params: { uri, id } } = route;
+        const {  params: { uri, cid } } = route;
 
         let statusSent = false;
-        
+
         return (
             <View style={styles.container}>
                 <StatusBar hidden={true} />
@@ -58,8 +77,14 @@ export default class VideoScreen extends Component{
                            console.log("video loaded with status: ", status);
                        }}
                        onPlaybackStatusUpdate={ status => {
-                           if(!statusSent && status.isPlaying && status.positionMillis > 100000){
+                           console.log("status", status);
+                           if(this.statusSent || !status.isPlaying) return;
 
+                           if(status.durationMillis === 0) return;
+
+                           if(status.positionMillis / status.durationMillis > 0.9){
+                               this.statusSent = true;
+                               this.sendStatusUpdate(cid, status.durationMillis);
                            }
                        }}
                 />

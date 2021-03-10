@@ -30,6 +30,7 @@ export default class MainContent extends Component {
     MusicViews = [];
     BlogViews = [];
 
+    
 
     state = {
         initialized : false,
@@ -37,6 +38,7 @@ export default class MainContent extends Component {
     }
 
     async componentDidMount() {
+        that=this;
         try {
             const value = await AsyncStorage.getItem('@first')
             if(value !== null) {
@@ -80,11 +82,11 @@ export default class MainContent extends Component {
         HomeData.DISCOVER.forEach((item, index) => {
             this.DiscoverViews.push(
                 <View style={styles.cardContainer} key={"discover_"+ index}>
-                    <Card lock={false}
-                        color={Color.MENU}
-                        title={item.title}
-                        desc={getLanguageText(Languages.DISCOVER)}
-                        source={{ uri: item.image }}
+                    <Card lock={false} 
+                        color={Color.MENU} 
+                        title={item.title} 
+                        desc={getLanguageText(Languages.DISCOVER)} 
+                        source={{ uri: item.image }} 
                         uri={item.url}
                         id={item.cid}/>
                 </View>
@@ -102,11 +104,11 @@ export default class MainContent extends Component {
         HomeData.BLOG.forEach((item, index) => {
             this.BlogViews.push(
                 <View style={styles.cardContainer} key={"blog_"+ index}>
-                    <Card lock={false}
-                    color={Color.MENU}
-                    title={item.title}
-                    source={{ uri: item.image }}
-                    media={MediaType.HOME_BLOG}
+                    <Card lock={false} 
+                    color={Color.MENU} 
+                    title={item.title} 
+                    source={{ uri: item.image }} 
+                    media={MediaType.HOME_BLOG} 
                     uri={item.url}/>
                 </View>
             )
@@ -130,47 +132,6 @@ export default class MainContent extends Component {
         })
     }
 
-    showWelcomeVideo(){
-        if(this.state.showWelcome){
-        return (
-            <Modal
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => {
-          console.log("Modal has been closed.");
-        }}
-      >
-            <View style={styles.welcomeVideo}>
-            <Video source={{uri:'https://sahajayoga-assets.s3-eu-west-1.amazonaws.com/mantra/013-mm1.mp4'}}  // Can be a URL or a local file.
-                rate={1.0}                                     // Store reference
-                volume={1.0}
-                isMuted={false}
-                resizeMode={Video.RESIZE_MODE_COVER}
-                style={styles.video}
-                shouldPlay={true}
-                isLooping={false}
-                orientation="landscape"
-                useNativeControls={true}
-                onLoadStart={()=>{
-                    console.log("video started!");
-                }}
-                onLoad={ status =>{
-                    console.log("video loaded with status: ", status);
-                }}
-                onPlaybackStatusUpdate={ status => {
-                    //console.log(status)
-                    if (status.didJustFinish) {
-                        console.log("video ended!");
-                        setTimeout(function(){
-                            that.setState({
-                                showWelcome : false
-                            })}, 1000);
-                      }
-                }}
-            />
-        </View></Modal>)
-        }
-    }
     // showWelcomeVideo(){
     //     if(this.state.showWelcome){
     //     return (

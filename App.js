@@ -16,8 +16,10 @@ import {ChangeTheme, ColorSettings} from "./utils/Colors";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import audioPlayer from "./components/Player";
+//import TrackPlayer from 'react-native-track-player';
 
 
+let that;
 export default class App extends Component {
     state = {
         appIsReady: false,
@@ -31,18 +33,26 @@ export default class App extends Component {
 
         //console.disableYellowBox = true;
         LogBox.ignoreAllLogs(true);
+        that = this;
     }
 
     async componentDidMount() {
         AppState.addEventListener('change', this._handleAppStateChange);
         try {
-            const value = await AsyncStorage.getItem('@themeIndex')
+            const value = await AsyncStorage.getItem('@themeIndex');
+            EventEmitter.on(CustomEvents.THEME_SELECTED, themeIndex =>{
+                this.setState({themeIndex}, ()=>{
+                    navigate("Main");
+                });
+                this.switchBgMusic()
+            });
             if(value !== null) {
                 console.log("has theme");
                 console.log(value)
                 ChangeTheme(parseInt(value));
                 EventEmitter.emit(CustomEvents.THEME_SELECTED, parseInt(value));
             }
+
             const bgvolume = await AsyncStorage.getItem('@bgvolume')
             if(bgvolume !== null) {
                 console.log("has bgvolume");
@@ -63,25 +73,16 @@ export default class App extends Component {
         }
         await this.prepareResources();
 
-        EventEmitter.on(CustomEvents.THEME_SELECTED, this.updateTheme)
-    }
 
-    updateTheme = themeIndex =>{
-        this.setState({themeIndex}, ()=>{
-            navigate("Main");
-        })
-    }
 
-    componentWillUnmount() {
-        EventEmitter.off(CustomEvents.THEME_SELECTED, this.updateTheme)
-    }
 
+
+    }
     _handleAppStateChange = nextAppState => {
         console.log("_handleAppStateChange");
 
         console.log(nextAppState)
-        if(this.state.appState != "background" && nextAppState === "background" && HomeData.BG_MUSIC.timer > 0){
-
+        if(this.state.appState != "background" && nextAppState == "background" && HomeData.BG_MUSIC.timer > 0){
             this.setBgTimer()
         }
         this.setState({
@@ -95,15 +96,13 @@ export default class App extends Component {
         console.log(HomeData.BG_MUSIC.timer);
         console.log(time)
     }
-
     prepareResources = async () => {
         await performAPICalls();
         await downloadAssets();
 
-        this.setState({ appIsReady: true, musicReady:true }, async () => {
+        this.setState({ appIsReady: true }, async () => {
             try {
-                await SplashScreen.preventAutoHideAsync();
-                await this.playBgMusic();
+                await SplashScreen.hideAsync();
             }catch (e){
 
             }
@@ -129,7 +128,7 @@ export default class App extends Component {
         this.sound = audioPlayer.getInstance();
         //console.log(this.sound)
         await this.sound.createAudio();
-        this.sound.setVolume(HomeData.BG_MUSIC.volume);
+        //this.sound.setVolume(HomeData.BG_MUSIC.volume);
         this.sound.loadAudioAsync(HomeData.THEMES[ColorSettings.SelectedTheme].audio);
 
         /*EventEmitter.on(CustomEvents.THEME_SELECTED, themeIndex =>{
@@ -177,7 +176,7 @@ export default class App extends Component {
     }
 }
 
-const performAPICalls = async () => {
+async function performAPICalls() {
     try {
         const loginData = await axios.post(LOGIN_URL, { deviceId: Constants.deviceId, name: "Samet" });
         const { token, initial: { popular, today, blog, discover, music, moods, starter, themes } } = loginData.data;
@@ -278,8 +277,8 @@ const performAPICalls = async () => {
                 headers: {
                     'authorization': 'Bearer '+HomeData.TOKEN
                 }}).then((response)=>{
-                    console.log("videolist >>>")
-                    console.log(response);
+                    //console.log("videolist >>>")
+                    //console.log(response);
                     var v = response.data;
                     var b = [];
                     for (var i=0; i < v.length;i++){

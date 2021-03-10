@@ -25,7 +25,7 @@ export default class WelcomeVideoScreen extends Component{
                        shouldPlay={true}
                        isLooping={false}
                        orientation="landscape"
-                       useNativeControls={true}
+                       useNativeControls={false}
                        onFullscreenUpdate={onFullscreenUpdate}
                        onLoadStart={()=>{
                            console.log("video started!");
@@ -34,10 +34,10 @@ export default class WelcomeVideoScreen extends Component{
                            console.log("video loaded with status: ", status);
                        }}
                        onPlaybackStatusUpdate={ status => {
-                        if (status.didJustFinish) {
-                            console.log("video ended!");
-                            this.props.navigation.goBack();
-                          }
+                           if (status.didJustFinish) {
+                               console.log("video ended!");
+                               this.props.navigation.goBack();
+                           }
                        }}
                 />
             </View>
