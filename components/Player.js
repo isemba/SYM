@@ -6,6 +6,7 @@ import {HomeData} from "../utils/Data";
 
 export default class audioPlayer extends Component{
     static instance = null;
+    shouldPlay = false;
     static createInstance() {
         var object = new audioPlayer();
         return object;
@@ -52,7 +53,7 @@ export default class audioPlayer extends Component{
         console.log(url)
         console.log(this._tUrl)
         let { isLoaded, isPlaying } = await this._radioStream.getStatusAsync();
-        if(url != this._tUrl){
+        if(url !== this._tUrl){
             try {
 
                 this._tUrl=url;
@@ -67,7 +68,7 @@ export default class audioPlayer extends Component{
                 );
                 //store.dispatch(setLiveState(true));
                 this.setVolume(HomeData.BG_MUSIC.volume)
-                this.toggleAudio(true); // Autoplay at start
+                this.toggleAudio(this.shouldPlay); // Autoplay at start
                 console.log("playing");
                 return true;
 

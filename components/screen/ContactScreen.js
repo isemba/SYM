@@ -3,7 +3,6 @@ import React, { Component, useState } from "react";
 import {Lato_100Thin, Lato_400Regular, useFonts} from "@expo-google-fonts/lato";
 import Logo from "../Logo";
 import Languages, {getLanguageText} from "../../utils/Language";
-import CheckBox from '@react-native-community/checkbox';
 import { CONTACT_URL } from "../../environement";
 import * as axios from "axios";
 import {HomeData} from "../../utils/Data";
@@ -82,7 +81,7 @@ export class ContactScreen extends Component {
                 console.log(HomeData.TOKEN)
                 await axios.post(CONTACT_URL, { message:this.state.message },{
                     headers: {
-                        'authorization': HomeData.TOKEN
+                        'authorization': `Bearer ${HomeData.TOKEN}`
                     }}).then((response)=>{console.log(response)});
             }catch (e){
                 console.error(e);
@@ -177,18 +176,18 @@ export class ContactScreen extends Component {
                                     value={this.state.message}/>
                             </View>
                             <View style={styles.checkBoxHolder}>
-                                <CheckBox
-                                    disabled={false}
-                                    value={this.state.check}
-                                    tintColors={ {true: "#fff", false: "rgba(255,255,255,0.5)"}}
-                                    tintColor={'rgba(255,255,255,0.5)'}
-                                    onCheckColor={'#fff'}
-                                    onFillColor={'transparent'}
-                                    onTintColor={'#fff'}
-                                    onValueChange={(value) => this.setState({
-                                        check: value,
-                                    })}
-                                />
+                                {/*<CheckBox*/}
+                                {/*    disabled={false}*/}
+                                {/*    value={this.state.check}*/}
+                                {/*    tintColors={ {true: "#fff", false: "rgba(255,255,255,0.5)"}}*/}
+                                {/*    tintColor={'rgba(255,255,255,0.5)'}*/}
+                                {/*    onCheckColor={'#fff'}*/}
+                                {/*    onFillColor={'transparent'}*/}
+                                {/*    onTintColor={'#fff'}*/}
+                                {/*    onValueChange={(value) => this.setState({*/}
+                                {/*        check: value,*/}
+                                {/*    })}*/}
+                                {/*/>*/}
                                 <TouchableOpacity style={styles.linkBtn} onPress={ ()=>{ Linking.openURL('https://sahaja-public.s3-eu-west-1.amazonaws.com/policy.html')}}>
                                     <Text style={styles.checkBoxText}>{getLanguageText(Languages.FORM_CHECK)}</Text>
                                     <Text style={[styles.checkBoxText, {textDecorationLine: "underline"}]}>{getLanguageText(Languages.FORM_CHECK_LINK)}</Text>
@@ -272,7 +271,7 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderRadius:10,
         paddingTop:10,
-        paddingBottom:Lato_100Thin,
+        paddingBottom:Lato_400Regular,
         paddingLeft:12,
         paddingRight:12,
         marginTop:20,

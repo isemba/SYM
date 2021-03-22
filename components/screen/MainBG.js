@@ -16,17 +16,17 @@ export default class MainBG extends Component{
     };
 
 
-        componentDidMount() {
-            EventEmitter.on(CustomEvents.BG_RATIO_CHANGED,this.updateBgRatio);
-        }
-    
-        componentWillUnmount() {
-            EventEmitter.off(CustomEvents.BG_RATIO_CHANGED, this.updateBgRatio);
-        }
-    
-        updateBgRatio = bgOpacity =>{
-            this.setState({bgOpacity});
-        }
+    componentDidMount() {
+        EventEmitter.on(CustomEvents.BG_RATIO_CHANGED,this.updateBgRatio);
+    }
+
+    componentWillUnmount() {
+        EventEmitter.off(CustomEvents.BG_RATIO_CHANGED, this.updateBgRatio);
+    }
+
+    updateBgRatio = bgOpacity =>{
+        this.setState({bgOpacity});
+    }
 
     render() {
 
@@ -41,19 +41,6 @@ export default class MainBG extends Component{
             left: 0,
             opacity: this.state.bgOpacity
         }} />
-   //     <BlurView
-   //   style={styles.absolute}
-   //   blurType="light"
-   //   blurAmount={10}
-   //   reducedTransparencyFallbackColor="white"
-   //   style={{
-   //     width: windowWidth,
-   //     height: windowHeight,
-   //     position: "absolute",
-   //     top: 0,
-   //     left: 0,
-   //     opacity: this.state.bgOpacity}}
-   ///>
         )
     }
 }

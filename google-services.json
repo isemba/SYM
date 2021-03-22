@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "244562524487",
+    "project_id": "sahaja-yoga-meditasyon",
+    "storage_bucket": "sahaja-yoga-meditasyon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244562524487:android:d304ac155efb848773f462",
+        "android_client_info": {
+          "package_name": "com.sahajayogameditasyon.sahajayoga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244562524487-2p5peenv8qs2fpc2fthgso95mjnr4tgb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpQPP9d4-zwZPSk8gR5mxjGWcEdblIbPU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244562524487-2p5peenv8qs2fpc2fthgso95mjnr4tgb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "244562524487-0ij2a83122qqi2nnqmehthsodarqfrsh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sahajayogameditasyon.sahajayoga",
+                "app_store_id": "1556526076"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

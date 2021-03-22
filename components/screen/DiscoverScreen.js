@@ -36,7 +36,7 @@ class DiscoverScreen extends Component {
             item.groups = getMeditationGroups(item.meditations)
         })
         //this.state.discoverList = DiscoverList;
-        
+
         this.dList = DiscoverList;
         this.flatListRef = React.createRef();
         this.headerListRef = React.createRef();
@@ -66,7 +66,7 @@ class DiscoverScreen extends Component {
            this.headerListRef.current.scrollToIndex({index});
            this.flatListRef.current.scrollToIndex({index});
 
-           
+
            setTimeout(() => {
             this.headerLocked = false;
            }, 1000);
@@ -130,7 +130,7 @@ class DiscoverScreen extends Component {
             console.log("onViewableItemsChanged > "+this.headerLocked)
             if(!this.headerLocked){
                 this.headerListRef.current.scrollToIndex({index});
-            } 
+            }
 
         }
 
@@ -191,7 +191,7 @@ function addMeditationCards(group, groupIndex){
 }
 
 function getCard(card, index, size){
-    const { lock, color, title, desc, image, url } = card;
+    const { lock, color, title, desc, image, url, cid } = card;
     return (
         <Card
             key={"discover_card_" + index}
@@ -203,6 +203,7 @@ function getCard(card, index, size){
             //source={require('../../assets/images/SampleImage.jpg')}
             source={{uri:image}}
             uri={url}
+            id={cid}
         />
     )
 }
@@ -230,7 +231,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         flex: 1,
-        resizeMode: "cover"   
+        resizeMode: "cover"
     }
 });
 

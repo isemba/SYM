@@ -33,7 +33,7 @@ export default function ProfileCard() {
     const [strike, setStrike] = useState(HomeData.STATS.days);
     const [joinCount, setJoinCount] = useState(HomeData.STATS.totalMeditations);
     const [joinTime, setJoinTime] = useState(HomeData.STATS.totalDuration);
-    const [joinStrike, setJoinStrike] = useState(HomeData.STATS.days);
+    const [joinStrike, setJoinStrike] = useState(HomeData.STATS.strike);
     const [reminders, setReminders] = useState(false);
     const [remindHour, onChangeRemindHour] = useState(9);
     const [remindMinute, onChangeRemindMinute] = useState(40);
@@ -166,7 +166,7 @@ export default function ProfileCard() {
     const enableNotification = async ()=>{
         Notifications.cancelAllScheduledNotificationsAsync();
         console.log("enableNotification");
-        let sch = { 
+        let sch = {
             hour:  parseInt(remindHour),
             minute: parseInt(remindMinute),
             repeats: true
@@ -199,7 +199,7 @@ export default function ProfileCard() {
         } else {
           alert('Must use physical device for Push Notifications');
         }
-      
+
         if (Platform.OS === 'android') {
           Notifications.setNotificationChannelAsync('default', {
             name: 'default',
@@ -208,14 +208,14 @@ export default function ProfileCard() {
             lightColor: '#FF231F7C',
           });
         }
-      
+
         return token;
       }
-     
+
     return (
         <ScrollView contentContainerStyle={styles.container}>
            <View style={styles.profileArea}>
-               
+
 
                <ViewShot
                 style={styles.screenShot}
@@ -242,12 +242,11 @@ export default function ProfileCard() {
                 >
                     <Text style={styles.text}>Takvim ve Geçmiş > </Text>
                 </TouchableOpacity>
-                
-                
+
+
                 <SwitchArea text="Anımsatıcılar" value={reminders} setValue={setReminders}/>
                 { reminders ? <RemindersBar days={remindDays} /> : null }
 
-                { Platform.OS === "ios" ? <SwitchArea text="Apple Sağlık" value={appleHealth} setValue={setAppleHealth}/> : null }
                 <TouchableOpacity
                     style={{ marginBottom: 10 }} onPress={()=>{
                         navigation.navigate('Faq');
@@ -276,8 +275,8 @@ export default function ProfileCard() {
 
         </ScrollView>
     )
-       
-            
+
+
 
 };
 

@@ -15,13 +15,10 @@ const windowHeight = Dimensions.get('window').height;
 
 export default class HomeScreen extends Component{
     state = {
-        bg:HomeData.THEMES[0].bg
+        bg: ""
     };
 
     componentDidMount() {
-        console.log("Homescreen colorsettings")
-        console.log(ColorSettings);
-        console.log(HomeData.THEMES[ColorSettings.SelectedTheme].bg)
         this.setState({
             bg:HomeData.THEMES[ColorSettings.SelectedTheme].bg
         })
@@ -68,7 +65,7 @@ export default class HomeScreen extends Component{
                     console.log("bg video started!");
                 }}
                 onLoad={status => {
-                    console.log("bg video loaded with status: ", status);
+                   // console.log("bg video loaded with status: ", status);
                 }}
             />
 

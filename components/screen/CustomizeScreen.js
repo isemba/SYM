@@ -13,7 +13,16 @@ import * as FileSystem from 'expo-file-system';
 import {setTheme} from "../RootNavigation";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 export default class CustomizeScreen extends Component{
+    // const themes = [
+    //     {source: require('../../assets/images/theme1.jpg')},
+    //     {source: require('../../assets/images/theme2.jpg')},
+    //     {source: require('../../assets/images/theme3.jpg')},
+    //     {source: require('../../assets/images/theme4.jpg')}
+    // ]
+    //const
+
     constructor(props){
         super(props);
         this.state ={
@@ -40,8 +49,9 @@ export default class CustomizeScreen extends Component{
             selectedMinute:m
         });
     }
-
     checkTheme = async index => {
+        /*console.log("checkTheme");
+        console.log(index);*/
         setTheme(index);
         if(HomeData.THEMES[index].downloaded){
             ChangeTheme(index);
@@ -63,6 +73,7 @@ export default class CustomizeScreen extends Component{
                 this.setState({downloading:-1});
                 ChangeTheme(index);
                 EventEmitter.emit(CustomEvents.THEME_SELECTED, index);
+
             } catch (e) {
                 console.error(e);
             }
@@ -70,6 +81,8 @@ export default class CustomizeScreen extends Component{
     }
 
     checkCover(theme, index){
+        /*console.log(this.state.downloading);
+        console.log(index);*/
         if(!theme.downloaded){
 
             if(this.state.downloading == index){
@@ -134,6 +147,21 @@ export default class CustomizeScreen extends Component{
                                 <Image source={require('../../assets/images/volume-up.png')} style={styles.icon} />
                             </View>
                         </View>
+                        {/* <View style={styles.settingsHolder}>
+                <Text style={styles.topText}>Uygulamadan çıkınca çalmaya devam et</Text>
+                <View>
+                    <Picker
+                    selectedValue={this.state.selectedMinute}
+                    onValueChange={m =>this.setBgMinutes(m)}
+                    style={{ width: 120, color:"#fff", paddingRight:0 }}
+                    mode="dropdown">
+                        {minuteItems}
+                    </Picker>
+                </View>
+                <View style={styles.row}>
+                    <Image source={require('../../assets/images/timer.png')} style={{}} />
+                </View>
+            </View> */}
                     </LinearGradient>
                 </View>
                 <ScrollView
@@ -151,7 +179,7 @@ export default class CustomizeScreen extends Component{
                         //console.log(cardStyles)
                         return (
                             <View style={cardStyles} key={"theme_"+index}>
-                                <Card lock={false} color={Color.MENU} source={{uri:theme.image}} themeIndex={index} media={MediaType.THEME} style={{marginBottom:0, height:"100%"}} callback={this.checkTheme}/>
+                                <Card lock={false} color={Color.MENU} source={{uri:theme.image}} themeIndex={index} media={MediaType.THEME} style={{marginBottom:0, height:"100%"}} id={theme.id} callback={this.checkTheme}/>
                                 {this.checkCover(theme, index)}
                             </View>
                         )
@@ -226,3 +254,4 @@ const styles = StyleSheet.create({
         justifyContent:"center"
     }
 });
+//export default CustomizeScreen;

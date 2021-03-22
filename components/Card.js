@@ -8,13 +8,14 @@ import {navigate, setWelcome} from "./RootNavigation";
 import EventEmitter from "react-native-eventemitter";
 import CustomEvents from "../models/CustomEvents";
 import { HomeData } from "../utils/Data";
+import * as Analytics from "expo-firebase-analytics";
 
 const windowWidth = Dimensions.get('window').width;
 const radios = 15;
 
 export default function Card(props) {
 
-    
+
     const { lock, title, desc, source, uri, text, themeIndex, id, target, url, callback } = props;
     const media = props.media ? props.media : MediaType.VIDEO;
     const size = props.size ? props.size : 47;
@@ -29,14 +30,19 @@ export default function Card(props) {
                     HomeData.STARTER.showVideo = false;
                     setWelcome();
                     navigate('WelcomeVideo');
-                } else navigate('Video', {uri, id});
+                } else {
+                    Analytics.logEvent("VideoOpen", {id});
+                    navigate('Video', {uri, id});
+                }
 
                 break;
 
             case MediaType.MUSIC:
+                Analytics.logEvent("MusicOpen", {id: target.cid});
                 navigate('Music', {target});
                 break;
             case MediaType.THEME:
+                Analytics.logEvent("ThemeSelect", {id});
                 callback(themeIndex)
                 break;
 

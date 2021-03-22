@@ -2,7 +2,7 @@
   "expo": {
     "name": "SahajaYogaMeditasyon",
     "slug": "SahajaYogaMeditasyon",
-    "version": "1.0.9",
+    "version": "1.0.13",
     "orientation": "portrait",
     "icon": "./assets/appicon.png",
     "splash": {
@@ -19,17 +19,30 @@
     "android": {
       "useNextNotificationsApi": true,
       "package": "com.sahajayogameditasyon.sahajayoga",
-      "versionCode": 5,
-      "permissions": ["READ_INTERNAL_STORAGE"]
+      "versionCode": 9,
+      "permissions": ["READ_INTERNAL_STORAGE"],
+      "googleServicesFile": "./google-services.json"
     },
     "ios": {
       "supportsTablet": false,
       "requireFullScreen": true,
       "bundleIdentifier": "com.sahajayogameditasyon.sahajayoga",
-      "buildNumber": "5"
+      "buildNumber": "9",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "config": {
+        "firebase": {
+          "apiKey": "AIzaSyCvBL_To-PJ4SEddg9QVgN7xQG1uDVtF-U",
+          "authDomain": "sahaja-yoga-meditasyon.firebaseapp.com",
+          "projectId": "sahaja-yoga-meditasyon",
+          "storageBucket": "sahaja-yoga-meditasyon.appspot.com",
+          "messagingSenderId": "244562524487",
+          "appId": "1:244562524487:web:0e24eea5e1f8160973f462",
+          "measurementId": "G-5FDSFTKL7Z"
+        }
+      }
     }
   }
 }

@@ -1,18 +1,16 @@
 import React, { Component } from "react";
 import { Dimensions, ScrollView, StyleSheet, View, FlatList, TouchableOpacity, ImageBackground, Text, Image } from 'react-native';
-import { MusicList, HomeData } from "../../utils/Data";
+import { HomeData } from "../../utils/Data";
 import Languages, { getLanguageText } from '../../utils/Language';
-import Card from '../Card';
 import Title from "../Title";
 import HeaderBar from "../HeaderBar";
-import {LinearGradient} from "expo-linear-gradient";
 import {Color} from "../../utils/Colors";
 import {checkNetworkInfo} from "../../utils/Connection";
 import {getMeditationGroups} from "../../utils/Utils";
 import { Ionicons } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
 import {navigate, setWelcome} from "../RootNavigation";
-
+import * as Analytics from "expo-firebase-analytics";
 import Slider from '@react-native-community/slider';
 
 const windowWidth = Dimensions.get('window').width;
@@ -26,8 +24,6 @@ class MusicScreen extends Component {
     headerLocked;
     activeIndex = 0;
     listIndex=0
-    
-    
 
     constructor(props){
         super(props);
@@ -37,9 +33,9 @@ class MusicScreen extends Component {
         //console.log(HomeData.MUSIC)
         /*MusicList = HomeData.MUSIC;
         console.log(MusicList);*/
-        
 
-        var tmObj;
+
+        let tmObj;
         if(props.route.params != null && props.route.params != undefined && props.route.params.target != null){
             tmObj = props.route.params.target
         }else{
@@ -50,7 +46,7 @@ class MusicScreen extends Component {
             }
         }
 
-        
+
         this.state = {
             titles: [],
             musicList : [],
@@ -61,38 +57,12 @@ class MusicScreen extends Component {
             shouldPlayImmediately:false,
             activeIndex:0
         }
-        
 
-        /*let hd = HomeData.MUSICLIST;
-        console.log(hd);
-
-        let ml = MusicList;
-        let hd =  HomeData.MUSICLIST;*/
-        /*ml.forEach((item) => {
-            console.log(item)
-        });
-        ml.forEach((item) => {
-            item.musics = [];
-            item.groups=[];
-            let t1 = item.title.en.split(' ')[0];
-            let t2 = item.title.tr.split(' ')[0];
-            let t3 = item.title.en.split(' ')[0].toLowerCase();
-            let t4 = item.title.tr.split(' ')[0].toLowerCase();
-            hd.forEach((m) => {
-
-                if(m.url.indexOf(t1) > 0 || m.url.indexOf(t2) > 0 || m.url.indexOf(t3) > 0 || m.url.indexOf(t4) > 0) item.musics.push(m)
-            });
-
-
-        });
-        var filtered = ml.filter(function(el) { return el.musics.length > 0; });
-        */
-        //musicList = filtered;
         musicList = HomeData.MUSICLIST;
         if(this.props.route.params){
             activeID = this.props.route.params.target.cid;
         }
-        
+
 
         musicList.forEach((item, index) => {
             console.log(item.title);
@@ -117,13 +87,13 @@ class MusicScreen extends Component {
     }
 
     componentDidMount(){
-               
+
         console.log("activeIndex: " + this.activeIndex );
         this.props.navigation.addListener('blur', this._onBlur);
         this.props.navigation.addListener('focus', this._onFocus);
         var tmObj;
         var sp = false;
-        if(this.state.activeObj.url == ""){
+        if(this.state.activeObj.url === ""){
             tmObj = musicList[this.activeIndex].meditations[0];
         }else{
             tmObj = this.state.activeObj;
@@ -142,8 +112,8 @@ class MusicScreen extends Component {
             }
             this.checkSoundFile(true);
             console.log(this.state.activeObj)
-        });  
-        
+        });
+
     }
     componentWillUnmount() {
         this.props.navigation.removeListener('blur', this._onBlur);
@@ -166,7 +136,7 @@ class MusicScreen extends Component {
             HomeData.STARTER.showVideo = false;
             setWelcome();
             navigate('WelcomeVideo');
-        } 
+        }
 
         //console.log(sound)
     }
@@ -174,29 +144,29 @@ class MusicScreen extends Component {
         //console.log("navigate away");
         //this.checkSoundFile(false);
 
-        
+
     }
-    _onPlaybackStatusUpdate = playbackStatus => {     
+    _onPlaybackStatusUpdate = playbackStatus => {
         if(playbackStatus.isLoaded && playbackStatus.isPlaying)  {
             this.setState({
                 soundDuration: playbackStatus.durationMillis,
                 soundPosition: playbackStatus.positionMillis,
-            });    
-        }    
+            });
+        }
       };
-    
+
     async checkSoundFile(load){
         console.log("checkSoundFile "+load);
         console.log(this.state);
         if(this.state.isPlaying){
             await sound.stopAsync();
-            this.unloadSound(load)        
+            this.unloadSound(load)
         }else if(that.state.hasSoundLoaded){
             this.unloadSound(load)
         }else if(load){
              this.loadSound()
         }
-            
+
     }
     async unloadSound(load){
         await sound.unloadAsync().then((status)=>{
@@ -208,8 +178,8 @@ class MusicScreen extends Component {
     async loadSound(){
         if(!this.state.isLoading){
             console.log("load playing? "+that.state.isPlaying)
-            that.setState({isLoading:true, isPlaying:false}, ()=> that.loadTargetSound()); 
-            
+            that.setState({isLoading:true, isPlaying:false}, ()=> that.loadTargetSound());
+
         }
     }
     async loadTargetSound(){
@@ -221,7 +191,7 @@ class MusicScreen extends Component {
                     sound.setOnPlaybackStatusUpdate(that._onPlaybackStatusUpdate);
                     if(that.state.shouldPlayImmediately) that.playPause();
                 });
-                
+
                 //sound.setProgressUpdateIntervalAsync(500);
             });
         }catch(e){
@@ -235,7 +205,7 @@ class MusicScreen extends Component {
             that.setState({isPlaying:p}, ()=>{
                 that.playPauseSound();
             });
-            
+
         }else{
             setTimeout(function(){that.playPause()}, 500);
         }
@@ -270,8 +240,8 @@ class MusicScreen extends Component {
        try {
            this.headerLocked = true;
            this.headerListRef.current.scrollToIndex({index});
-           this.flatListRef.current.scrollToIndex({index});         
-           
+           this.flatListRef.current.scrollToIndex({index});
+
 
            setTimeout(()=>{
                this.headerLocked = false;
@@ -283,7 +253,7 @@ class MusicScreen extends Component {
     };
 
     renderHeaderItem = ({item, index}) => (
-        
+
         <Title
             //title={getLanguageText(item.title)}
             title={item.title}
@@ -351,7 +321,7 @@ class MusicScreen extends Component {
           this.sound.pauseAsync();
         }
       }
-    
+
       _onSeekSliderSlidingComplete = async (value) => {
         if (this.sound != null) {
           this.isSeeking = false;
@@ -363,7 +333,7 @@ class MusicScreen extends Component {
           }
         }
       }
-    
+
       _getSeekSliderPosition() {
         if (
           sound != null &&
@@ -405,7 +375,7 @@ class MusicScreen extends Component {
                         style={styles.playbackSlider}
                         minimumTrackTintColor="#fff"
                         maximumTrackTintColor="#000"
-                        thumbTintColor="#fff"                            
+                        thumbTintColor="#fff"
                         value={this._getSeekSliderPosition()}
                         onValueChange={this._onSeekSliderValueChange}
                         onSlidingComplete={this._onSeekSliderSlidingComplete}
@@ -417,9 +387,9 @@ class MusicScreen extends Component {
                         <View style={styles.title}>
                             <Text style={styles.titleStyle}>{this.state.activeObj.title}</Text>
                         </View>
-                        
+
                         <View style={styles.controls}>
-                            <TouchableOpacity style={styles.control, {opacity: this.state.isLoaded ? 1 : 0.5}} onPress={() => {if(this.state.isLoaded)this.playPause()}}>
+                            <TouchableOpacity style={{opacity: this.state.isLoaded ? 1 : 0.5}} onPress={() => {if(this.state.isLoaded)this.playPause()}}>
                             {this.state.isPlaying ? (
                                 <Ionicons name='ios-pause' size={20} color='#fff' />
                                 ) : (
@@ -451,19 +421,11 @@ class MusicScreen extends Component {
 
 function playMusic(card){
     console.log(card);
+    Analytics.logEvent("SoundPlay", {id: card.cid, title: card.title});
     that.setState({activeObj:card, shouldPlayImmediately:true});
     that.checkSoundFile(true);
 }
 function addMeditationCards(group, groupIndex){
-    /*const groupSize = group.length;
-
-    if(groupSize === 1 && groupIndex === 0){
-        const card = group[0];
-        return (
-            getCard(card, 0, 96)
-        )
-    }*/
-
     return (
         <View style={styles.cardContainer} key={"music_card_container_" + groupIndex}>
             {
@@ -487,7 +449,7 @@ function getCard(card, index, size){
             <ImageBackground
                 style={[styles.ccontainer, {width: windowWidth * size / 100, height: 300}]}
                 source={{uri:image}}
-                imageStyle={{ borderRadius: 15, resizeMode: "cover" }}                
+                imageStyle={{ borderRadius: 15, resizeMode: "cover" }}
             >
             <View style={[styles.bottom]} intensity={40}>
                 <Text style={styles.titleStyle}>
@@ -563,14 +525,14 @@ const styles = StyleSheet.create({
         zIndex:2
     },
     bottomBar:{
-        position:"absolute", 
-        bottom:0, 
+        position:"absolute",
+        bottom:0,
         left:0,
-        height:40, 
-        display:"flex", 
-        width: windowWidth * 96 / 100, 
-        flexDirection:"row", 
-        alignItems:"center", 
+        height:40,
+        display:"flex",
+        width: windowWidth * 96 / 100,
+        flexDirection:"row",
+        alignItems:"center",
         justifyContent:"space-between",
         zIndex:1,
         paddingLeft:20,
@@ -582,9 +544,9 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         flex: 1,
-        resizeMode: "cover"   
+        resizeMode: "cover"
     },
-    playbackSlider: {       
+    playbackSlider: {
         position:'absolute',
         zIndex:35,
         top:153,

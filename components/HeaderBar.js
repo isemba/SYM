@@ -47,10 +47,10 @@ const styles = StyleSheet.create({
     text: {
         color: Color.LIGHT_TEXT_COLOR,
         fontWeight: "bold",
-        fontSize: 20,
+        fontSize: 22,
         fontFamily: "Lato_400Regular",
         paddingVertical: 5,
-        
+
 
 
     },

@@ -19,9 +19,6 @@ export default function MoodCard({mood, uri}){
         console.log("Mood Card THEME_SELECTED")
 
         changeBgColor(Color.MOOD_BG);
-        /*this.setState({
-            bg:Color.BOTTOM_BG
-        })*/
         console.log(Color.MOOD_BG);
         console.log(bgColor);
     }
@@ -43,8 +40,10 @@ export default function MoodCard({mood, uri}){
                         HomeData.STARTER.showVideo = false;
                         setWelcome();
                         navigate('WelcomeVideo');
-                    } else
+                    } else {
                         navigate("Video", { uri });
+                    }
+
                 }}
             >
                 <View style={[styles.container, {backgroundColor: bgColor}]}>
@@ -57,7 +56,6 @@ export default function MoodCard({mood, uri}){
 
 const styles = StyleSheet.create({
     container:{
-
         borderRadius: 8,
         justifyContent: "center",
         alignItems: "center",
@@ -71,6 +69,5 @@ const styles = StyleSheet.create({
         fontFamily: "Lato_400Regular",
         fontSize: 14,
         textAlign: 'center'
-
     }
 });
