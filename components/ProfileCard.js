@@ -1,11 +1,11 @@
-import React, { Component, useState, useEffect, useRef } from 'react';
+import React, { Component, useState, useEffect, useRef, useCallback } from 'react';
 import { Share, Linking,Button, Dimensions, StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, ScrollView, Switch, Platform, TouchableWithoutFeedback, TextInput } from 'react-native';
 import { Color } from "../utils/Colors";
 import {Lato_400Regular, Lato_100Thin, useFonts} from "@expo-google-fonts/lato";
 import { useNavigation } from '@react-navigation/native';
 import { HomeData } from "../utils/Data";
 import Languages, {getLanguageText} from "../utils/Language";
-
+import LogoHorizontal from "./LogoHorizontal";
 //import { captureRef } from 'react-native-view-shot';
 import ViewShot from 'react-native-view-shot';
 import * as Sharing from 'expo-sharing';
@@ -33,7 +33,7 @@ export default function ProfileCard() {
     const [strike, setStrike] = useState(HomeData.STATS.days);
     const [joinCount, setJoinCount] = useState(HomeData.STATS.totalMeditations);
     const [joinTime, setJoinTime] = useState(HomeData.STATS.totalDuration);
-    const [joinStrike, setJoinStrike] = useState(HomeData.STATS.strike);
+    const [joinStrike, setJoinStrike] = useState(HomeData.STATS.days);
     const [reminders, setReminders] = useState(false);
     const [remindHour, onChangeRemindHour] = useState(9);
     const [remindMinute, onChangeRemindMinute] = useState(40);
@@ -49,16 +49,35 @@ export default function ProfileCard() {
     ]);
     const [renderMe, setRenderMe] = useState(false);
     //const { onCapture } = useCapture();
+    //var capture=false;
+    // function useForceUpdate(){
+    //     const [value, setValue] = useState(0); // integer state
+    //     return () => setValue(value => value + 1); // update the state to force render
+    // }
+    const [capture, setCapture] = useState(false);
+    const forceUpdate = useCallback(() => {
+        console.log("update");
+        updateState({})}, [])
     const viewShotRef = useRef();
 
     const onCapture = ()=> {
         console.log("onCapture");
+        setCapture(true);
         //console.log(viewShotRef && viewShotRef.current)
-        viewShotRef.current.capture().then(uri => {
-            console.log('Image saved to', uri);
-            Sharing.shareAsync('file://' + uri);
-          },
-        error => alert("Oops, snapshot failed", error));
+        //capture=true;
+        //useForceUpdate();
+        console.log("forceUpdate >"+capture)
+        //forceUpdate();
+        setTimeout(function(){
+            viewShotRef.current.capture().then(uri => {
+                //capture=false;
+                console.log('Image saved to', uri);
+                setCapture(false);
+                Sharing.shareAsync('file://' + uri);
+                
+            },
+            error => alert("Oops, snapshot failed", error));
+        }, 500)
     }
     const InfoArea = ({ text, count }) => (
         <View style={{flex: 1}}>
@@ -180,7 +199,28 @@ export default function ProfileCard() {
             trigger: sch
           });
       }
-
+      const onShare = async () => {
+        try {
+            let msg = 'Sahaja Yoga Meditasyon tüm seviyeler için hazırlanmış sayısız programa ve gelişmiş uygulamalara sahip.\n\n Sen de denemelisin! Link burada:';
+            if(Platform.OS == "android") msg += '\n\nhttp://www.sahajayogameditasyon.com';
+          const result = await Share.share({
+            message: msg,
+            url: 'http://www.sahajayogameditasyon.com',
+            title: 'Sahaja Yoga Meditasyon'
+          });
+          if (result.action === Share.sharedAction) {
+            if (result.activityType) {
+              // shared with activity type of result.activityType
+            } else {
+              // shared
+            }
+          } else if (result.action === Share.dismissedAction) {
+            // dismissed
+          }
+        } catch (error) {
+          alert(error.message);
+        }
+      };
     const [token, setToken] = useState(null);
     async function registerForPushNotificationsAsync() {
         let token;
@@ -214,21 +254,30 @@ export default function ProfileCard() {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-           <View style={styles.profileArea}>
-
-
-               <ViewShot
+           <View style={styles.profileArea}>    
+            <ViewShot
                 style={styles.screenShot}
                 ref={viewShotRef}
-                options={{format: 'jpg', quality: 0.9}}>
-                <ImageBackground style={styles.strikeImage} source={require('../assets/images/rozet.png')}>
-                   <Text style={styles.strikeText}>{strike}</Text>
-               </ImageBackground>
-                <View style={styles.infoArea}>
-                    <InfoArea text="KATILDIĞI MEDiTASYONLAR" count={joinCount}/>
-                    <InfoArea text="MEDiTASYONDAKi DAKiKALARIN" count={joinTime}/>
-                    <InfoArea text="ART ARDA GÜNLERiN" count={joinStrike}/>
-                </View>
+                options={{format: 'jpg', quality: 0.9}}>    
+                <ImageBackground source={capture? Color.BG_IMAGE : require("../assets/images/transparent.png")} style={styles.image}> 
+                {/* <ImageBackground source={require("../assets/images/red.png")} style={[styles.image, {opacity:capture?1:0}]}> */}
+
+               
+                    <View style={styles.logoContainer}>
+                        <Image source={require("../assets/images/SYM-Logo.png")} />
+                        <LogoHorizontal />
+                    </View>
+
+                
+                    <ImageBackground style={styles.strikeImage} source={require('../assets/images/rozet.png')}>
+                    <Text style={styles.strikeText}>{strike}</Text>
+                </ImageBackground>
+                    <View style={styles.infoArea}>
+                        <InfoArea text="KATILDIĞI MEDiTASYONLAR" count={joinCount}/>
+                        <InfoArea text="MEDiTASYONDAKi DAKiKALARIN" count={joinTime}/>
+                        <InfoArea text="ART ARDA GÜNLERiN" count={joinStrike}/>
+                    </View>
+                </ImageBackground>
                </ViewShot>
                <TouchableOpacity style={styles.shareArea} onPress={onCapture}>
                    <Image source={require("../assets/images/export.png")} />
@@ -237,7 +286,7 @@ export default function ProfileCard() {
            </View>
 
             <View >
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     style={{ marginVertical: 10 }}
                 >
                     <Text style={styles.text}>Takvim ve Geçmiş > </Text>
@@ -245,7 +294,7 @@ export default function ProfileCard() {
 
 
                 <SwitchArea text="Anımsatıcılar" value={reminders} setValue={setReminders}/>
-                { reminders ? <RemindersBar days={remindDays} /> : null }
+                { reminders ? <RemindersBar days={remindDays} /> : null } */}
 
                 <TouchableOpacity
                     style={{ marginBottom: 10 }} onPress={()=>{
@@ -263,14 +312,18 @@ export default function ProfileCard() {
                 </TouchableOpacity>
             </View>
 
-            <View>
+            {/* <View>
                 <Text style={styles.socialLabel}>Bizi Tavsiye Edin</Text>
                 <View style={styles.socialIcons}>
                 <SocialIcon source={require("../assets/images/fbIcon.png")} link={"https://www.facebook.com/Sahaja-Yoga-Meditasyon-112360240901664"}/>
                 <SocialIcon source={require("../assets/images/instagramIcon.png")} link={"http://www.instagram.com/sahajayogameditasyon/"}/>
-                    {/* <SocialIcon source={require("../assets/images/twitterIcon.png")}/>
-                    <SocialIcon source={require("../assets/images/whatsappIcon.png")}/> */}
                 </View>
+            </View> */}
+            <View>
+                <TouchableOpacity style={styles.socialArea} onPress={onShare}>
+                   <Image source={require("../assets/images/export.png")} />
+                   <Text style={[styles.text, { paddingTop: 2, marginLeft: 5 }]}>Bizi Tavsiye Edin</Text>
+               </TouchableOpacity>
             </View>
 
         </ScrollView>
@@ -287,14 +340,21 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         flexGrow: 1,
+        paddingTop:50,
         paddingBottom:50
+    },
+    logoContainer:{
+        display:'flex',
+        flexDirection:'column',
+        alignItems:'center',
+        paddingTop:20
     },
     profileArea: {
         alignItems: "center",
         marginTop: 60
     },
     shareArea: {
-        borderColor: "#7A51B9",
+        borderColor: "#F0B49E",
         borderRadius: 25,
         borderWidth: 3,
         flexDirection: "row",
@@ -303,6 +363,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         marginVertical: 10
     },
+    socialArea: {
+        borderColor: "#00C6D9",
+        borderRadius: 25,
+        borderWidth: 3,
+        flexDirection: "row",
+        justifyContent: "center",
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        marginVertical: 10,
+        backgroundColor:"rgba(255,255,255,0.1)"
+    },
     socialIcons: {
         flexDirection: "row",
         marginBottom: 10
@@ -310,7 +381,8 @@ const styles = StyleSheet.create({
     text: {
         color: Color.LIGHT_TEXT_COLOR,
         fontSize: 18,
-        fontFamily: "Lato_400Regular"
+        fontFamily: "Lato_400Regular",
+        textAlign:"center"
     },
     backGround:{
         backgroundColor: '#280d52'
@@ -318,7 +390,9 @@ const styles = StyleSheet.create({
     screenShot:{
         display:"flex",
         flexDirection:"column",
-        alignItems:"center"
+        alignItems:"center",
+        paddingBottom:20,
+        marginBottom:-20
     },
     strikeImage: {
         width: 200,
@@ -391,4 +465,11 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         marginBottom:20
     },
+    image: {
+        width: '100%',
+        resizeMode: "cover",
+        alignItems:'center',
+        paddingBottom:20,
+        marginBottom:-20
+    }
 });

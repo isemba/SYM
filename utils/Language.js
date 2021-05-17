@@ -6,7 +6,7 @@ const Languages = {
     BLOG:{ en: "Blog", tr: "Blog"},
     PROFILE:{ en: "Profile", tr: "Profil"},
     SETTINGS:{ en: "Settings", tr: "Ayarlar"},
-    FAQ:{ en: "Faq", tr: "Sık Sorulan Sorular"},
+    FAQ:{ en: "Faq", tr: "Sıkça Sorulan Sorular"},
     CONTACT:{en: "Contact Us", tr: "Bize Ulaşın"},
     FORM_TITLE:{en: "Contact Us", tr: "Bize Yazın"},
     FORM_EMAIL:{en: "E-MAIL", tr: "E-POSTA"},

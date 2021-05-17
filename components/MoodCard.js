@@ -10,7 +10,7 @@ import CustomEvents from "../models/CustomEvents";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-export default function MoodCard({mood, uri}){
+export default function MoodCard({mood, uri, id}){
     let [fontLoaded] = useFonts({ Lato_400Regular, Lato_300Light});
 
     //console.log("MOOD CARD RENEDER: " + mood);
@@ -19,8 +19,8 @@ export default function MoodCard({mood, uri}){
         console.log("Mood Card THEME_SELECTED")
 
         changeBgColor(Color.MOOD_BG);
-        console.log(Color.MOOD_BG);
-        console.log(bgColor);
+        /*console.log(Color.MOOD_BG);
+        console.log(bgColor);*/
     }
     useEffect(() => {
         EventEmitter.on(CustomEvents.THEME_SELECTED, updateTheme);
@@ -37,11 +37,11 @@ export default function MoodCard({mood, uri}){
             <TouchableWithoutFeedback
                 onPress={()=>{
                     if(HomeData.STARTER.showVideo){
-                        HomeData.STARTER.showVideo = false;
-                        setWelcome();
+                        /*HomeData.STARTER.showVideo = false;
+                        setWelcome();*/
                         navigate('WelcomeVideo');
                     } else {
-                        navigate("Video", { uri });
+                        navigate("Video", { uri, id });
                     }
 
                 }}

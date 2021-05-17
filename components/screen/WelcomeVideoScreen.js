@@ -1,8 +1,11 @@
 import {Video} from "expo-av";
 import React, { Component } from "react";
-import {Dimensions, StyleSheet, View, StatusBar, Platform } from "react-native";
+import {Dimensions, StyleSheet, View, StatusBar, Platform, BackHandler } from "react-native";
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { HomeData } from "../../utils/Data";
+import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
+import {checkNetworkInfo} from "../../utils/Connection";
+import { setWelcome} from "../RootNavigation";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -11,7 +14,41 @@ const windowHeight = Dimensions.get('window').height;
 
 export default class WelcomeVideoScreen extends Component{
 
-
+    playbackObject = null;
+    componentDidMount() {
+        //console.log("BackAndroid add")
+        this.props.navigation.addListener('blur', this._onBlur);
+        this.props.navigation.addListener('focus', this._onFocus);
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+      }
+      
+      componentWillUnmount() {
+          this.props.navigation.removeListener('blur', this._onBlur);
+          this.props.navigation.removeListener('focus', this._onFocus);
+        //console.log("BackAndroid remove")
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+      }
+      _onFocus = () => {
+        console.log("WelcomeVideo _onFocus");
+        activateKeepAwake();
+    }
+    _onBlur = async  () => {
+        console.log("WelcomeVideo _onBlur");
+        if(this.playbackObject != null){
+            await this.playbackObject.unloadAsync();
+        }
+        deactivateKeepAwake();
+    }
+      handleBackButton() {
+          //console.log("back-btn")
+        return true;
+      }
+      _handleVideoRef = component => {
+        this.playbackObject = component;
+        //console.log("REF! playbackObject: ", playbackObject);
+        //if(this.playbackObject != null) this.playbackObject.presentFullscreenPlayer();
+        
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -20,6 +57,7 @@ export default class WelcomeVideoScreen extends Component{
                        rate={1.0}                                     // Store reference
                        volume={1.0}
                        isMuted={false}
+                       ref={this._handleVideoRef}
                        resizeMode={Video.RESIZE_MODE_CONTAIN}
                        style={styles.backgroundVideo}
                        shouldPlay={true}
@@ -34,8 +72,14 @@ export default class WelcomeVideoScreen extends Component{
                            console.log("video loaded with status: ", status);
                        }}
                        onPlaybackStatusUpdate={ status => {
+                            if(!status.isLoaded){
+                                checkNetworkInfo(true);
+                                //this.props.navigation.goBack();
+                            }
                            if (status.didJustFinish) {
                                console.log("video ended!");
+                               HomeData.STARTER.showVideo = false;
+                                setWelcome();
                                this.props.navigation.goBack();
                            }
                        }}

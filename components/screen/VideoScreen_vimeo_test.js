@@ -21,6 +21,9 @@ export default class VideoScreen extends Component{
         super(props);
         //useKeepAwake();
         that = this;
+        this.state={
+            videoUrl:""
+        }
     }
 
     fullScreen = false;
@@ -32,7 +35,19 @@ export default class VideoScreen extends Component{
         this.props.navigation.addListener('focus', this._onFocus);
 
         ScreenOrientation.addOrientationChangeListener(this._onOrientationChange);
-
+        console.log("axios")
+        axios.get('https://player.vimeo.com/video/542790320/config')
+        .then(function (res) { 
+            console.log("response");
+            console.log(res.data.request.files);
+            that.setState({
+          thumbnailUrl: res.data.video.thumbs['640'],
+          videoUrl: res.data.request.files.progressive[0].url,
+          //video: res.data.video,
+        });
+        console.log(that.state)
+    });
+        //console.log(this.state)
         
     }
 
@@ -101,11 +116,14 @@ export default class VideoScreen extends Component{
         const {  params: { uri, id } } = route;
 
         console.log("route: ", route);
-
+        if(this.state.videoUrl == ""){
+            return <View></View>;
+        }else{
         return (
+            
             <View style={styles.container}>
                 <StatusBar hidden={true} />
-                <Video source={{ uri }}  // Can be a URL or a local file.
+                <Video source={{ uri:this.state.videoUrl }}  // Can be a URL or a local file.
                        rate={1.0}                                     // Store reference
                        volume={1.0}
                        isMuted={false}
@@ -157,6 +175,7 @@ export default class VideoScreen extends Component{
             </View>
         )
     }
+}
 }
 
 const onFullscreenUpdate = async ({fullscreenUpdate}) => {

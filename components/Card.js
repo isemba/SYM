@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet, ImageBackground, Dimensions, TouchableOpacity } from "react-native";
-import { BlurView } from 'expo-blur';
+//import { BlurView } from 'expo-blur';
 import React from "react";
 import {ChangeTheme, Color} from "../utils/Colors";
 import { Ionicons } from "@expo/vector-icons";
@@ -27,8 +27,8 @@ export default function Card(props) {
             case MediaType.HOME_BLOG:
             case MediaType.VIDEO:
                 if(HomeData.STARTER.showVideo){
-                    HomeData.STARTER.showVideo = false;
-                    setWelcome();
+                    /*HomeData.STARTER.showVideo = false;
+                    setWelcome();*/
                     navigate('WelcomeVideo');
                 } else {
                     Analytics.logEvent("VideoOpen", {id});

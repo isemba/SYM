@@ -8,8 +8,8 @@ export function navigate(name, params) {
 }
 export async function setWelcome(){
     console.log("setWelcome")
-    const setvalue = await AsyncStorage.setItem('@first', "true");
-    const value = await AsyncStorage.getItem('@first');
+    const setvalue = await AsyncStorage.setItem('@welcomeVideoShown', "true");
+    const value = await AsyncStorage.getItem('@welcomeVideoShown');
     console.log("first value >>>")
     console.log(value);
 }

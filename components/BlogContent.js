@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import { StyleSheet, Text, View, Dimensions, SafeAreaView, ActivityIndicator, ScrollView,ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, SafeAreaView, ActivityIndicator, ScrollView,ImageBackground, Platform } from 'react-native';
 import { Video } from 'expo-av';
 import {Color} from "../utils/Colors";
 import { useFonts, Lato_400Regular } from "@expo-google-fonts/lato";
@@ -21,7 +21,7 @@ export default function BlogContent({route}){
     if(!fontLoaded){
         return <AppLoading />;
     }else {
-        console.log(route.params);
+        //console.log(route.params);
         const { uri, text, title, source } = route.params;
         const iconName = videoPlaying ? "ios-pause" : "ios-play-circle";
         
@@ -43,7 +43,7 @@ export default function BlogContent({route}){
                             borderTopRightRadius: 10
                         }}
                         onLoad={status => {
-                            console.log("blog video loaded with status: ", status);
+                            //console.log("blog video loaded with status: ", status);
                             setVideoLoaded(true);
                         }}
                         ref={ comp => {
@@ -79,7 +79,7 @@ export default function BlogContent({route}){
                                     }
 
                                 }else {
-                                    console.log("videoRef is null");
+                                    //console.log("videoRef is null");
                                 }
                             }}
 
@@ -107,7 +107,7 @@ export default function BlogContent({route}){
                                     }
 
                                 }else {
-                                    console.log("videoRef is null");
+                                    //console.log("videoRef is null");
                                 }
                             }}
                         />

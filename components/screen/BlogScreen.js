@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, ScrollView, Dimensions,ImageBackground } from "react-native";
+import { StyleSheet, View, Text, ScrollView, Dimensions,ImageBackground, SafeAreaView } from "react-native";
 import React, { Component } from 'react';
 import Card from "../Card";
 import { Color } from "../../utils/Colors"
@@ -18,7 +18,7 @@ class BlogScreen extends Component {
     constructor(props) {
         super(props);
 
-        console.log(HomeData.BLOGLIST);
+        //console.log(HomeData.BLOGLIST);
 
         HomeData.BLOGLIST.forEach((item, index) => {
             //console.log(item);
@@ -29,7 +29,7 @@ class BlogScreen extends Component {
                     lock={false}
                     color={Color.MENU}
                     title={item.title}
-                    desc={getLanguageText(Languages.DISCOVER)}
+                    desc={getLanguageText(Languages.BLOG)}
                     source={{uri:item.image}}
                     media={MediaType.BLOG}
                     uri={item.url}
@@ -40,7 +40,7 @@ class BlogScreen extends Component {
         });
 
         console.log("blog screen");
-        console.log(HomeData.BLOG_CONTENT)
+        //console.log(HomeData.BLOG_CONTENT)
         if(HomeData.BLOG_CONTENT.cid != null && HomeData.BLOG_CONTENT.cid !=undefined){
             let tmObj = {};
             tmObj.uri={};
@@ -54,18 +54,19 @@ class BlogScreen extends Component {
     }
     
     render() {
-        return (
-            <View>                
-                
+        return (             
+                <SafeAreaView style={{display:"flex", flex:1}}>
+            <ImageBackground source={Color.BG_IMAGE} style={styles.image}>
                 <ScrollView contentContainerStyle={styles.container}>
-                    <ImageBackground source={Color.BG_IMAGE} style={styles.image}>
+                    
                         <View style={styles.blogCards}>
                             { this.BlogViews }
                         </View>
                         <View style={{ height: 140 }} />
-                    </ImageBackground>
+                    
                 </ScrollView>
-            </View>
+                </ImageBackground>
+                </SafeAreaView>
 
         );
     }

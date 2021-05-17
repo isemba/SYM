@@ -19,12 +19,17 @@ export const getMeditationGroups = list => {
 
 export const fixUrls = list => {
     list.forEach(item => {
-        //console.log(item)
+        ////console.log(item)
+        
         if(item.image){
             item.image = CONTENT_URL + item.image;
         }
 
-        if(item.url){
+        //if(item.url.indexOf('vimeo') < 0 ){}
+        if(item.vimeo){
+            //console.log("found vimeo! " + item.url)
+            item.url = item.vimeo;
+        }else if(item.url && item.url.indexOf('vimeo') < 0){
             item.url = CONTENT_URL + item.url;
         }
         if(item.audio){

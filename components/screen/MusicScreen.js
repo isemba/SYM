@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Dimensions, ScrollView, StyleSheet, View, FlatList, TouchableOpacity, ImageBackground, Text, Image } from 'react-native';
+import { Dimensions, ScrollView, StyleSheet, View, FlatList, TouchableOpacity, ImageBackground, Text, Image,SafeAreaView } from 'react-native';
 import { HomeData } from "../../utils/Data";
 import Languages, { getLanguageText } from '../../utils/Language';
 import Title from "../Title";
@@ -12,6 +12,9 @@ import { Audio } from 'expo-av';
 import {navigate, setWelcome} from "../RootNavigation";
 import * as Analytics from "expo-firebase-analytics";
 import Slider from '@react-native-community/slider';
+import {LinearGradient} from "expo-linear-gradient";
+import { getActionFromState } from "@react-navigation/core";
+import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -33,14 +36,17 @@ class MusicScreen extends Component {
         //console.log(HomeData.MUSIC)
         /*MusicList = HomeData.MUSIC;
         console.log(MusicList);*/
-
+        musicList = HomeData.MUSICLIST;
+        if(this.props.route.params && this.props.route.params.target){
+            activeID = this.props.route.params.target.cid;
+        }
 
         let tmObj;
         if(props.route.params != null && props.route.params != undefined && props.route.params.target != null){
             tmObj = props.route.params.target
         }else{
             tmObj={
-                image:"",
+                image:musicList[this.activeIndex].meditations[0].image,
                 title:"",
                 url:""
             }
@@ -55,17 +61,18 @@ class MusicScreen extends Component {
             soundPosition: null,
             soundDuration: null,
             shouldPlayImmediately:false,
-            activeIndex:0
+            activeIndex:0,
+            soundTime:"00:00",
+            shouldPlay:true
         }
 
-        musicList = HomeData.MUSICLIST;
-        if(this.props.route.params){
-            activeID = this.props.route.params.target.cid;
-        }
+        this.isSeeking = false;
+
+        
 
 
         musicList.forEach((item, index) => {
-            console.log(item.title);
+            //console.log(item.title);
             item.groups = getMeditationGroups(item.meditations);
             if(activeID){
                 item.groups.forEach(group => {
@@ -116,8 +123,8 @@ class MusicScreen extends Component {
 
     }
     componentWillUnmount() {
-        this.props.navigation.removeListener('blur', this._onBlur);
-        this.props.navigation.removeListener('focus', this._onFocus);
+        console.log("music will unmount")
+        //this.props.route.params.target = null;
         this.setState({
             shouldPlayImmediately:false,
             activeObj:{
@@ -126,15 +133,19 @@ class MusicScreen extends Component {
                 url:""
             }
         })
+        this.props.navigation.removeListener('blur', this._onBlur);
+        this.props.navigation.removeListener('focus', this._onFocus);
+        
         sound.stopAsync().then(sound.unloadAsync());
         //this.unloadSound(false);
     }
     _onFocus = () => {
         console.log("network >>>");
+        activateKeepAwake();
         checkNetworkInfo();
         if(HomeData.STARTER.showVideo){
-            HomeData.STARTER.showVideo = false;
-            setWelcome();
+            /*HomeData.STARTER.showVideo = false;
+            setWelcome();*/
             navigate('WelcomeVideo');
         }
 
@@ -143,7 +154,8 @@ class MusicScreen extends Component {
     _onBlur = () => {
         //console.log("navigate away");
         //this.checkSoundFile(false);
-
+        
+        deactivateKeepAwake();
 
     }
     _onPlaybackStatusUpdate = playbackStatus => {
@@ -151,13 +163,25 @@ class MusicScreen extends Component {
             this.setState({
                 soundDuration: playbackStatus.durationMillis,
                 soundPosition: playbackStatus.positionMillis,
+                soundTime:this.getTime(playbackStatus.positionMillis)
             });
         }
       };
 
+    getTime = (t) =>{
+        var sec = t/1000;
+        var m = Math.floor(sec/60);
+        var s = Math.round(sec - (m*60));
+        m = m<10? "0"+m : m;
+        s = s<10? "0"+s : s;
+        //console.log(m+":"+s);
+
+        return(m+":"+s);
+    }
     async checkSoundFile(load){
         console.log("checkSoundFile "+load);
         console.log(this.state);
+        checkNetworkInfo(true);
         if(this.state.isPlaying){
             await sound.stopAsync();
             this.unloadSound(load)
@@ -183,15 +207,19 @@ class MusicScreen extends Component {
         }
     }
     async loadTargetSound(){
+        console.log("loadTargetSound");
+        console.log(that.state.activeObj)
         try{
             //console.log(sound);
             await sound.loadAsync({uri:that.state.activeObj.url}).then((status)=>{
-                that.setState({isLoading:false,isLoaded:true, hasSoundLoaded:true}, ()=>{
-                    console.log("soundloaded")
-                    sound.setOnPlaybackStatusUpdate(that._onPlaybackStatusUpdate);
-                    if(that.state.shouldPlayImmediately) that.playPause();
-                });
-
+                console.log(status);
+                if(status.isLoaded){
+                    that.setState({isLoading:false,isLoaded:true, hasSoundLoaded:true}, ()=>{
+                        console.log("soundloaded")
+                        sound.setOnPlaybackStatusUpdate(that._onPlaybackStatusUpdate);
+                        if(that.state.shouldPlayImmediately) that.playPause();
+                    });
+                }
                 //sound.setProgressUpdateIntervalAsync(500);
             });
         }catch(e){
@@ -213,15 +241,9 @@ class MusicScreen extends Component {
     async playPauseSound(){
         console.log(that.state.isPlaying);
             if(that.state.isPlaying){
-                await sound.playAsync().then((s)=> {
-                    console.log(s);
-                    console.log("playing!")
-                });
+                await sound.playAsync();
             }else{
-                await sound.pauseAsync().then((s)=> {
-                    console.log(s);
-                    console.log("paused!")
-                });;
+                await sound.pauseAsync();
             }
     }
     changeActiveList = index => {
@@ -233,15 +255,20 @@ class MusicScreen extends Component {
         this.setState({
             musicList : musicList
         });*/
-
+        //this.refs._scrollView.scrollTo({x:0, y:0});
         this.setState({
             activeIndex : index
         });
        try {
            this.headerLocked = true;
            this.headerListRef.current.scrollToIndex({index});
-           this.flatListRef.current.scrollToIndex({index});
-
+           //this.flatListRef.current.scrollToIndex({index});
+           this.flatListRef.current.scrollToOffset({offset:0, animated:false});
+           /*setTimeout(function(){
+               console.log(that.flatListRef.current);
+               that.flatListRef.current.scrollToOffset(0);
+           }, 200)*/
+           
 
            setTimeout(()=>{
                this.headerLocked = false;
@@ -278,14 +305,98 @@ class MusicScreen extends Component {
             <View style={{height: windowHeight / 10}}/>
         </ScrollView>
     )
+    renderStaticScreen(){
+        musicList[this.activeIndex]
+        //console.log(musicList[this.state.activeIndex].meditations)
+        
+        return(
+        // <ScrollView
+        //     contentContainerStyle={styles.musicContainer}
+        //     showsVerticalScrollIndicator={false}
+        //     ref={'_scrollView'}
+        // >
+                            
+        //     <View style={styles.cardContainer}>
+        //     {
+        //         musicList[this.state.activeIndex].meditations.map((card, index)=>( getCard(card, index, size) ))
+        //     }
+        //     </View>
+            
 
+            
+
+        //     <View style={{height: windowHeight / 10}}/>
+        // </ScrollView>
+        <FlatList
+            contentContainerStyle={styles.musicContainer}
+            data={musicList[this.state.activeIndex].meditations}
+            renderItem={this.renderItem}
+            keyExtractor={item => item.title}
+            horizontal={false}
+            pagingEnabled={false}
+            ref={this.flatListRef}
+            scrollEnabled={true}
+            numColumns={2}
+            initialNumToRender={2}
+            initialScrollIndex={0}
+            //onViewableItemsChanged={this.onViewableItemsChanged }
+        /> 
+        )
+    }
+    renderItem(item){
+        /*console.log("renderItem");
+        console.log(item);*/
+        //var size = this.dList[this.state.activeIndex].meditations.length > 1 ? 47 : 96;
+
+        //var size = 47;
+        return(
+            //getCard(item, item.index, size)
+            //<View></View>
+
+            // <Card
+            //     key={"discover_card_" + item.index}
+            //     lock={false}
+            //     color={"#fff"}
+            //     size={size}
+            //     title={item.item.title}
+            //     desc={""}
+            //     //source={require('../../assets/images/SampleImage.jpg')}
+            //     source={{uri:item.item.image}}
+            //     uri={item.item.url}
+            //     id={item.item.cid}
+            //     style={{marginRight:10}}
+            // />
+            <TouchableOpacity
+            key={item.index}
+            onPress={() => {
+                playMusic(item.item);
+            }}
+            style={{marginRight:10}}
+        >
+            <ImageBackground
+                style={[styles.ccontainer, {width: windowWidth * 47 / 100, height: 300}]}
+                source={{uri:item.item.image}}
+                imageStyle={{ borderRadius: 15, resizeMode: "cover" }}
+            >
+            <View style={[styles.bottom]} intensity={40}>
+                <Text style={styles.titleStyle}>
+                    {item.item.title}
+                </Text>
+                <Text style={styles.descStyle}>
+                    {item.item.desc}
+                </Text>
+            </View>
+            </ImageBackground>
+        </TouchableOpacity>
+        )
+    }
     onViewableItemsChanged = ({ viewableItems, changed }) => {
        // console.log("Visible items are", viewableItems);
         //console.log("Changed in this iteration", changed);
 
         if(!viewableItems || viewableItems.length == 0) return;
 
-        console.log(viewableItems[0])
+        //console.log(viewableItems[0])
         const index = viewableItems[0].index;
 
         if(this.headerListRef != null){
@@ -315,21 +426,24 @@ class MusicScreen extends Component {
 
     _onSeekSliderValueChange = (value) => {
         console.log("SEEK SLIDER VALUE", value);
-        if (this.sound != null && !this.isSeeking) {
+        //console.log(sound);
+        console.log(this.isSeeking);
+        if (sound != null && !this.isSeeking) {
           this.isSeeking = true;
-          this.shouldPlayAtEndOfSeek = this.state.shouldPlay;
-          this.sound.pauseAsync();
+          this.shouldPlayAtEndOfSeek = true;
+          sound.pauseAsync();
         }
       }
 
       _onSeekSliderSlidingComplete = async (value) => {
-        if (this.sound != null) {
+        console.log("_onSeekSliderSlidingComplete", value);
+        if (sound != null) {
           this.isSeeking = false;
           const seekPosition = value * this.state.soundDuration;
           if (this.shouldPlayAtEndOfSeek) {
-            this.sound.playFromPositionAsync(seekPosition);
+            sound.playFromPositionAsync(seekPosition);
           } else {
-            this.sound.setPositionAsync(seekPosition);
+            sound.setPositionAsync(seekPosition);
           }
         }
       }
@@ -350,10 +464,19 @@ class MusicScreen extends Component {
         //const { musicList } = this.state;
         //const { musicList } = this.mList;
         return (
-
+<LinearGradient style={{display:"flex", flex:1}} colors={Color.HEADER_GRADIENT}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 0}}>
+            <SafeAreaView style={{display:"flex", flex:1}}>
             <ImageBackground source={Color.BG_IMAGE} style={styles.image}>
                 <HeaderBar title={getLanguageText(Languages.MUSIC)} />
-                <FlatList
+                <LinearGradient
+                style={[styles.container, {height: 60, marginBottom:10, marginTop:-5}]}
+                colors={Color.HEADER_GRADIENT}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 0}}
+            >
+            <FlatList
                     style={[styles.container, {marginBottom:10, height:105 ,paddingRight:20}]}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
@@ -364,9 +487,22 @@ class MusicScreen extends Component {
                     renderItem={this.renderHeaderItem}
                     contentContainerStyle={{paddingRight:20}}
                 />
+                
+            </LinearGradient>
+                {/* <FlatList
+                    style={[styles.container, {marginBottom:10, height:105 ,paddingRight:20}]}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    ref={this.headerListRef}
+                    data={this.mList}
+                    //keyExtractor={item => "header_"+ item.title.en}
+                    keyExtractor={item => "header_"+ item.title}
+                    renderItem={this.renderHeaderItem}
+                    contentContainerStyle={{paddingRight:20}}
+                /> */}
 
                 <View style={styles.player}>
-                    <View style={{backgroundColor: Color.BOTTOM_BG, borderRadius:15, height:200}}>
+                    <View style={{backgroundColor: Color.BOTTOM_BG, borderRadius:15, height:205}}>
                     <Image
                     style={[styles.ccontainer, {width: windowWidth * 96 / 100, height: 160}]}
                     source={{uri:this.state.activeObj.image}}
@@ -376,19 +512,19 @@ class MusicScreen extends Component {
                         minimumTrackTintColor="#fff"
                         maximumTrackTintColor="#000"
                         thumbTintColor="#fff"
+                        thumbImage={require("../../assets/images/slider-thumb.png")}
                         value={this._getSeekSliderPosition()}
                         onValueChange={this._onSeekSliderValueChange}
                         onSlidingComplete={this._onSeekSliderSlidingComplete}
-                        disabled={
-                        !this.state.isPlaybackAllowed || this.state.isLoading
-                        }
+                        disabled={false}
                         />
                     <View style={styles.bottomBar}>
                         <View style={styles.title}>
                             <Text style={styles.titleStyle}>{this.state.activeObj.title}</Text>
                         </View>
 
-                        <View style={styles.controls}>
+                        <View style={[styles.controls, {display:'flex', flexDirection:'row'}]}>
+                            <Text style={[styles.titleStyle, {marginRight:10}]}>{this.state.soundTime}</Text>
                             <TouchableOpacity style={{opacity: this.state.isLoaded ? 1 : 0.5}} onPress={() => {if(this.state.isLoaded)this.playPause()}}>
                             {this.state.isPlaying ? (
                                 <Ionicons name='ios-pause' size={20} color='#fff' />
@@ -401,7 +537,7 @@ class MusicScreen extends Component {
                     </View>
                 </View>
 
-                <FlatList
+                {/* <FlatList
                     data={this.mList}
                     renderItem={this.renderScreen}
                     keyExtractor={item => item.title}
@@ -410,17 +546,19 @@ class MusicScreen extends Component {
                     scrollEnabled={false}
                     ref={this.flatListRef}
                     //onViewableItemsChanged={this.onViewableItemsChanged }
-                />
-
+                /> */}
+{this.renderStaticScreen()}
 
             </ImageBackground>
+            </SafeAreaView>
+            </LinearGradient>
         )
     }
 
 }
 
 function playMusic(card){
-    console.log(card);
+    //console.log(card);
     Analytics.logEvent("SoundPlay", {id: card.cid, title: card.title});
     that.setState({activeObj:card, shouldPlayImmediately:true});
     that.checkSoundFile(true);
@@ -439,6 +577,7 @@ function getCard(card, index, size){
     //console.log(card)
     const { lock, color, title, desc, image, url, cid } = card;
     //let src=require(source);
+    //console.log(image)
     return (
         <TouchableOpacity
             key={index}
@@ -472,13 +611,17 @@ const styles = StyleSheet.create({
         marginBottom: 5
     },
     musicContainer: {
-        padding: 10,
+        padding: windowWidth / 50,
         width: windowWidth,
-        flex : 1
+        flexGrow : 1,
+        justifyContent:"flex-start",
+        minHeight:windowHeight - 160
     },
     cardContainer: {
         flexDirection: "row",
-        justifyContent: "space-between"
+        alignItems:"flex-start",
+        justifyContent: "space-between",
+        flexWrap:"wrap"
     },
     backGround:{
         backgroundColor: '#280d52'
@@ -506,7 +649,8 @@ const styles = StyleSheet.create({
         color: Color.LIGHT_TEXT_COLOR,
         fontSize: 14,
         fontWeight: "bold",
-        marginBottom: 2
+        marginBottom: 2,
+        paddingTop:3
     },
     descStyle: {
         color: Color.LIGHT_TEXT_COLOR,
@@ -516,7 +660,7 @@ const styles = StyleSheet.create({
         paddingLeft: windowWidth / 50,
         paddingRight: windowWidth / 50,
         width: windowWidth,
-        height:200,
+        height:205,
         overflow:"hidden",
         marginBottom:5
     },
@@ -553,7 +697,7 @@ const styles = StyleSheet.create({
         left:20,
         opacity:1,
         width: (windowWidth * 96 / 100)-40,
-
+        height:16
       }
 });
 

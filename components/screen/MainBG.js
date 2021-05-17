@@ -4,7 +4,7 @@ import EventEmitter from "react-native-eventemitter";
 import CustomEvents from "../../models/CustomEvents";
 import { Color } from "../../utils/Colors";
 import { LinearGradient } from 'expo-linear-gradient';
-import { BlurView } from "@react-native-community/blur";
+//import { BlurView } from "@react-native-community/blur";
 
 
 const windowWidth = Dimensions.get('window').width;

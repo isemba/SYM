@@ -1,4 +1,4 @@
-import {Text, View, StyleSheet, TouchableOpacity, Image} from "react-native";
+import {Text, View, StyleSheet, TouchableOpacity, Image, Platform} from "react-native";
 import React from "react";
 import { createStackNavigator } from '@react-navigation/stack';
 import ProfileScreen from "./ProfileScreen";
@@ -14,7 +14,13 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 const ProfileStack = createStackNavigator();
 
-
+function ProfileTitle() {
+    return (
+      <View style={{display:"flex", flexDirection:"row", alignItems:"center",justifyContent:"center"}}>
+          <Text style={[style.headerProfileTitle]}>Prof</Text><Text style={[style.headerProfileTitle]}>il</Text>
+      </View>
+    );
+  }
 export default function ProfileStackScreen() {
     let [fontLoaded] = useFonts({ Lato_400Regular});
 
@@ -27,10 +33,10 @@ export default function ProfileStackScreen() {
                 component={ProfileScreen}
                 options={{
                     title: getLanguageText(Languages.PROFILE),
-                    
                     headerBackTitleVisible: false,
                     headerTransparent: true,
-                    headerTitle:getLanguageText(Languages.PROFILE),
+                    //headerTitle:getLanguageText(Languages.PROFILE),
+                    headerTitle: props => <ProfileTitle {...props} />,
                     headerTitleStyle : style.headerMainTitle,
                     
                     headerBackground: ()=> (
@@ -74,7 +80,7 @@ export default function ProfileStackScreen() {
                     headerBackTitleVisible: false,
                     headerTransparent: true,
                     headerTitle:getLanguageText(Languages.FAQ),
-                    headerTitleStyle : style.headerTitle,
+                    headerTitleStyle : Platform.OS == "ios"? style.iosHeaderTitle : style.headerTitle,
                     headerBackImage: ()=>(<Image source={require('../../assets/images/back.png')} resizeMode="center" style={{ width: 32, height: 32 }} />),
                     headerBackground: ()=> (
                         <LinearGradient
@@ -95,7 +101,7 @@ export default function ProfileStackScreen() {
                     headerBackTitleVisible: false,
                     headerTransparent: true,
                     headerTitle:getLanguageText(Languages.CONTACT),
-                    headerTitleStyle : style.headerTitle,
+                    headerTitleStyle : Platform.OS == "ios"? style.iosHeaderTitle : style.headerTitle,
                     headerBackImage: ()=>(<Image source={require('../../assets/images/back.png')} resizeMode="center" style={{ width: 32, height: 32 }} />),
                     headerBackground: ()=> (
                         <LinearGradient
@@ -135,12 +141,20 @@ const style = StyleSheet.create({
         fontSize: 26,
         padding: 10
     },
+    iosHeaderTitle:{
+        color: Color.LIGHT_TEXT_COLOR,
+        fontSize: 20,
+        fontFamily: "Lato_400Regular",
+        textAlign:"center",
+        paddingLeft:60,
+        paddingRight:60,
+    },
     headerTitle:{
         color: Color.LIGHT_TEXT_COLOR,
         fontSize: 20,
         fontFamily: "Lato_400Regular",
         textAlign:"center",
-        paddingRight:60
+        paddingRight:60,
     },
     headerMainTitle:{
         color: Color.LIGHT_TEXT_COLOR,
@@ -148,6 +162,12 @@ const style = StyleSheet.create({
         fontFamily: "Lato_400Regular",
         textAlign:"center",
         paddingLeft:20,
-        paddingRight:30
+        paddingRight:30,
+    },
+    headerProfileTitle:{
+        color: Color.LIGHT_TEXT_COLOR,
+        fontSize: 20,
+        fontFamily: "Lato_400Regular",
+        textAlign:"center"
     }
 });

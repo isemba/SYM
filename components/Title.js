@@ -48,14 +48,12 @@ export default function Title(props) {
                     right:0,
                     borderRadius:20
                 }} />
-                    <Text style={[ styles.text, { fontFamily: active ? "Lato_400Regular" : "Lato_300Light"  } ]}>{ title }</Text>
+                    {/* <Text style={[ styles.text, { fontFamily: active ? "Lato_400Regular" : "Lato_300Light"  } ]}>{ title }</Text> */}
+                    <Text style={[ styles.text, { fontFamily: "Lato_400Regular" } ]}>{ title }</Text>
                 </TouchableOpacity>
             )
         }
     }
-
-
-
 }
 
 const styles = StyleSheet.create({

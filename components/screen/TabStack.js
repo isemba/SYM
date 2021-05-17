@@ -31,7 +31,7 @@ export default class TabStack extends Component {
     }
 
     updateTheme = themeIndex => {
-        console.log("Main Content THEME_SELECTED")
+        //console.log("Main Content THEME_SELECTED")
         this.setState({
             bg:Color.BOTTOM_BG
         })
@@ -83,7 +83,9 @@ export default class TabStack extends Component {
                 tabBarOptions={{
                     tabStyle: {
                         borderTopWidth: 0,
-                        backgroundColor: this.state.bg
+                        backgroundColor: this.state.bg,
+                        paddingTop:5,
+                        paddingBottom:10
                     },
                     activeTintColor: 'white',
                     inactiveTintColor: '#767676',
@@ -99,7 +101,7 @@ export default class TabStack extends Component {
                         shadowOffset: {
                             height: 0,
                         },
-                        border:"none"
+                        border:"none",
                     }
                 }}
 
@@ -157,8 +159,8 @@ const styles = StyleSheet.create({
         textAlign:"center"
     },
     icon:{
-        width:30,
-        height:30,
-        paddingTop:5
+        width:23,
+        height:23,
+        paddingTop:0
     }
 });

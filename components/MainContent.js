@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import {Dimensions, ScrollView, StyleSheet, View, TouchableOpacity, Modal} from 'react-native';
+import {Dimensions, ScrollView, StyleSheet, View, TouchableOpacity, Modal, SafeAreaView} from 'react-native';
 import Title from "./Title";
 import Languages, {getLanguageText} from "../utils/Language";
 import {navigate} from "./RootNavigation";
@@ -12,10 +12,12 @@ import CustomEvents from "../models/CustomEvents";
 import { TabBarHeight } from '../utils/DeviceInfo';
 import AppLoading from "expo-app-loading";
 import {MediaType} from "../utils/EnumTypes";
+import MenuIcon from "./screen/MenuIcon";
 
 import {Video} from "expo-av";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import {isIPhoneX} from "../utils/DeviceInfo";
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const clickArea = windowHeight *  2 / 20;
@@ -36,9 +38,10 @@ export default class MainContent extends Component {
     }
 
     async componentDidMount() {
+        console.log("isiphonex"+ isIPhoneX())
         that=this;
         try {
-            const value = await AsyncStorage.getItem('@first')
+            const value = await AsyncStorage.getItem('@welcomeVideoShown')
             if(value !== null) {
               console.log("shown before");
               HomeData.STARTER.showVideo=false;
@@ -54,9 +57,9 @@ export default class MainContent extends Component {
 
         HomeData.MOODS.forEach((item, index) => {
             /*console.log("mood");
-            console.log(item.title);*/
+            console.log(item);*/
             this.MoodViews.push(
-                <MoodCard mood={item.title} key={"mood" + index} uri={item.url} />
+                <MoodCard mood={item.title} key={"mood" + index} uri={item.url} id={item.cid}/>
             )
         });
 
@@ -137,6 +140,8 @@ export default class MainContent extends Component {
         }
 
         return (
+            
+             
             <ScrollView
                 style={styles.container}
                 scrollEventThrottle={1}
@@ -149,9 +154,14 @@ export default class MainContent extends Component {
                     EventEmitter.emit(CustomEvents.BG_RATIO_CHANGED, ratio );
 
                 }}
+                
             >
-
-                <TouchableOpacity style={{ height: clickArea, paddingTop: windowHeight / 10 }} onPress={()=>{navigate("Customize")}} />
+                <SafeAreaView style={{height:isIPhoneX()? 150 : 50, marginBottom:isIPhoneX()? -150 : -50, zIndex:5}}>
+                    <View style={{marginTop:isIPhoneX()? 50 : 0}}>
+                        <MenuIcon navigateTo={"Customize"} />
+                    </View>
+                </SafeAreaView>
+                {/* <TouchableOpacity style={{ height: clickArea, paddingTop: windowHeight / 10 }} onPress={()=>{navigate("Customize")}} /> */}
                 <View style={{ height: emptyArea, paddingTop: windowHeight / 10 }}/>
 
                 <Title  title={getLanguageText(Languages.HOW_ARE_YOU_FEELING)} />

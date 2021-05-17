@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Dimensions } from "react-native";
+import { Text, View, StyleSheet, Dimensions, Platform } from "react-native";
 import React from "react";
 import { Color } from "../utils/Colors";
 import {LinearGradient} from "expo-linear-gradient";
@@ -16,9 +16,9 @@ export default function HeaderBar(props) {
         containerStyle.height = size;
     }
 
-    if(!fontLoaded){
-        return <AppLoading />;
-    }else{
+     if(!fontLoaded){
+         return <AppLoading />;
+     }else{
         return (
 
             <LinearGradient
@@ -46,10 +46,11 @@ const styles = StyleSheet.create({
     },
     text: {
         color: Color.LIGHT_TEXT_COLOR,
-        fontWeight: "bold",
-        fontSize: 22,
+        fontSize: 20,
         fontFamily: "Lato_400Regular",
-        paddingVertical: 5,
+        textAlign:"center",
+        paddingRight:60,
+        paddingLeft:60,
 
 
 

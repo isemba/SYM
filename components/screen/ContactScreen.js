@@ -1,12 +1,14 @@
-import {Text, View, ScrollView, StyleSheet, ImageBackground, TextInput, Image, Keyboard, Dimensions, TouchableOpacity, Linking} from "react-native";
+import {Modal, Text, View, ScrollView, StyleSheet, ImageBackground, TextInput, Image, Keyboard, Dimensions, TouchableOpacity, Linking} from "react-native";
 import React, { Component, useState } from "react";
 import {Lato_100Thin, Lato_400Regular, useFonts} from "@expo-google-fonts/lato";
-import Logo from "../Logo";
+import LogoHorizontal from "../LogoHorizontal";
 import Languages, {getLanguageText} from "../../utils/Language";
+// import CheckBox from '@react-native-community/checkbox';
 import { CONTACT_URL } from "../../environement";
 import * as axios from "axios";
 import {HomeData} from "../../utils/Data";
 import { Color } from "../../utils/Colors"
+import { FontAwesome5 } from '@expo/vector-icons'; 
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
@@ -28,7 +30,9 @@ export class ContactScreen extends Component {
         this.state = {
             email: "",
             name: "",
-            message: ""
+            message: "",
+            modalVisible:false,
+            response:""
         };
     }
 
@@ -79,10 +83,17 @@ export class ContactScreen extends Component {
             try {
                 console.log("send");
                 console.log(HomeData.TOKEN)
-                await axios.post(CONTACT_URL, { message:this.state.message },{
+                await axios.post(CONTACT_URL, { name:this.state.name, mail:this.state.email,message:this.state.message },{
                     headers: {
                         'authorization': `Bearer ${HomeData.TOKEN}`
-                    }}).then((response)=>{console.log(response)});
+                    }}).then((response)=>{
+                        console.log(response);
+                        console.log(response.data.message);
+                        this.setState({
+                            modalVisible:true,
+                            response:response.data.message
+                        })
+                    });
             }catch (e){
                 console.error(e);
             }
@@ -98,12 +109,14 @@ export class ContactScreen extends Component {
     }
     render() {
         return (
+            <ImageBackground source={Color.BG_IMAGE} style={styles.image}>
             <ScrollView contentContainerStyle={styles.container}>
-                <ImageBackground source={Color.BG_IMAGE} style={styles.image}>
+                
                     <View style={styles.contactHolder}>
-                        <View style={styles.logoContainer}>
-                            <Logo />
-                        </View>
+                    <View style={styles.logoContainer}>
+                        <Image source={require("../../assets/images/SYM-Logo.png")} />
+                        <LogoHorizontal />
+                    </View>
 
                         <View style={styles.formHolder}>
                             <Text style={styles.formTitle}> {getLanguageText(Languages.CONTACT)} </Text>
@@ -176,19 +189,26 @@ export class ContactScreen extends Component {
                                     value={this.state.message}/>
                             </View>
                             <View style={styles.checkBoxHolder}>
-                                {/*<CheckBox*/}
-                                {/*    disabled={false}*/}
-                                {/*    value={this.state.check}*/}
-                                {/*    tintColors={ {true: "#fff", false: "rgba(255,255,255,0.5)"}}*/}
-                                {/*    tintColor={'rgba(255,255,255,0.5)'}*/}
-                                {/*    onCheckColor={'#fff'}*/}
-                                {/*    onFillColor={'transparent'}*/}
-                                {/*    onTintColor={'#fff'}*/}
-                                {/*    onValueChange={(value) => this.setState({*/}
-                                {/*        check: value,*/}
-                                {/*    })}*/}
-                                {/*/>*/}
-                                <TouchableOpacity style={styles.linkBtn} onPress={ ()=>{ Linking.openURL('https://sahaja-public.s3-eu-west-1.amazonaws.com/policy.html')}}>
+                                {/* <CheckBox
+                                    disabled={false}
+                                    value={this.state.check}
+                                    tintColors={ {true: "#fff", false: "rgba(255,255,255,0.5)"}}
+                                    tintColor={'rgba(255,255,255,0.5)'}
+                                    onCheckColor={'#fff'}
+                                    onFillColor={'transparent'}
+                                    onTintColor={'#fff'}
+                                    onValueChange={(value) => this.setState({
+                                        check: value,
+                                    })}
+                                /> */}
+                                <TouchableOpacity onPress={() => this.setState({
+                                        check: !this.state.check,
+                                    })}>
+                                    <View style={[styles.checkBg,{backgroundColor:this.state.check?'#fff':'transparent'}]}>
+                                    <FontAwesome5 name="check" size={12} color="black" style={{opacity:this.state.check? 1:0}}/>
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.linkBtn} onPress={ ()=>{ Linking.openURL('http://www.sahajayogameditasyon.com/aydinlatma_metni.html')}}>
                                     <Text style={styles.checkBoxText}>{getLanguageText(Languages.FORM_CHECK)}</Text>
                                     <Text style={[styles.checkBoxText, {textDecorationLine: "underline"}]}>{getLanguageText(Languages.FORM_CHECK_LINK)}</Text>
                                 </TouchableOpacity>
@@ -208,12 +228,42 @@ export class ContactScreen extends Component {
                             <Text style={styles.linkBtnText}>www.sahajayogameditasyon.com</Text>
                         </TouchableOpacity>
                     </View>
-                </ImageBackground>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={this.state.modalVisible}
+                    onRequestClose={() => {
+                    console.log('Modal has been closed.');
+                    }}>
+                        <TouchableOpacity
+                        style={{ ...styles.container, backgroundColor: 'rgba(0,0,0,.3)' }}
+                        onPress={() => {
+                            this.setState({modalVisible:false})
+                        }}>
+                    <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                        <Text style={styles.modalText}>{this.state.response}</Text>                   
+                    </View>
+                    </View>
+                    </TouchableOpacity>
+                </Modal>
             </ScrollView>
+            </ImageBackground>
+
         );
     }
 }
 const styles = StyleSheet.create({
+    checkBg:{
+        width:20,
+        height:20,
+        borderRadius:3,
+        borderColor:'#fff',
+        borderWidth:2,
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center'
+    },
     container: {
         justifyContent: "space-between",
         alignItems: "center",
@@ -335,7 +385,42 @@ const styles = StyleSheet.create({
         fontSize:18,
         textDecorationLine:"underline",
         textAlign:"center"
-    }
+    },centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+      },
+      modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+      },
+      openButton: {
+        backgroundColor: '#F194FF',
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+      },
+      textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+      },
+      modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+      },
 
 });
 

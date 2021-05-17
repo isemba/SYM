@@ -38,12 +38,14 @@ export default class audioPlayer extends Component{
             playThroughEarpieceAndroid: false,
           });*/
         this._radioStream = new Audio.Sound();
+        
         this._tUrl = "";
         EventEmitter.on(CustomEvents.BG_VOLUME, volume =>{
             this.setVolume(volume);
         });
     };
 
+    
     async setVolume(volume){
         console.log("volume > "+volume)
         this._radioStream.setVolumeAsync(volume/100);
@@ -64,7 +66,7 @@ export default class audioPlayer extends Component{
                 }
                 console.log("loading");
                 await this._radioStream.loadAsync(
-                    { uri: url},
+                    { uri: url},{isLooping:true}
                 );
                 //store.dispatch(setLiveState(true));
                 this.setVolume(HomeData.BG_MUSIC.volume)
@@ -108,6 +110,7 @@ export default class audioPlayer extends Component{
         console.log("toggleAudio > "+shouldplay +" / "+isLoaded+ " / "+isPlaying)
         if (isLoaded && !isPlaying && shouldplay) {
             //store.dispatch(setPlayingStatus(true));
+            this.setVolume(HomeData.BG_MUSIC.volume);
             await this._radioStream.playAsync();
         } else if (isLoaded && isPlaying && !shouldplay) {
             //store.dispatch(setPlayingStatus(false));

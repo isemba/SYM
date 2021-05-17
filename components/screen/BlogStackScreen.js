@@ -15,15 +15,11 @@ export default class BlogStackScreen extends Component{
     constructor(props) {
         super(props);
 
-        console.log(props)
+        //console.log(props)
     }
     componentDidMount(){
         console.log("blogstack mount");
-        console.log(this.props)
-    }
-    componentDidUpdate(){
-        console.log("blogstack update");
-        console.log(this.props)
+        //console.log(this.props)
     }
     render(){
     return (
@@ -47,7 +43,7 @@ export default class BlogStackScreen extends Component{
                       ),
                     }}
             />
-            <BlogStack.Screen
+            {/* <BlogStack.Screen
                 name="BlogContent"
                 component={BlogContent}
                 options={{ 
@@ -66,7 +62,7 @@ export default class BlogStackScreen extends Component{
                         />
                       ),
                     }}
-            />
+            /> */}
         </BlogStack.Navigator>
     )
                 }

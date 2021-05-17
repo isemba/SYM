@@ -1,7 +1,8 @@
-import {ActivityIndicator, Text, View, Picker, Slider, StyleSheet, ImageBackground, Dimensions, TouchableOpacity, ScrollView, Image} from "react-native";
+import {ActivityIndicator, Text, View, Picker,  StyleSheet, SafeAreaView,ImageBackground, Dimensions, TouchableOpacity, ScrollView, Image} from "react-native";
 import React, { Component } from "react";
 import Card from "../Card";
 import {ChangeTheme, Color, ColorSettings} from "../../utils/Colors";
+import Slider from '@react-native-community/slider';
 import MenuIcon from "./MenuIcon";
 import {LinearGradient} from "expo-linear-gradient";
 import HeaderBar from "../HeaderBar";
@@ -12,7 +13,8 @@ import CustomEvents from "../../models/CustomEvents";
 import * as FileSystem from 'expo-file-system';
 import {setTheme} from "../RootNavigation";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { Ionicons } from '@expo/vector-icons'; 
+import {navigate} from "../RootNavigation";
 
 export default class CustomizeScreen extends Component{
     // const themes = [
@@ -50,33 +52,39 @@ export default class CustomizeScreen extends Component{
         });
     }
     checkTheme = async index => {
-        /*console.log("checkTheme");
-        console.log(index);*/
-        setTheme(index);
-        if(HomeData.THEMES[index].downloaded){
-            ChangeTheme(index);
-            EventEmitter.emit(CustomEvents.THEME_SELECTED, index);
-        }else{
-            this.setState({downloading:index})
-            let downloadResumable = FileSystem.createDownloadResumable(
-                HomeData.THEMES[index].video,
-                FileSystem.documentDirectory + HomeData.THEMES[index].filename,
-                {}
-            );
-            try {
-                let { uri } = await downloadResumable.downloadAsync();
-                console.log('Finished downloading to ', uri);
-                let info = await FileSystem.getInfoAsync(FileSystem.documentDirectory+HomeData.THEMES[index].filename);
-                console.log(info);
-                HomeData.THEMES[index].downloaded = true;
-                HomeData.THEMES[index].bg = FileSystem.documentDirectory+HomeData.THEMES[index].filename;
-                this.setState({downloading:-1});
+        /**/console.log("checkTheme");
+        console.log(index);
+        console.log(ColorSettings.SelectedTheme);
+
+        if(index != ColorSettings.SelectedTheme){
+            setTheme(index);
+            if(HomeData.THEMES[index].downloaded){
                 ChangeTheme(index);
                 EventEmitter.emit(CustomEvents.THEME_SELECTED, index);
+            }else{
+                this.setState({downloading:index})
+                let downloadResumable = FileSystem.createDownloadResumable(
+                    HomeData.THEMES[index].video,
+                    FileSystem.documentDirectory + HomeData.THEMES[index].filename,
+                    {}
+                );
+                try {
+                    let { uri } = await downloadResumable.downloadAsync();
+                    console.log('Finished downloading to ', uri);
+                    let info = await FileSystem.getInfoAsync(FileSystem.documentDirectory+HomeData.THEMES[index].filename);
+                    console.log(info);
+                    HomeData.THEMES[index].downloaded = true;
+                    HomeData.THEMES[index].bg = FileSystem.documentDirectory+HomeData.THEMES[index].filename;
+                    this.setState({downloading:-1});
+                    ChangeTheme(index);
+                    EventEmitter.emit(CustomEvents.THEME_SELECTED, index);
 
-            } catch (e) {
-                console.error(e);
+                } catch (e) {s
+                    console.error(e);
+                }
             }
+        }else{
+            navigate('Main');
         }
     }
 
@@ -94,6 +102,8 @@ export default class CustomizeScreen extends Component{
             }else{
                 return(
                     <View style={styles.cover} pointerEvents="none">
+                        {/* <AntDesign name="download" size={24} color="#fff" /> */}
+                        <Ionicons name="download-outline" size={30} color="#fff" />
                     </View>
                 )
             }
@@ -102,11 +112,11 @@ export default class CustomizeScreen extends Component{
         }
     }
     async onValueChange(value){
-        //console.log("onValueChange");
-        //console.log(value);
+        console.log("onValueChange");
+        console.log(value);
         HomeData.BG_MUSIC.volume = value;
         EventEmitter.emit(CustomEvents.BG_VOLUME, value);
-        const bgvolume = await AsyncStorage.setItem('@bgvolume', value.toString())
+        
     }
     async setBgMinutes(m){
         this.setState({ selectedMinute:m })
@@ -117,7 +127,10 @@ export default class CustomizeScreen extends Component{
             return <Picker.Item key={i} value={s.val} label={s.label} />
         });
         return (
-
+<LinearGradient style={{display:"flex", flex:1}} colors={Color.HEADER_GRADIENT}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 0}}>
+            <SafeAreaView style={{display:"flex", flex:1}}>
             <LinearGradient style={styles.container} colors={Color.MAIN_BG_GRADIENT}>
                 <HeaderBar title="Sahneler" size={60} />
                 <MenuIcon navigateTo={"Main"}/>
@@ -187,6 +200,8 @@ export default class CustomizeScreen extends Component{
                 </ScrollView>
 
             </LinearGradient>
+            </SafeAreaView>
+            </LinearGradient>
         );
     }
 }
@@ -248,7 +263,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         borderRadius: 15,
-        backgroundColor:"rgba(0,0,0,0.9)",
+        backgroundColor:"rgba(0,0,0,0.8)",
         display:"flex",
         alignItems:"center",
         justifyContent:"center"
