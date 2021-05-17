@@ -1,0 +1,95 @@
+[{
+  "_id": {
+    "$oid": "602987dbba347432e44edf10"
+  },
+  "discover": [
+    "40",
+    "41",
+    "36",
+    "25",
+    "13"
+  ],
+  "blog": [
+    "48",
+    "66",
+    "51",
+    "54",
+    "63"
+  ],
+  "music": [
+    "M7",
+    "M44",
+    "M20",
+    "M89",
+    "M64"
+  ],
+  "popular": [
+    "2",
+    "7",
+    "6",
+    "53",
+    "M7"
+  ],
+  "moods": [
+    {
+      "title": "Stresli",
+      "cardId": "38"
+    },
+    {
+      "title": "Mutlu",
+      "cardId": "47"
+    },
+    {
+      "title": "Endişeli",
+      "cardId": "25"
+    },
+    {
+      "title": "Şefkatli",
+      "cardId": "44"
+    },
+    {
+      "title": "Demotive",
+      "cardId": "31"
+    },
+    {
+      "title": "Depresif",
+      "cardId": "30"
+    },
+    {
+      "title": "Dikkat dağılmış",
+      "cardId": "39"
+    },
+    {
+      "title": "Minettar",
+      "cardId": "35"
+    },
+    {
+      "title": "Yetersiz",
+      "cardId": "41"
+    },
+    {
+      "title": "Bezgin",
+      "cardId": "23"
+    },
+    {
+      "title": "Yalnız",
+      "cardId": "20"
+    },
+    {
+      "title": "Üzgün",
+      "cardId": "26"
+    },
+    {
+      "title": "Uykusuz",
+      "cardId": "37"
+    },
+    {
+      "title": "Yorgun",
+      "cardId": "21"
+    },
+    {
+      "title": "Rahatsız",
+      "cardId": "43"
+    }
+  ]
+}]

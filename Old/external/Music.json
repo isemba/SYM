@@ -1,0 +1,1388 @@
+[
+    {
+        "cid": "M1",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M1-1st-center.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/enerji-merkezi-13x.png",
+        "title": "1.Merkez",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M2",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M2-2nd-center.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/enerji-merkezi-23x.png",
+        "title": "2.Merkez",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M3",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M3-3rd-center.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/enerji-merkezi-33x.png",
+        "title": "3.Merkez",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M4",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M4-4th-center.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/enerji-merkezi-43x.png",
+        "title": "4.Merkez",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M5",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M5-5th-center.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/enerji-merkezi-53x.png",
+        "title": "5.Merkez",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M6",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M6-6th-center.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/enerji-merkezi-63x.png",
+        "title": "6.Merkez",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M7",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M7-7th-center.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/enerji-merkezi-73x.png",
+        "title": "7.Merkez",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M8",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M8-sol-kanal.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/sol-kanal3x.png",
+        "title": "Sol Kanal",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M9",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M9-sag-kanal.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/sag-kanal3x.png",
+        "title": "Sağ Kanal",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M10",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M10-orta-kanal.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/orta-kanal3x.png",
+        "title": "Orta Kanal",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M11",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M11-beni-al.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/beni-al3x.png",
+        "title": "Beni Al",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M12",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M12-butunlesme.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/butunlesme3x.png",
+        "title": "Bütünleşme",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M13",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M13-cosku.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/cosku3x.png",
+        "title": "Coşku",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M14",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M14-derinlesme.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/derinlesme3x.png",
+        "title": "Derinleşme",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M15",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M15-duru.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/duru3x.png",
+        "title": "Duru",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M16",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M16-gazal.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/gazal3x.png",
+        "title": "Gazal",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M17",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M17-mutluluk.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/mutluluk3x.png",
+        "title": "Mutluluk",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M17",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M18-sakinlik.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/sakinlik3x.png",
+        "title": "Sakinlik",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M19",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M19-tesaduf.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/sakinlik3x.png",
+        "title": "Tesadüf",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "M20",
+        "media": "music",
+        "url": "music/frekans/M20-bilge.mp3",
+        "image": "music/frekans/frekans-images/bilge3x.png",
+        "title": "Bilge",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "M21",
+        "media": "music",
+        "url": "music/frekans/M21-evren.mp3",
+        "image": "music/frekans/frekans-images/evren3x.png",
+        "title": "Evren",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "M22",
+        "media": "music",
+        "url": "music/frekans/M22-ganga.mp3",
+        "image": "music/frekans/frekans-images/ganga3x.png",
+        "title": "Ganga",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "M23",
+        "media": "music",
+        "url": "music/frekans/M23-kailash.mp3",
+        "image": "music/frekans/frekans-images/kailash3x.png",
+        "title": "Kailash",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "M24",
+        "media": "music",
+        "url": "music/frekans/M24-korkusuz.mp3",
+        "image": "music/frekans/frekans-images/korkusuz3x.png",
+        "title": "Korkusuz",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "M25",
+        "media": "music",
+        "url": "music/frekans/M25-kosmos.mp3",
+        "image": "music/frekans/frekans-images/kozmos3x.png",
+        "title": "Kozmos",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "M26",
+        "media": "music",
+        "url": "music/frekans/M26-ksham.mp3",
+        "image": "music/frekans/frekans-images/ksham3x.png",
+        "title": "Ksham",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "M27",
+        "media": "music",
+        "url": "music/frekans/M27-kundalini.mp3",
+        "image": "music/frekans/frekans-images/kundalini3x.png",
+        "title": "Kundalini",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "M28",
+        "media": "music",
+        "url": "music/frekans/M28-lotus.mp3",
+        "image": "music/frekans/frekans-images/lotus3x.png",
+        "title": "Lotus",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "M29",
+        "media": "music",
+        "url": "music/frekans/M29-masum.mp3",
+        "image": "music/frekans/frekans-images/masum3x.png",
+        "title": "Masum",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "M30",
+        "media": "music",
+        "url": "music/frekans/M30-nira.mp3",
+        "image": "music/frekans/frekans-images/nira3x.png",
+        "title": "Nira",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "M31",
+        "media": "music",
+        "url": "music/frekans/M31-okyanus.mp3",
+        "image": "music/frekans/frekans-images/okyanus3x.png",
+        "title": "Okyanus",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "M32",
+        "media": "music",
+        "url": "music/frekans/M32-dikkat.mp3",
+        "image": "music/frekans/frekans-images/saf-dikkat3x.png",
+        "title": "Dikkat",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "M33",
+        "media": "music",
+        "url": "music/frekans/M33-saf.mp3",
+        "image": "music/frekans/frekans-images/saf3x.png",
+        "title": "Saf",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "M34",
+        "media": "music",
+        "url": "music/frekans/M34-shakti.mp3",
+        "image": "music/frekans/frekans-images/shakti3x.png",
+        "title": "Shakti",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "M35",
+        "media": "music",
+        "url": "music/frekans/M35-yamuna.mp3",
+        "image": "music/frekans/frekans-images/yamuna3x.png",
+        "title": "Yamuna",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "M36",
+        "media": "music",
+        "url": "music/frekans/M36-yukselis.mp3",
+        "image": "music/frekans/frekans-images/yukselis3x.png",
+        "title": "Yükseliş",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "M37",
+        "media": "music",
+        "url": "music/classic/M37-acik-kapi.mp3",
+        "image": "music/classic/classic-images/acik-kapi3x.png",
+        "title": "Açık Kapı",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M38",
+        "media": "music",
+        "url": "music/classic/M38-ave-maria-caccini.mp3",
+        "image": "music/frekans/frekans-images/yolculuk3x.png",
+        "title": "Yolculuk",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M39",
+        "media": "music",
+        "url": "music/classic/M39-aydinlanma.mp3",
+        "image": "music/classic/classic-images/aydinlanma3x.png",
+        "title": "Aydınlanma",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M40",
+        "media": "music",
+        "url": "music/classic/M40-dolunay.mp3",
+        "image": "music/classic/classic-images/dolunay3x.png",
+        "title": "Dolunay",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M41",
+        "media": "music",
+        "url": "music/classic/M41-gece-isigi.mp3",
+        "image": "music/classic/classic-images/gece-isigi3x.png",
+        "title": "Gece Işığı",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M42",
+        "media": "music",
+        "url": "music/classic/M42-gecenin-gucu.mp3",
+        "image": "music/classic/classic-images/gecenin-gucu3x.png",
+        "title": "Gecenin Gücü",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M43",
+        "media": "music",
+        "url": "music/classic/M43-harmoni.mp3",
+        "image": "music/classic/classic-images/harmoni3x.png",
+        "title": "Harmoni",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M44",
+        "media": "music",
+        "url": "music/classic/M44-lacrimosa.mp3",
+        "image": "music/classic/classic-images/lacrimosa3x.png",
+        "title": "Lacrimosa",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M45",
+        "media": "music",
+        "url": "music/classic/M45-mehtap.mp3",
+        "image": "music/classic/classic-images/mehtap3x.png",
+        "title": "Mehtap",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M46",
+        "media": "music",
+        "url": "music/classic/M46-merhamet.mp3",
+        "image": "music/classic/classic-images/merhamet3x.png",
+        "title": "Merhamet",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M47",
+        "media": "music",
+        "url": "music/classic/M47-parlak-gelecek.mp3",
+        "image": "music/classic/classic-images/parlak-gelecek3x.png",
+        "title": "Parlak Gelecek",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M48",
+        "media": "music",
+        "url": "music/classic/M48-prana.mp3",
+        "image": "music/classic/classic-images/prana3x.png",
+        "title": "Prana",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M49",
+        "media": "music",
+        "url": "music/classic/M49-sessiz-bir-gun.mp3",
+        "image": "music/classic/classic-images/sessiz-bir-gun3x.png",
+        "title": "Sessiz Bir Gün",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M50",
+        "media": "music",
+        "url": "music/classic/M50-simsek.mp3",
+        "image": "music/classic/classic-images/simsek3x.png",
+        "title": "Şimşek",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M51",
+        "media": "music",
+        "url": "music/classic/M51-sonsuz-ufuk.mp3",
+        "image": "music/classic/classic-images/sonsuz-ufuk3x.png",
+        "title": "Sonsuz Ufuk",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M52",
+        "media": "music",
+        "url": "music/classic/M52-tefekkur.mp3",
+        "image": "music/classic/classic-images/tefekkur3x.png",
+        "title": "Tefekkür",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M53",
+        "media": "music",
+        "url": "music/classic/M53-uyanis.mp3",
+        "image": "music/classic/classic-images/uyanis3x.png",
+        "title": "Uyanış",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M54",
+        "media": "music",
+        "url": "music/classic/M54-yakamoz.mp3",
+        "image": "music/classic/classic-images/yakamoz3x.png",
+        "title": "Yakamoz",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M55",
+        "media": "music",
+        "url": "music/classic/M55-yalin.mp3",
+        "image": "music/classic/classic-images/yalin3x.png",
+        "title": "Yalın",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M56",
+        "media": "music",
+        "url": "music/classic/M56-yansima.mp3",
+        "image": "music/classic/classic-images/yansima3x.png",
+        "title": "Yansıma",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M57",
+        "media": "music",
+        "url": "music/classic/M57-yildizlarin-dansi.mp3",
+        "image": "music/classic/classic-images/yildizlarin-dansi3x.png",
+        "title": "Yıldızların Dansı",
+        "group": {
+            "id": 6,
+            "title": "Klasik Müzikler"
+        }
+    },
+    {
+        "cid": "M58",
+        "media": "music",
+        "url": "music/sleep-musics/M58-angel.mp3",
+        "image": "music/sleep-musics/sleep-music-images/angel3x.png",
+        "title": "Melek",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "M59",
+        "media": "music",
+        "url": "music/sleep-musics/M59-bhakti.mp",
+        "image": "music/sleep-musics/sleep-music-images/bhakti3x.png.png",
+        "title": "Bhakti",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "M60",
+        "media": "music",
+        "url": "music/sleep-musics/M60-chandra.mp3",
+        "image": "music/sleep-musics/sleep-music-images/chandra3x.png",
+        "title": "Chandra",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "M61",
+        "media": "music",
+        "url": "music/sleep-musics/M61-ipek.mp3",
+        "image": "music/sleep-musics/sleep-music-images/ipek3x.png",
+        "title": "İpek",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "M62",
+        "media": "music",
+        "url": "music/sleep-musics/M62-jivatma.mp3",
+        "image": "music/sleep-musics/sleep-music-images/jivatma3x.png",
+        "title": "Jivatma",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "M63",
+        "media": "music",
+        "url": "music/sleep-musics/M63-kali.mp3",
+        "image": "music/sleep-musics/sleep-music-images/kali3x.png",
+        "title": "Kali",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "M64",
+        "media": "music",
+        "url": "music/sleep-musics/M64-lalita.mp3",
+        "image": "music/sleep-musics/sleep-music-images/lalita3x.png",
+        "title": "Lalita",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "M65",
+        "media": "music",
+        "url": "music/sleep-musics/M65-nidra.mp3",
+        "image": "music/sleep-musics/sleep-music-images/nidra3x.png",
+        "title": "Nidra",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "M66",
+        "media": "music",
+        "url": "music/sleep-musics/M66-ruya.mp3",
+        "image": "music/sleep-musics/sleep-music-images/ruya3x.png",
+        "title": "Rüya",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "M67",
+        "media": "music",
+        "url": "music/sleep-musics/M67-shankar.mp3",
+        "image": "music/sleep-musics/sleep-music-images/shankar3x.png",
+        "title": "Shankar",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "M68",
+        "media": "music",
+        "url": "music/sleep-musics/M68-shraddha.mp3",
+        "image": "music/sleep-musics/sleep-music-images/shraddha3x.png",
+        "title": "Shraddha",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "M69",
+        "media": "music",
+        "url": "music/sleep-musics/M69-turiya.mp3",
+        "image": "music/sleep-musics/sleep-music-images/turiya3x.png",
+        "title": "Turiya",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "M70",
+        "media": "music",
+        "url": "music/sleep-musics/M70-uma.mp3",
+        "image": "music/sleep-musics/sleep-music-images/uma3x.png",
+        "title": "Uma",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "M71",
+        "media": "music",
+        "url": "music/sleep-musics/M71-vidya.mp3",
+        "image": "music/sleep-musics/sleep-music-images/vidya3x.png",
+        "title": "Vidya",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "M72",
+        "media": "music",
+        "url": "music/ambient/M72-yuruyus.mp3",
+        "image": "music/ambient/ambient-images/yuruyus3x.png",
+        "title": "Yürüyüş",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "M73",
+        "media": "music",
+        "url": "music/ambient/M73-baharat.mp3",
+        "image": "music/ambient/ambient-images/baharat3x.png",
+        "title": "Baharat",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "M74",
+        "media": "music",
+        "url": "music/ambient/M74-derin.mp3",
+        "image": "music/ambient/ambient-images/derin3x.png",
+        "title": "Derin",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "M75",
+        "media": "music",
+        "url": "music/ambient/M75-harika.mp3",
+        "image": "music/ambient/ambient-images/harika3x.png",
+        "title": "Harika",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "M76",
+        "media": "music",
+        "url": "music/ambient/M76-ice-yolculuk.mp3",
+        "image": "music/ambient/ambient-images/ice-yolculuk3x.png",
+        "title": "İçe Yolculuk",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "M77",
+        "media": "music",
+        "url": "music/ambient/M77-sessizlik.mp3",
+        "image": "music/ambient/ambient-images/sessizlik3x.png",
+        "title": "Sessizlik",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "M78",
+        "media": "music",
+        "url": "music/ambient/M78-sakin.mp3",
+        "image": "music/ambient/ambient-images/sakin3x.png",
+        "title": "Sakin",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "M79",
+        "media": "music",
+        "url": "music/ambient/M79-sentez.mp3",
+        "image": "music/ambient/ambient-images/sentez3x.png",
+        "title": "Sentez",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "M80",
+        "media": "music",
+        "url": "music/ambient/M80-uzay.mp3",
+        "image": "music/ambient/ambient-images/uzay3x.png",
+        "title": "Uzay",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "M81",
+        "media": "music",
+        "url": "music/ambient/M81-vizyon.mp3",
+        "image": "music/ambient/ambient-images/vizyon3x.png",
+        "title": "Vizyon",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "M82",
+        "media": "music",
+        "url": "music/ambient/M82-yeni-bir-gun.mp3",
+        "image": "music/ambient/ambient-images/yeni-bir-gun3x.png",
+        "title": "Yeni Bir Gün",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "M83",
+        "media": "music",
+        "url": "music/nature-sounds/M83-beach-wave.mp3",
+        "image": "music/ambient/ambient-images/beach-wave.3x.png",
+        "title": "Dalgalar",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "M84",
+        "media": "music",
+        "url": "music/nature-sounds/M84-birds-1.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/birds-13x.png",
+        "title": "Tabiat - 2",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "M85",
+        "media": "music",
+        "url": "music/nature-sounds/M85-birds-2.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/birds-23x.png",
+        "title": "Tabiat - 1",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "M86",
+        "media": "music",
+        "url": "music/nature-sounds/M86-farm.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/farm3x.png",
+        "title": "Yeşil",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "M87",
+        "media": "music",
+        "url": "music/nature-sounds/M87-fire.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/fire3x.png",
+        "title": "Ateş",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "M88",
+        "media": "music",
+        "url": "music/nature-sounds/M88-jungle-night.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/jungle-night3x.png",
+        "title": "Orman",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "M89",
+        "media": "music",
+        "url": "music/nature-sounds/M89-rain-thunder.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/rain-thunder3x.png",
+        "title": "Yağmur",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "M90",
+        "media": "music",
+        "url": "music/nature-sounds/M90-small-stream.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/small-stream3x.png",
+        "title": "Pınar",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "M91",
+        "media": "music",
+        "url": "music/nature-sounds/M91-water-lapping.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/water-lapping.png",
+        "title": "Akış",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "M92",
+        "media": "music",
+        "url": "music/nature-sounds/M92-waterfall.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/waterfall3x.png",
+        "title": "Şelale",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "M93",
+        "media": "music",
+        "url": "music/nature-sounds/M93-wind-chime.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/wind-chime3x.png",
+        "title": "Çan Sesleri",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "MM1",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/dogu_ruzgari.mp4",
+        "image": "music/nature-sounds/nature-sounds-images/wind-chime3x.png",
+        "title": "Doğu Rüzgarı",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "cid": "MM1",
+        "media": "music",
+        "url": "music/Meditasyon-muzikleri/M20-sevgi.mp3",
+        "image": "music/Meditasyon-muzikleri/meditasyon-muzikleri-images/sevgi3x.png",
+        "title": "Sevgi",
+        "group": {
+            "id": 1,
+            "title": "Meditasyon Müzikleri",
+        }
+    },
+    {
+        "id": "FM1",
+        "media": "music",
+        "url": "music/frekans/cocuk.mp3",
+        "image": "music/frekans/frekans-images/cocuk3x.png",
+        "title": "Çocuk",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "id": "FM2",
+        "media": "music",
+        "url": "music/frekans/doga.mp3",
+        "image": "music/frekans/frekans-images/doga3x.png",
+        "title": "Doğa",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "id": "FM3",
+        "media": "music",
+        "url": "music/frekans/yolculuk.mp3",
+        "image": "music/frekans/frekans-images/yolculuk3x.png",
+        "title": "Yolculuk",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "id": "FM4",
+        "media": "music",
+        "url": "music/frekans/jivan.mp3",
+        "image": "music/frekans/frekans-images/jivan3x.png",
+        "title": "Jivan",
+        "group": {
+            "id": 2,
+            "title": "Frekans Müzikleri"
+        }
+    },
+    {
+        "cid": "AM1",
+        "media": "music",
+        "url": "music/ambient/an.mp3",
+        "image": "music/ambient/ambient-images/An3x.png",
+        "title": "An",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "AM2",
+        "media": "music",
+        "url": "music/ambient/baglan.mp3",
+        "image": "music/ambient/ambient-images/Baglan3x.png",
+        "title": "Bağlan",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "AM3",
+        "media": "music",
+        "url": "music/ambient/balans.mp3",
+        "image": "music/ambient/ambient-images/Balans3x.png",
+        "title": "Balans",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "AM4",
+        "media": "music",
+        "url": "music/ambient/donusum.mp3",
+        "image": "music/ambient/ambient-images/Donusum3x.png",
+        "title": "Dönüşüm",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "AM5",
+        "media": "music",
+        "url": "music/ambient/guven.mp3",
+        "image": "music/ambient/ambient-images/Guven3x.png",
+        "title": "Güven",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "AM6",
+        "media": "music",
+        "url": "music/ambient/his.mp3",
+        "image": "music/ambient/ambient-images/His3x.png",
+        "title": "His",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "AM7",
+        "media": "music",
+        "url": "music/ambient/has.mp3",
+        "image": "music/ambient/ambient-images/Has3x.png",
+        "title": "Has",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "AM8",
+        "media": "music",
+        "url": "music/ambient/odaklanma.mp3",
+        "image": "music/ambient/ambient-images/Odaklanma3x.png",
+        "title": "Odaklanma",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "AM9",
+        "media": "music",
+        "url": "music/ambient/ol.mp3",
+        "image": "music/ambient/ambient-images/Ol3x.png",
+        "title": "Ol",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "AM10",
+        "media": "music",
+        "url": "music/ambient/talu.mp3",
+        "image": "music/ambient/ambient-images/Talu3x.png",
+        "title": "Talu",
+        "group": {
+            "id": 3,
+            "title": "Ambians Müzikleri"
+        }
+    },
+    {
+        "cid": "SM1",
+        "media": "music",
+        "url": "music/sleep-musics/dingin.mp3",
+        "image": "music/sleep-musics/sleep-music-images/dingin3x.png",
+        "title": "Dingin",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "SM2",
+        "media": "music",
+        "url": "music/sleep-musics/gizem.mp3",
+        "image": "music/sleep-musics/sleep-music-images/gizem3x.png",
+        "title": "Gizem",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "SM3",
+        "media": "music",
+        "url": "music/sleep-musics/ma.mp3",
+        "image": "music/sleep-musics/sleep-music-images/ma3x.png",
+        "title": "Ma",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "SM4",
+        "media": "music",
+        "url": "music/sleep-musics/maya.mp3",
+        "image": "music/sleep-musics/sleep-music-images/maya3x.png",
+        "title": "Maya",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "SM5",
+        "media": "music",
+        "url": "music/sleep-musics/mesaj.mp3",
+        "image": "music/sleep-musics/sleep-music-images/mesaj3x.png",
+        "title": "Mesaj",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "SM6",
+        "media": "music",
+        "url": "music/sleep-musics/nadi.mp3",
+        "image": "music/sleep-musics/sleep-music-images/nadi3x.png",
+        "title": "Nadi",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "SM7",
+        "media": "music",
+        "url": "music/sleep-musics/sundari.mp3",
+        "image": "music/sleep-musics/sleep-music-images/sundari3x.png",
+        "title": "Sundari",
+        "group": {
+            "id": 5,
+            "title": "Uyku Müzikleri"
+        }
+    },
+    {
+        "cid": "NM1",
+        "media": "music",
+        "url": "music/nature-sounds/amazon.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/amazon3x.png",
+        "title": "Amazon",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "NM2",
+        "media": "music",
+        "url": "music/nature-sounds/dharma.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/dharma3x.png",
+        "title": "Dharma",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "NM3",
+        "media": "music",
+        "url": "music/nature-sounds/kamp.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/kamp3x.png",
+        "title": "Kamp",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "NM4",
+        "media": "music",
+        "url": "music/nature-sounds/sonsuzluk.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/sonsuzluk3x.png",
+        "title": "Sonsuzluk",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "NM5",
+        "media": "music",
+        "url": "music/nature-sounds/kaynak.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/kaynak3x.png",
+        "title": "Kaynak",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "NM6",
+        "media": "music",
+        "url": "music/nature-sounds/maryada.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/maryada3x.png",
+        "title": "Maryada",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "NM7",
+        "media": "music",
+        "url": "music/nature-sounds/ruzgar.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/ruzgar3x.png",
+        "title": "Rüzgar",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "NM8",
+        "media": "music",
+        "url": "music/nature-sounds/sabah-nesesi.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/sabah-nesesi3x.png",
+        "title": "Sabah Neşesi",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "NM9",
+        "media": "music",
+        "url": "music/nature-sounds/shanti.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/shanti3x.png",
+        "title": "Shanti",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    },
+    {
+        "cid": "NM10",
+        "media": "music",
+        "url": "music/nature-sounds/sis.mp3",
+        "image": "music/nature-sounds/nature-sounds-images/sis3x.png",
+        "title": "Sis",
+        "group": {
+            "id": 4,
+            "title": "Doğa Sesleri"
+        }
+    }
+]
